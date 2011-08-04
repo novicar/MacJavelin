@@ -1,0 +1,468 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9AF19D9413EADEEE0046A907 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF19D9313EADEEE0046A907 /* Cocoa.framework */; };
+		9AF19D9E13EADEEE0046A907 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AF19D9C13EADEEE0046A907 /* InfoPlist.strings */; };
+		9AF19DA113EADEEE0046A907 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF19DA013EADEEE0046A907 /* main.m */; };
+		9AF19DA413EADEEE0046A907 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF19DA213EADEEE0046A907 /* Credits.rtf */; };
+		9AF19DA713EADEEE0046A907 /* JavelinDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF19DA613EADEEE0046A907 /* JavelinDocument.m */; };
+		9AF19DAA13EADEEE0046A907 /* JavelinDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF19DA813EADEEE0046A907 /* JavelinDocument.xib */; };
+		9AF19DAD13EADEEF0046A907 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AF19DAB13EADEEF0046A907 /* MainMenu.xib */; };
+		9AF19DB413EADEEF0046A907 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF19D9313EADEEE0046A907 /* Cocoa.framework */; };
+		9AF19DBC13EADEEF0046A907 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AF19DBA13EADEEF0046A907 /* InfoPlist.strings */; };
+		9AF19DBF13EADEEF0046A907 /* JavelinTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 9AF19DBE13EADEEF0046A907 /* JavelinTests.h */; };
+		9AF19DC113EADEEF0046A907 /* JavelinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF19DC013EADEEF0046A907 /* JavelinTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9AF19DB513EADEEF0046A907 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9AF19D8613EADEEE0046A907 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9AF19D8E13EADEEE0046A907;
+			remoteInfo = Javelin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9AF19D8F13EADEEE0046A907 /* Javelin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Javelin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AF19D9313EADEEE0046A907 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		9AF19D9613EADEEE0046A907 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		9AF19D9713EADEEE0046A907 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9AF19D9813EADEEE0046A907 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9AF19D9B13EADEEE0046A907 /* Javelin-Info.plist */ = {isa = PBXFileReference; path = "Javelin-Info.plist"; sourceTree = "<group>"; };
+		9AF19D9D13EADEEE0046A907 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9AF19D9F13EADEEE0046A907 /* Javelin-Prefix.pch */ = {isa = PBXFileReference; path = "Javelin-Prefix.pch"; sourceTree = "<group>"; };
+		9AF19DA013EADEEE0046A907 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9AF19DA313EADEEE0046A907 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		9AF19DA513EADEEE0046A907 /* JavelinDocument.h */ = {isa = PBXFileReference; path = JavelinDocument.h; sourceTree = "<group>"; };
+		9AF19DA613EADEEE0046A907 /* JavelinDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JavelinDocument.m; sourceTree = "<group>"; };
+		9AF19DA913EADEEE0046A907 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JavelinDocument.xib; sourceTree = "<group>"; };
+		9AF19DAC13EADEEF0046A907 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		9AF19DB313EADEEF0046A907 /* JavelinTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JavelinTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AF19DB913EADEEF0046A907 /* JavelinTests-Info.plist */ = {isa = PBXFileReference; path = "JavelinTests-Info.plist"; sourceTree = "<group>"; };
+		9AF19DBB13EADEEF0046A907 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9AF19DBD13EADEEF0046A907 /* JavelinTests-Prefix.pch */ = {isa = PBXFileReference; path = "JavelinTests-Prefix.pch"; sourceTree = "<group>"; };
+		9AF19DBE13EADEEF0046A907 /* JavelinTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JavelinTests.h; sourceTree = "<group>"; };
+		9AF19DC013EADEEF0046A907 /* JavelinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JavelinTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9AF19D8C13EADEEE0046A907 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AF19D9413EADEEE0046A907 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AF19DAF13EADEEF0046A907 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AF19DB413EADEEF0046A907 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9AF19D8413EADEEE0046A907 = {
+			isa = PBXGroup;
+			children = (
+				9AF19D9913EADEEE0046A907 /* Javelin */,
+				9AF19DB713EADEEF0046A907 /* JavelinTests */,
+				9AF19D9213EADEEE0046A907 /* Frameworks */,
+				9AF19D9013EADEEE0046A907 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9AF19D9013EADEEE0046A907 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9AF19D8F13EADEEE0046A907 /* Javelin.app */,
+				9AF19DB313EADEEF0046A907 /* JavelinTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9AF19D9213EADEEE0046A907 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AF19D9313EADEEE0046A907 /* Cocoa.framework */,
+				9AF19D9513EADEEE0046A907 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9AF19D9513EADEEE0046A907 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AF19D9613EADEEE0046A907 /* AppKit.framework */,
+				9AF19D9713EADEEE0046A907 /* CoreData.framework */,
+				9AF19D9813EADEEE0046A907 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		9AF19D9913EADEEE0046A907 /* Javelin */ = {
+			isa = PBXGroup;
+			children = (
+				9AF19DA513EADEEE0046A907 /* JavelinDocument.h */,
+				9AF19DA613EADEEE0046A907 /* JavelinDocument.m */,
+				9AF19DA813EADEEE0046A907 /* JavelinDocument.xib */,
+				9AF19DAB13EADEEF0046A907 /* MainMenu.xib */,
+				9AF19D9A13EADEEE0046A907 /* Supporting Files */,
+			);
+			path = Javelin;
+			sourceTree = "<group>";
+		};
+		9AF19D9A13EADEEE0046A907 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9AF19D9B13EADEEE0046A907 /* Javelin-Info.plist */,
+				9AF19D9C13EADEEE0046A907 /* InfoPlist.strings */,
+				9AF19D9F13EADEEE0046A907 /* Javelin-Prefix.pch */,
+				9AF19DA013EADEEE0046A907 /* main.m */,
+				9AF19DA213EADEEE0046A907 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9AF19DB713EADEEF0046A907 /* JavelinTests */ = {
+			isa = PBXGroup;
+			children = (
+				9AF19DBE13EADEEF0046A907 /* JavelinTests.h */,
+				9AF19DC013EADEEF0046A907 /* JavelinTests.m */,
+				9AF19DB813EADEEF0046A907 /* Supporting Files */,
+			);
+			path = JavelinTests;
+			sourceTree = "<group>";
+		};
+		9AF19DB813EADEEF0046A907 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9AF19DB913EADEEF0046A907 /* JavelinTests-Info.plist */,
+				9AF19DBA13EADEEF0046A907 /* InfoPlist.strings */,
+				9AF19DBD13EADEEF0046A907 /* JavelinTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9AF19D8E13EADEEE0046A907 /* Javelin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AF19DC413EADEEF0046A907 /* Build configuration list for PBXNativeTarget "Javelin" */;
+			buildPhases = (
+				9AF19D8B13EADEEE0046A907 /* Sources */,
+				9AF19D8C13EADEEE0046A907 /* Frameworks */,
+				9AF19D8D13EADEEE0046A907 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Javelin;
+			productName = Javelin;
+			productReference = 9AF19D8F13EADEEE0046A907 /* Javelin.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9AF19DB213EADEEF0046A907 /* JavelinTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AF19DC713EADEEF0046A907 /* Build configuration list for PBXNativeTarget "JavelinTests" */;
+			buildPhases = (
+				9AF19DAE13EADEEF0046A907 /* Sources */,
+				9AF19DAF13EADEEF0046A907 /* Frameworks */,
+				9AF19DB013EADEEF0046A907 /* Resources */,
+				9AF19DB113EADEEF0046A907 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9AF19DB613EADEEF0046A907 /* PBXTargetDependency */,
+			);
+			name = JavelinTests;
+			productName = JavelinTests;
+			productReference = 9AF19DB313EADEEF0046A907 /* JavelinTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9AF19D8613EADEEE0046A907 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 9AF19D8913EADEEE0046A907 /* Build configuration list for PBXProject "Javelin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9AF19D8413EADEEE0046A907;
+			productRefGroup = 9AF19D9013EADEEE0046A907 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9AF19D8E13EADEEE0046A907 /* Javelin */,
+				9AF19DB213EADEEF0046A907 /* JavelinTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9AF19D8D13EADEEE0046A907 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AF19D9E13EADEEE0046A907 /* InfoPlist.strings in Resources */,
+				9AF19DA413EADEEE0046A907 /* Credits.rtf in Resources */,
+				9AF19DAA13EADEEE0046A907 /* JavelinDocument.xib in Resources */,
+				9AF19DAD13EADEEF0046A907 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AF19DB013EADEEF0046A907 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AF19DBC13EADEEF0046A907 /* InfoPlist.strings in Resources */,
+				9AF19DBF13EADEEF0046A907 /* JavelinTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9AF19DB113EADEEF0046A907 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9AF19D8B13EADEEE0046A907 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AF19DA113EADEEE0046A907 /* main.m in Sources */,
+				9AF19DA713EADEEE0046A907 /* JavelinDocument.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AF19DAE13EADEEF0046A907 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AF19DC113EADEEF0046A907 /* JavelinTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9AF19DB613EADEEF0046A907 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9AF19D8E13EADEEE0046A907 /* Javelin */;
+			targetProxy = 9AF19DB513EADEEF0046A907 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9AF19D9C13EADEEE0046A907 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AF19D9D13EADEEE0046A907 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9AF19DA213EADEEE0046A907 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AF19DA313EADEEE0046A907 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		9AF19DA813EADEEE0046A907 /* JavelinDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AF19DA913EADEEE0046A907 /* en */,
+			);
+			name = JavelinDocument.xib;
+			sourceTree = "<group>";
+		};
+		9AF19DAB13EADEEF0046A907 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AF19DAC13EADEEF0046A907 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		9AF19DBA13EADEEF0046A907 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AF19DBB13EADEEF0046A907 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9AF19DC213EADEEF0046A907 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9AF19DC313EADEEF0046A907 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9AF19DC513EADEEF0046A907 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Javelin/Javelin-Prefix.pch";
+				INFOPLIST_FILE = "Javelin/Javelin-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9AF19DC613EADEEF0046A907 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Javelin/Javelin-Prefix.pch";
+				INFOPLIST_FILE = "Javelin/Javelin-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		9AF19DC813EADEEF0046A907 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Javelin.app/Contents/MacOS/Javelin";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JavelinTests/JavelinTests-Prefix.pch";
+				INFOPLIST_FILE = "JavelinTests/JavelinTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		9AF19DC913EADEEF0046A907 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Javelin.app/Contents/MacOS/Javelin";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JavelinTests/JavelinTests-Prefix.pch";
+				INFOPLIST_FILE = "JavelinTests/JavelinTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9AF19D8913EADEEE0046A907 /* Build configuration list for PBXProject "Javelin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AF19DC213EADEEF0046A907 /* Debug */,
+				9AF19DC313EADEEF0046A907 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9AF19DC413EADEEF0046A907 /* Build configuration list for PBXNativeTarget "Javelin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AF19DC513EADEEF0046A907 /* Debug */,
+				9AF19DC613EADEEF0046A907 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9AF19DC713EADEEF0046A907 /* Build configuration list for PBXNativeTarget "JavelinTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AF19DC813EADEEF0046A907 /* Debug */,
+				9AF19DC913EADEEF0046A907 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9AF19D8613EADEEE0046A907 /* Project object */;
+}
