@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9AABD3D013EE9A69008860FB /* JavelinPdfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AABD3CF13EE9A69008860FB /* JavelinPdfView.m */; };
+		9AABD4B213EEB9AF008860FB /* LinkPattern copy 1.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4A813EEB9AF008860FB /* LinkPattern copy 1.tif */; };
+		9AABD4B313EEB9AF008860FB /* LinkPattern copy.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4A913EEB9AF008860FB /* LinkPattern copy.tif */; };
+		9AABD4B413EEB9AF008860FB /* ToolbarBackAdorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4AA13EEB9AF008860FB /* ToolbarBackAdorn.tif */; };
+		9AABD4B513EEB9AF008860FB /* ToolbarDrawerImage.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4AB13EEB9AF008860FB /* ToolbarDrawerImage.tif */; };
+		9AABD4B613EEB9AF008860FB /* ToolbarForwardAdorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4AC13EEB9AF008860FB /* ToolbarForwardAdorn.tif */; };
+		9AABD4B713EEB9AF008860FB /* ToolbarNextPageImage.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4AD13EEB9AF008860FB /* ToolbarNextPageImage.tif */; };
+		9AABD4B813EEB9AF008860FB /* ToolbarPreviousPageImage.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4AE13EEB9AF008860FB /* ToolbarPreviousPageImage.tif */; };
+		9AABD4B913EEB9AF008860FB /* ToolbarView1Adorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4AF13EEB9AF008860FB /* ToolbarView1Adorn.tif */; };
+		9AABD4BA13EEB9AF008860FB /* ToolbarView2Adorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4B013EEB9AF008860FB /* ToolbarView2Adorn.tif */; };
+		9AABD4BB13EEB9AF008860FB /* ToolbarView3Adorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4B113EEB9AF008860FB /* ToolbarView3Adorn.tif */; };
+		9AABD4BD13EEBF12008860FB /* ToolbarView4Adorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4BC13EEBF12008860FB /* ToolbarView4Adorn.tif */; };
 		9AF19D9413EADEEE0046A907 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF19D9313EADEEE0046A907 /* Cocoa.framework */; };
 		9AF19D9E13EADEEE0046A907 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AF19D9C13EADEEE0046A907 /* InfoPlist.strings */; };
 		9AF19DA113EADEEE0046A907 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF19DA013EADEEE0046A907 /* main.m */; };
@@ -18,6 +30,13 @@
 		9AF19DBC13EADEEF0046A907 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AF19DBA13EADEEF0046A907 /* InfoPlist.strings */; };
 		9AF19DBF13EADEEF0046A907 /* JavelinTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 9AF19DBE13EADEEF0046A907 /* JavelinTests.h */; };
 		9AF19DC113EADEEF0046A907 /* JavelinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF19DC013EADEEF0046A907 /* JavelinTests.m */; };
+		9AF19DCB13EADF760046A907 /* Javelin1.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9AF19DCA13EADF760046A907 /* Javelin1.icns */; };
+		9AF19DCD13EADFA70046A907 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF19DCC13EADFA70046A907 /* Quartz.framework */; };
+		9AFD212813ED99740060F352 /* JavelinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFD212713ED99740060F352 /* JavelinController.m */; };
+		9AFF94EF13F003B300784C6D /* ToolbarFirstAdorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF94EB13F003B300784C6D /* ToolbarFirstAdorn.tif */; };
+		9AFF94F013F003B300784C6D /* ToolbarLastAdorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF94EC13F003B300784C6D /* ToolbarLastAdorn.tif */; };
+		9AFF94F113F003B300784C6D /* ToolbarNextAdorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF94ED13F003B300784C6D /* ToolbarNextAdorn.tif */; };
+		9AFF94F213F003B300784C6D /* ToolbarPrevAdorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF94EE13F003B300784C6D /* ToolbarPrevAdorn.tif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,26 +50,47 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9AABD3CE13EE9A69008860FB /* JavelinPdfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavelinPdfView.h; sourceTree = "<group>"; };
+		9AABD3CF13EE9A69008860FB /* JavelinPdfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JavelinPdfView.m; sourceTree = "<group>"; };
+		9AABD4A813EEB9AF008860FB /* LinkPattern copy 1.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "LinkPattern copy 1.tif"; path = "Javelin/Artwork/LinkPattern copy 1.tif"; sourceTree = "<group>"; };
+		9AABD4A913EEB9AF008860FB /* LinkPattern copy.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "LinkPattern copy.tif"; path = "Javelin/Artwork/LinkPattern copy.tif"; sourceTree = "<group>"; };
+		9AABD4AA13EEB9AF008860FB /* ToolbarBackAdorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarBackAdorn.tif; path = Javelin/Artwork/ToolbarBackAdorn.tif; sourceTree = "<group>"; };
+		9AABD4AB13EEB9AF008860FB /* ToolbarDrawerImage.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarDrawerImage.tif; path = Javelin/Artwork/ToolbarDrawerImage.tif; sourceTree = "<group>"; };
+		9AABD4AC13EEB9AF008860FB /* ToolbarForwardAdorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarForwardAdorn.tif; path = Javelin/Artwork/ToolbarForwardAdorn.tif; sourceTree = "<group>"; };
+		9AABD4AD13EEB9AF008860FB /* ToolbarNextPageImage.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarNextPageImage.tif; path = Javelin/Artwork/ToolbarNextPageImage.tif; sourceTree = "<group>"; };
+		9AABD4AE13EEB9AF008860FB /* ToolbarPreviousPageImage.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarPreviousPageImage.tif; path = Javelin/Artwork/ToolbarPreviousPageImage.tif; sourceTree = "<group>"; };
+		9AABD4AF13EEB9AF008860FB /* ToolbarView1Adorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarView1Adorn.tif; path = Javelin/Artwork/ToolbarView1Adorn.tif; sourceTree = "<group>"; };
+		9AABD4B013EEB9AF008860FB /* ToolbarView2Adorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarView2Adorn.tif; path = Javelin/Artwork/ToolbarView2Adorn.tif; sourceTree = "<group>"; };
+		9AABD4B113EEB9AF008860FB /* ToolbarView3Adorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarView3Adorn.tif; path = Javelin/Artwork/ToolbarView3Adorn.tif; sourceTree = "<group>"; };
+		9AABD4BC13EEBF12008860FB /* ToolbarView4Adorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarView4Adorn.tif; path = Javelin/Artwork/ToolbarView4Adorn.tif; sourceTree = "<group>"; };
 		9AF19D8F13EADEEE0046A907 /* Javelin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Javelin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF19D9313EADEEE0046A907 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9AF19D9613EADEEE0046A907 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		9AF19D9713EADEEE0046A907 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9AF19D9813EADEEE0046A907 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		9AF19D9B13EADEEE0046A907 /* Javelin-Info.plist */ = {isa = PBXFileReference; path = "Javelin-Info.plist"; sourceTree = "<group>"; };
+		9AF19D9B13EADEEE0046A907 /* Javelin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Javelin-Info.plist"; sourceTree = "<group>"; };
 		9AF19D9D13EADEEE0046A907 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9AF19D9F13EADEEE0046A907 /* Javelin-Prefix.pch */ = {isa = PBXFileReference; path = "Javelin-Prefix.pch"; sourceTree = "<group>"; };
+		9AF19D9F13EADEEE0046A907 /* Javelin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Javelin-Prefix.pch"; sourceTree = "<group>"; };
 		9AF19DA013EADEEE0046A907 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9AF19DA313EADEEE0046A907 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		9AF19DA513EADEEE0046A907 /* JavelinDocument.h */ = {isa = PBXFileReference; path = JavelinDocument.h; sourceTree = "<group>"; };
+		9AF19DA513EADEEE0046A907 /* JavelinDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JavelinDocument.h; sourceTree = "<group>"; };
 		9AF19DA613EADEEE0046A907 /* JavelinDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JavelinDocument.m; sourceTree = "<group>"; };
 		9AF19DA913EADEEE0046A907 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JavelinDocument.xib; sourceTree = "<group>"; };
 		9AF19DAC13EADEEF0046A907 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9AF19DB313EADEEF0046A907 /* JavelinTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JavelinTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AF19DB913EADEEF0046A907 /* JavelinTests-Info.plist */ = {isa = PBXFileReference; path = "JavelinTests-Info.plist"; sourceTree = "<group>"; };
+		9AF19DB913EADEEF0046A907 /* JavelinTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JavelinTests-Info.plist"; sourceTree = "<group>"; };
 		9AF19DBB13EADEEF0046A907 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9AF19DBD13EADEEF0046A907 /* JavelinTests-Prefix.pch */ = {isa = PBXFileReference; path = "JavelinTests-Prefix.pch"; sourceTree = "<group>"; };
+		9AF19DBD13EADEEF0046A907 /* JavelinTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JavelinTests-Prefix.pch"; sourceTree = "<group>"; };
 		9AF19DBE13EADEEF0046A907 /* JavelinTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JavelinTests.h; sourceTree = "<group>"; };
 		9AF19DC013EADEEF0046A907 /* JavelinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JavelinTests.m; sourceTree = "<group>"; };
+		9AF19DCA13EADF760046A907 /* Javelin1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Javelin1.icns; sourceTree = "<group>"; };
+		9AF19DCC13EADFA70046A907 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		9AFD212613ED99740060F352 /* JavelinController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavelinController.h; sourceTree = "<group>"; };
+		9AFD212713ED99740060F352 /* JavelinController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JavelinController.m; sourceTree = "<group>"; };
+		9AFF94EB13F003B300784C6D /* ToolbarFirstAdorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarFirstAdorn.tif; path = Javelin/Artwork/ToolbarFirstAdorn.tif; sourceTree = "<group>"; };
+		9AFF94EC13F003B300784C6D /* ToolbarLastAdorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarLastAdorn.tif; path = Javelin/Artwork/ToolbarLastAdorn.tif; sourceTree = "<group>"; };
+		9AFF94ED13F003B300784C6D /* ToolbarNextAdorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarNextAdorn.tif; path = Javelin/Artwork/ToolbarNextAdorn.tif; sourceTree = "<group>"; };
+		9AFF94EE13F003B300784C6D /* ToolbarPrevAdorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarPrevAdorn.tif; path = Javelin/Artwork/ToolbarPrevAdorn.tif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AF19DCD13EADFA70046A907 /* Quartz.framework in Frameworks */,
 				9AF19D9413EADEEE0046A907 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,9 +114,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9AABD3E213EEB974008860FB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9AFF94EB13F003B300784C6D /* ToolbarFirstAdorn.tif */,
+				9AFF94EC13F003B300784C6D /* ToolbarLastAdorn.tif */,
+				9AFF94ED13F003B300784C6D /* ToolbarNextAdorn.tif */,
+				9AFF94EE13F003B300784C6D /* ToolbarPrevAdorn.tif */,
+				9AABD4BC13EEBF12008860FB /* ToolbarView4Adorn.tif */,
+				9AABD4A813EEB9AF008860FB /* LinkPattern copy 1.tif */,
+				9AABD4A913EEB9AF008860FB /* LinkPattern copy.tif */,
+				9AABD4AA13EEB9AF008860FB /* ToolbarBackAdorn.tif */,
+				9AABD4AB13EEB9AF008860FB /* ToolbarDrawerImage.tif */,
+				9AABD4AC13EEB9AF008860FB /* ToolbarForwardAdorn.tif */,
+				9AABD4AD13EEB9AF008860FB /* ToolbarNextPageImage.tif */,
+				9AABD4AE13EEB9AF008860FB /* ToolbarPreviousPageImage.tif */,
+				9AABD4AF13EEB9AF008860FB /* ToolbarView1Adorn.tif */,
+				9AABD4B013EEB9AF008860FB /* ToolbarView2Adorn.tif */,
+				9AABD4B113EEB9AF008860FB /* ToolbarView3Adorn.tif */,
+				9AF19DCA13EADF760046A907 /* Javelin1.icns */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		9AF19D8413EADEEE0046A907 = {
 			isa = PBXGroup;
 			children = (
+				9AABD3E213EEB974008860FB /* Resources */,
 				9AF19D9913EADEEE0046A907 /* Javelin */,
 				9AF19DB713EADEEF0046A907 /* JavelinTests */,
 				9AF19D9213EADEEE0046A907 /* Frameworks */,
@@ -95,6 +160,7 @@
 		9AF19D9213EADEEE0046A907 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AF19DCC13EADFA70046A907 /* Quartz.framework */,
 				9AF19D9313EADEEE0046A907 /* Cocoa.framework */,
 				9AF19D9513EADEEE0046A907 /* Other Frameworks */,
 			);
@@ -114,6 +180,10 @@
 		9AF19D9913EADEEE0046A907 /* Javelin */ = {
 			isa = PBXGroup;
 			children = (
+				9AABD3CE13EE9A69008860FB /* JavelinPdfView.h */,
+				9AABD3CF13EE9A69008860FB /* JavelinPdfView.m */,
+				9AFD212613ED99740060F352 /* JavelinController.h */,
+				9AFD212713ED99740060F352 /* JavelinController.m */,
 				9AF19DA513EADEEE0046A907 /* JavelinDocument.h */,
 				9AF19DA613EADEEE0046A907 /* JavelinDocument.m */,
 				9AF19DA813EADEEE0046A907 /* JavelinDocument.xib */,
@@ -226,6 +296,22 @@
 				9AF19DA413EADEEE0046A907 /* Credits.rtf in Resources */,
 				9AF19DAA13EADEEE0046A907 /* JavelinDocument.xib in Resources */,
 				9AF19DAD13EADEEF0046A907 /* MainMenu.xib in Resources */,
+				9AF19DCB13EADF760046A907 /* Javelin1.icns in Resources */,
+				9AABD4B213EEB9AF008860FB /* LinkPattern copy 1.tif in Resources */,
+				9AABD4B313EEB9AF008860FB /* LinkPattern copy.tif in Resources */,
+				9AABD4B413EEB9AF008860FB /* ToolbarBackAdorn.tif in Resources */,
+				9AABD4B513EEB9AF008860FB /* ToolbarDrawerImage.tif in Resources */,
+				9AABD4B613EEB9AF008860FB /* ToolbarForwardAdorn.tif in Resources */,
+				9AABD4B713EEB9AF008860FB /* ToolbarNextPageImage.tif in Resources */,
+				9AABD4B813EEB9AF008860FB /* ToolbarPreviousPageImage.tif in Resources */,
+				9AABD4B913EEB9AF008860FB /* ToolbarView1Adorn.tif in Resources */,
+				9AABD4BA13EEB9AF008860FB /* ToolbarView2Adorn.tif in Resources */,
+				9AABD4BB13EEB9AF008860FB /* ToolbarView3Adorn.tif in Resources */,
+				9AABD4BD13EEBF12008860FB /* ToolbarView4Adorn.tif in Resources */,
+				9AFF94EF13F003B300784C6D /* ToolbarFirstAdorn.tif in Resources */,
+				9AFF94F013F003B300784C6D /* ToolbarLastAdorn.tif in Resources */,
+				9AFF94F113F003B300784C6D /* ToolbarNextAdorn.tif in Resources */,
+				9AFF94F213F003B300784C6D /* ToolbarPrevAdorn.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +349,8 @@
 			files = (
 				9AF19DA113EADEEE0046A907 /* main.m in Sources */,
 				9AF19DA713EADEEE0046A907 /* JavelinDocument.m in Sources */,
+				9AFD212813ED99740060F352 /* JavelinController.m in Sources */,
+				9AABD3D013EE9A69008860FB /* JavelinPdfView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +541,7 @@
 				9AF19DC613EADEEF0046A907 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9AF19DC713EADEEF0046A907 /* Build configuration list for PBXNativeTarget "JavelinTests" */ = {
 			isa = XCConfigurationList;
@@ -461,6 +550,7 @@
 				9AF19DC913EADEEF0046A907 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
