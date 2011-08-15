@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A1466E313F3F3E90001E0DC /* UnicodeString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1466E113F3F3E90001E0DC /* UnicodeString.cpp */; };
+		9A1466EA13F42C980001E0DC /* Global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1466E813F42C980001E0DC /* Global.cpp */; };
+		9A4BB93E13F54F3000AC9FB6 /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A4BB93C13F54F3000AC9FB6 /* md5.cpp */; };
+		9A4BB94213F55FFC00AC9FB6 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4BB94113F55FFC00AC9FB6 /* WebService.m */; };
+		9A4BB94513F5605900AC9FB6 /* XmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4BB94413F5605900AC9FB6 /* XmlParser.m */; };
+		9A73E5AD13F58C83002F3457 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A73E5AC13F58C83002F3457 /* IOKit.framework */; };
+		9A9206AC13F176CD00EC8F96 /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A9206AA13F176CD00EC8F96 /* Test.cpp */; };
+		9A9206AF13F1787100EC8F96 /* TestOC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9A9206AE13F1787100EC8F96 /* TestOC.mm */; };
 		9AABD3D013EE9A69008860FB /* JavelinPdfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AABD3CF13EE9A69008860FB /* JavelinPdfView.m */; };
 		9AABD4B213EEB9AF008860FB /* LinkPattern copy 1.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4A813EEB9AF008860FB /* LinkPattern copy 1.tif */; };
 		9AABD4B313EEB9AF008860FB /* LinkPattern copy.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4A913EEB9AF008860FB /* LinkPattern copy.tif */; };
@@ -19,6 +27,12 @@
 		9AABD4BA13EEB9AF008860FB /* ToolbarView2Adorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4B013EEB9AF008860FB /* ToolbarView2Adorn.tif */; };
 		9AABD4BB13EEB9AF008860FB /* ToolbarView3Adorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4B113EEB9AF008860FB /* ToolbarView3Adorn.tif */; };
 		9AABD4BD13EEBF12008860FB /* ToolbarView4Adorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4BC13EEBF12008860FB /* ToolbarView4Adorn.tif */; };
+		9AC3641113F9732B006D86B2 /* DocumentRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3641013F9732B006D86B2 /* DocumentRecord.m */; };
+		9AE9896B13F2876C00A3873D /* Drumlin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9896A13F2876C00A3873D /* Drumlin.mm */; };
+		9AE9896F13F288AF00A3873D /* filer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9896D13F288AF00A3873D /* filer.cpp */; };
+		9AE9897213F288D400A3873D /* Rijndael.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9897013F288D400A3873D /* Rijndael.cpp */; };
+		9AE9897613F2B24F00A3873D /* KeyGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9897413F2B24F00A3873D /* KeyGen.cpp */; };
+		9AEA015613F922800047C73A /* Base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AEA015413F922800047C73A /* Base64.cpp */; };
 		9AF19D9413EADEEE0046A907 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AF19D9313EADEEE0046A907 /* Cocoa.framework */; };
 		9AF19D9E13EADEEE0046A907 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AF19D9C13EADEEE0046A907 /* InfoPlist.strings */; };
 		9AF19DA113EADEEE0046A907 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF19DA013EADEEE0046A907 /* main.m */; };
@@ -50,6 +64,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A1466E113F3F3E90001E0DC /* UnicodeString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnicodeString.cpp; sourceTree = "<group>"; };
+		9A1466E213F3F3E90001E0DC /* UnicodeString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnicodeString.h; sourceTree = "<group>"; };
+		9A1466E813F42C980001E0DC /* Global.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Global.cpp; path = ../Global.cpp; sourceTree = "<group>"; };
+		9A1466E913F42C980001E0DC /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Global.h; path = ../Global.h; sourceTree = "<group>"; };
+		9A1466EB13F434EA0001E0DC /* DocInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocInfo.h; sourceTree = "<group>"; };
+		9A4BB93C13F54F3000AC9FB6 /* md5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5.cpp; sourceTree = "<group>"; };
+		9A4BB93D13F54F3000AC9FB6 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		9A4BB94013F55FFC00AC9FB6 /* WebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebService.h; sourceTree = "<group>"; };
+		9A4BB94113F55FFC00AC9FB6 /* WebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebService.m; sourceTree = "<group>"; };
+		9A4BB94313F5605900AC9FB6 /* XmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlParser.h; sourceTree = "<group>"; };
+		9A4BB94413F5605900AC9FB6 /* XmlParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlParser.m; sourceTree = "<group>"; };
+		9A73E5AC13F58C83002F3457 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		9A9206AA13F176CD00EC8F96 /* Test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Test.cpp; sourceTree = "<group>"; };
+		9A9206AB13F176CD00EC8F96 /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		9A9206AD13F1787100EC8F96 /* TestOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestOC.h; sourceTree = "<group>"; };
+		9A9206AE13F1787100EC8F96 /* TestOC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestOC.mm; sourceTree = "<group>"; };
 		9AABD3CE13EE9A69008860FB /* JavelinPdfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavelinPdfView.h; sourceTree = "<group>"; };
 		9AABD3CF13EE9A69008860FB /* JavelinPdfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JavelinPdfView.m; sourceTree = "<group>"; };
 		9AABD4A813EEB9AF008860FB /* LinkPattern copy 1.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "LinkPattern copy 1.tif"; path = "Javelin/Artwork/LinkPattern copy 1.tif"; sourceTree = "<group>"; };
@@ -63,6 +93,19 @@
 		9AABD4B013EEB9AF008860FB /* ToolbarView2Adorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarView2Adorn.tif; path = Javelin/Artwork/ToolbarView2Adorn.tif; sourceTree = "<group>"; };
 		9AABD4B113EEB9AF008860FB /* ToolbarView3Adorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarView3Adorn.tif; path = Javelin/Artwork/ToolbarView3Adorn.tif; sourceTree = "<group>"; };
 		9AABD4BC13EEBF12008860FB /* ToolbarView4Adorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarView4Adorn.tif; path = Javelin/Artwork/ToolbarView4Adorn.tif; sourceTree = "<group>"; };
+		9AC3640F13F9732B006D86B2 /* DocumentRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentRecord.h; sourceTree = "<group>"; };
+		9AC3641013F9732B006D86B2 /* DocumentRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentRecord.m; sourceTree = "<group>"; };
+		9AE9896913F2876C00A3873D /* Drumlin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drumlin.h; sourceTree = "<group>"; };
+		9AE9896A13F2876C00A3873D /* Drumlin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Drumlin.mm; sourceTree = "<group>"; };
+		9AE9896D13F288AF00A3873D /* filer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filer.cpp; sourceTree = "<group>"; };
+		9AE9896E13F288AF00A3873D /* filer.H */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = filer.H; sourceTree = "<group>"; };
+		9AE9897013F288D400A3873D /* Rijndael.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rijndael.cpp; sourceTree = "<group>"; };
+		9AE9897113F288D400A3873D /* Rijndael.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rijndael.h; sourceTree = "<group>"; };
+		9AE9897313F28E5900A3873D /* DrumlinTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrumlinTypes.h; sourceTree = "<group>"; };
+		9AE9897413F2B24F00A3873D /* KeyGen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyGen.cpp; sourceTree = "<group>"; };
+		9AE9897513F2B24F00A3873D /* KeyGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyGen.h; sourceTree = "<group>"; };
+		9AEA015413F922800047C73A /* Base64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Base64.cpp; sourceTree = "<group>"; };
+		9AEA015513F922800047C73A /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		9AF19D8F13EADEEE0046A907 /* Javelin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Javelin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF19D9313EADEEE0046A907 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9AF19D9613EADEEE0046A907 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -98,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A73E5AD13F58C83002F3457 /* IOKit.framework in Frameworks */,
 				9AF19DCD13EADFA70046A907 /* Quartz.framework in Frameworks */,
 				9AF19D9413EADEEE0046A907 /* Cocoa.framework in Frameworks */,
 			);
@@ -160,6 +204,7 @@
 		9AF19D9213EADEEE0046A907 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A73E5AC13F58C83002F3457 /* IOKit.framework */,
 				9AF19DCC13EADFA70046A907 /* Quartz.framework */,
 				9AF19D9313EADEEE0046A907 /* Cocoa.framework */,
 				9AF19D9513EADEEE0046A907 /* Other Frameworks */,
@@ -180,6 +225,26 @@
 		9AF19D9913EADEEE0046A907 /* Javelin */ = {
 			isa = PBXGroup;
 			children = (
+				9A4BB93C13F54F3000AC9FB6 /* md5.cpp */,
+				9A4BB93D13F54F3000AC9FB6 /* md5.h */,
+				9A1466EB13F434EA0001E0DC /* DocInfo.h */,
+				9A9206AA13F176CD00EC8F96 /* Test.cpp */,
+				9A9206AB13F176CD00EC8F96 /* Test.h */,
+				9A9206AD13F1787100EC8F96 /* TestOC.h */,
+				9A9206AE13F1787100EC8F96 /* TestOC.mm */,
+				9AE9896913F2876C00A3873D /* Drumlin.h */,
+				9AE9896A13F2876C00A3873D /* Drumlin.mm */,
+				9AE9897313F28E5900A3873D /* DrumlinTypes.h */,
+				9A1466E113F3F3E90001E0DC /* UnicodeString.cpp */,
+				9A1466E213F3F3E90001E0DC /* UnicodeString.h */,
+				9A1466E813F42C980001E0DC /* Global.cpp */,
+				9A1466E913F42C980001E0DC /* Global.h */,
+				9AE9897413F2B24F00A3873D /* KeyGen.cpp */,
+				9AE9897513F2B24F00A3873D /* KeyGen.h */,
+				9AE9897013F288D400A3873D /* Rijndael.cpp */,
+				9AE9897113F288D400A3873D /* Rijndael.h */,
+				9AE9896D13F288AF00A3873D /* filer.cpp */,
+				9AE9896E13F288AF00A3873D /* filer.H */,
 				9AABD3CE13EE9A69008860FB /* JavelinPdfView.h */,
 				9AABD3CF13EE9A69008860FB /* JavelinPdfView.m */,
 				9AFD212613ED99740060F352 /* JavelinController.h */,
@@ -189,6 +254,14 @@
 				9AF19DA813EADEEE0046A907 /* JavelinDocument.xib */,
 				9AF19DAB13EADEEF0046A907 /* MainMenu.xib */,
 				9AF19D9A13EADEEE0046A907 /* Supporting Files */,
+				9A4BB94013F55FFC00AC9FB6 /* WebService.h */,
+				9A4BB94113F55FFC00AC9FB6 /* WebService.m */,
+				9A4BB94313F5605900AC9FB6 /* XmlParser.h */,
+				9A4BB94413F5605900AC9FB6 /* XmlParser.m */,
+				9AEA015413F922800047C73A /* Base64.cpp */,
+				9AEA015513F922800047C73A /* Base64.h */,
+				9AC3640F13F9732B006D86B2 /* DocumentRecord.h */,
+				9AC3641013F9732B006D86B2 /* DocumentRecord.m */,
 			);
 			path = Javelin;
 			sourceTree = "<group>";
@@ -351,6 +424,19 @@
 				9AF19DA713EADEEE0046A907 /* JavelinDocument.m in Sources */,
 				9AFD212813ED99740060F352 /* JavelinController.m in Sources */,
 				9AABD3D013EE9A69008860FB /* JavelinPdfView.m in Sources */,
+				9A9206AC13F176CD00EC8F96 /* Test.cpp in Sources */,
+				9A9206AF13F1787100EC8F96 /* TestOC.mm in Sources */,
+				9AE9896B13F2876C00A3873D /* Drumlin.mm in Sources */,
+				9AE9896F13F288AF00A3873D /* filer.cpp in Sources */,
+				9AE9897213F288D400A3873D /* Rijndael.cpp in Sources */,
+				9AE9897613F2B24F00A3873D /* KeyGen.cpp in Sources */,
+				9A1466E313F3F3E90001E0DC /* UnicodeString.cpp in Sources */,
+				9A1466EA13F42C980001E0DC /* Global.cpp in Sources */,
+				9A4BB93E13F54F3000AC9FB6 /* md5.cpp in Sources */,
+				9A4BB94213F55FFC00AC9FB6 /* WebService.m in Sources */,
+				9A4BB94513F5605900AC9FB6 /* XmlParser.m in Sources */,
+				9AEA015613F922800047C73A /* Base64.cpp in Sources */,
+				9AC3641113F9732B006D86B2 /* DocumentRecord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +539,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
