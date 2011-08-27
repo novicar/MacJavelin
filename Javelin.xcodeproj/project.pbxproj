@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		9A1466E313F3F3E90001E0DC /* UnicodeString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1466E113F3F3E90001E0DC /* UnicodeString.cpp */; };
 		9A1466EA13F42C980001E0DC /* Global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1466E813F42C980001E0DC /* Global.cpp */; };
+		9A1ECD8213FBCAF50089F75A /* DocumentDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9A1ECD8113FBCAF50089F75A /* DocumentDB.mm */; };
 		9A4BB93E13F54F3000AC9FB6 /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A4BB93C13F54F3000AC9FB6 /* md5.cpp */; };
 		9A4BB94213F55FFC00AC9FB6 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4BB94113F55FFC00AC9FB6 /* WebService.m */; };
 		9A4BB94513F5605900AC9FB6 /* XmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4BB94413F5605900AC9FB6 /* XmlParser.m */; };
 		9A73E5AD13F58C83002F3457 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A73E5AC13F58C83002F3457 /* IOKit.framework */; };
+		9A7EB71F1406A16B00DBD6DC /* AuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7EB71E1406A16A00DBD6DC /* AuthController.m */; };
 		9A9206AC13F176CD00EC8F96 /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A9206AA13F176CD00EC8F96 /* Test.cpp */; };
 		9A9206AF13F1787100EC8F96 /* TestOC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9A9206AE13F1787100EC8F96 /* TestOC.mm */; };
 		9AABD3D013EE9A69008860FB /* JavelinPdfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AABD3CF13EE9A69008860FB /* JavelinPdfView.m */; };
@@ -69,6 +71,8 @@
 		9A1466E813F42C980001E0DC /* Global.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Global.cpp; path = ../Global.cpp; sourceTree = "<group>"; };
 		9A1466E913F42C980001E0DC /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Global.h; path = ../Global.h; sourceTree = "<group>"; };
 		9A1466EB13F434EA0001E0DC /* DocInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocInfo.h; sourceTree = "<group>"; };
+		9A1ECD8013FBCAF50089F75A /* DocumentDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DocumentDB.h; path = ../DocumentDB.h; sourceTree = "<group>"; };
+		9A1ECD8113FBCAF50089F75A /* DocumentDB.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DocumentDB.mm; path = ../DocumentDB.mm; sourceTree = "<group>"; };
 		9A4BB93C13F54F3000AC9FB6 /* md5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5.cpp; sourceTree = "<group>"; };
 		9A4BB93D13F54F3000AC9FB6 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
 		9A4BB94013F55FFC00AC9FB6 /* WebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebService.h; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 		9A4BB94313F5605900AC9FB6 /* XmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlParser.h; sourceTree = "<group>"; };
 		9A4BB94413F5605900AC9FB6 /* XmlParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlParser.m; sourceTree = "<group>"; };
 		9A73E5AC13F58C83002F3457 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		9A7EB71D1406A16A00DBD6DC /* AuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthController.h; sourceTree = "<group>"; };
+		9A7EB71E1406A16A00DBD6DC /* AuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthController.m; sourceTree = "<group>"; };
 		9A9206AA13F176CD00EC8F96 /* Test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Test.cpp; sourceTree = "<group>"; };
 		9A9206AB13F176CD00EC8F96 /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
 		9A9206AD13F1787100EC8F96 /* TestOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestOC.h; sourceTree = "<group>"; };
@@ -225,6 +231,8 @@
 		9AF19D9913EADEEE0046A907 /* Javelin */ = {
 			isa = PBXGroup;
 			children = (
+				9A1ECD8013FBCAF50089F75A /* DocumentDB.h */,
+				9A1ECD8113FBCAF50089F75A /* DocumentDB.mm */,
 				9A4BB93C13F54F3000AC9FB6 /* md5.cpp */,
 				9A4BB93D13F54F3000AC9FB6 /* md5.h */,
 				9A1466EB13F434EA0001E0DC /* DocInfo.h */,
@@ -262,6 +270,8 @@
 				9AEA015513F922800047C73A /* Base64.h */,
 				9AC3640F13F9732B006D86B2 /* DocumentRecord.h */,
 				9AC3641013F9732B006D86B2 /* DocumentRecord.m */,
+				9A7EB71D1406A16A00DBD6DC /* AuthController.h */,
+				9A7EB71E1406A16A00DBD6DC /* AuthController.m */,
 			);
 			path = Javelin;
 			sourceTree = "<group>";
@@ -437,6 +447,8 @@
 				9A4BB94513F5605900AC9FB6 /* XmlParser.m in Sources */,
 				9AEA015613F922800047C73A /* Base64.cpp in Sources */,
 				9AC3641113F9732B006D86B2 /* DocumentRecord.m in Sources */,
+				9A1ECD8213FBCAF50089F75A /* DocumentDB.mm in Sources */,
+				9A7EB71F1406A16B00DBD6DC /* AuthController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
