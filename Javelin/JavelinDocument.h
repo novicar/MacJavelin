@@ -10,6 +10,8 @@
 
 @interface JavelinDocument : NSDocument {
 @private
+    NSAttributedString *_fileContents;
 }
 
+- (NSAttributedString*) getFileContents;
 @end
