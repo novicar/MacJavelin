@@ -17,6 +17,10 @@
 		9A4BB94513F5605900AC9FB6 /* XmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4BB94413F5605900AC9FB6 /* XmlParser.m */; };
 		9A73E5AD13F58C83002F3457 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A73E5AC13F58C83002F3457 /* IOKit.framework */; };
 		9A7EB71F1406A16B00DBD6DC /* AuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7EB71E1406A16A00DBD6DC /* AuthController.m */; };
+		9A9CEC93141A0EB40065791A /* General.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9CEC92141A0EB40065791A /* General.m */; };
+		9A9CEC96141A10C30065791A /* Watermark.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9CEC95141A10C30065791A /* Watermark.m */; };
+		9A9CEC99141A2E9B0065791A /* JavelinPrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9CEC98141A2E9A0065791A /* JavelinPrintView.m */; };
+		9A9CEC9C141A5B110065791A /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9CEC9B141A5B100065791A /* Log.m */; };
 		9AABD3D013EE9A69008860FB /* JavelinPdfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AABD3CF13EE9A69008860FB /* JavelinPdfView.m */; };
 		9AABD4B213EEB9AF008860FB /* LinkPattern copy 1.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4A813EEB9AF008860FB /* LinkPattern copy 1.tif */; };
 		9AABD4B313EEB9AF008860FB /* LinkPattern copy.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4A913EEB9AF008860FB /* LinkPattern copy.tif */; };
@@ -31,6 +35,8 @@
 		9AABD4BD13EEBF12008860FB /* ToolbarView4Adorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4BC13EEBF12008860FB /* ToolbarView4Adorn.tif */; };
 		9AC3641113F9732B006D86B2 /* DocumentRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3641013F9732B006D86B2 /* DocumentRecord.m */; };
 		9AD17AC5140A5F25008764F5 /* AuthCode.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD17AC4140A5F25008764F5 /* AuthCode.xib */; };
+		9AD9269C141E53A200035878 /* Properties.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AD9269B141E53A200035878 /* Properties.xib */; };
+		9AD926A0141E586800035878 /* PropertiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD9269F141E586800035878 /* PropertiesController.m */; };
 		9AE9896B13F2876C00A3873D /* Drumlin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9896A13F2876C00A3873D /* Drumlin.mm */; };
 		9AE9896F13F288AF00A3873D /* filer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9896D13F288AF00A3873D /* filer.cpp */; };
 		9AE9897213F288D400A3873D /* Rijndael.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9897013F288D400A3873D /* Rijndael.cpp */; };
@@ -87,6 +93,14 @@
 		9A73E5AC13F58C83002F3457 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		9A7EB71D1406A16A00DBD6DC /* AuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthController.h; sourceTree = "<group>"; };
 		9A7EB71E1406A16A00DBD6DC /* AuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthController.m; sourceTree = "<group>"; };
+		9A9CEC91141A0EB40065791A /* General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = General.h; sourceTree = "<group>"; };
+		9A9CEC92141A0EB40065791A /* General.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = General.m; sourceTree = "<group>"; };
+		9A9CEC94141A10C30065791A /* Watermark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Watermark.h; sourceTree = "<group>"; };
+		9A9CEC95141A10C30065791A /* Watermark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Watermark.m; sourceTree = "<group>"; };
+		9A9CEC97141A2E9A0065791A /* JavelinPrintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavelinPrintView.h; sourceTree = "<group>"; };
+		9A9CEC98141A2E9A0065791A /* JavelinPrintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JavelinPrintView.m; sourceTree = "<group>"; };
+		9A9CEC9A141A5B100065791A /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		9A9CEC9B141A5B100065791A /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
 		9AABD3CE13EE9A69008860FB /* JavelinPdfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavelinPdfView.h; sourceTree = "<group>"; };
 		9AABD3CF13EE9A69008860FB /* JavelinPdfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JavelinPdfView.m; sourceTree = "<group>"; };
 		9AABD4A813EEB9AF008860FB /* LinkPattern copy 1.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "LinkPattern copy 1.tif"; path = "Javelin/Artwork/LinkPattern copy 1.tif"; sourceTree = "<group>"; };
@@ -103,6 +117,9 @@
 		9AC3640F13F9732B006D86B2 /* DocumentRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentRecord.h; sourceTree = "<group>"; };
 		9AC3641013F9732B006D86B2 /* DocumentRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentRecord.m; sourceTree = "<group>"; };
 		9AD17AC4140A5F25008764F5 /* AuthCode.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthCode.xib; sourceTree = "<group>"; };
+		9AD9269B141E53A200035878 /* Properties.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Properties.xib; sourceTree = "<group>"; };
+		9AD9269E141E586800035878 /* PropertiesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertiesController.h; sourceTree = "<group>"; };
+		9AD9269F141E586800035878 /* PropertiesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertiesController.m; sourceTree = "<group>"; };
 		9AE9896913F2876C00A3873D /* Drumlin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drumlin.h; sourceTree = "<group>"; };
 		9AE9896A13F2876C00A3873D /* Drumlin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Drumlin.mm; sourceTree = "<group>"; };
 		9AE9896D13F288AF00A3873D /* filer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filer.cpp; sourceTree = "<group>"; };
@@ -275,6 +292,17 @@
 				9A089887140FA1FB00A6C388 /* AppController.m */,
 				9A25CD1914167BEF002257C7 /* DrumlinPrintPanel.h */,
 				9A25CD1A14167BEF002257C7 /* DrumlinPrintPanel.m */,
+				9A9CEC91141A0EB40065791A /* General.h */,
+				9A9CEC92141A0EB40065791A /* General.m */,
+				9A9CEC94141A10C30065791A /* Watermark.h */,
+				9A9CEC95141A10C30065791A /* Watermark.m */,
+				9A9CEC97141A2E9A0065791A /* JavelinPrintView.h */,
+				9A9CEC98141A2E9A0065791A /* JavelinPrintView.m */,
+				9A9CEC9A141A5B100065791A /* Log.h */,
+				9A9CEC9B141A5B100065791A /* Log.m */,
+				9AD9269B141E53A200035878 /* Properties.xib */,
+				9AD9269E141E586800035878 /* PropertiesController.h */,
+				9AD9269F141E586800035878 /* PropertiesController.m */,
 			);
 			path = Javelin;
 			sourceTree = "<group>";
@@ -399,6 +427,7 @@
 				9AFF94F113F003B300784C6D /* ToolbarNextAdorn.tif in Resources */,
 				9AFF94F213F003B300784C6D /* ToolbarPrevAdorn.tif in Resources */,
 				9AD17AC5140A5F25008764F5 /* AuthCode.xib in Resources */,
+				9AD9269C141E53A200035878 /* Properties.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +482,11 @@
 				9A7EB71F1406A16B00DBD6DC /* AuthController.m in Sources */,
 				9A089888140FA1FB00A6C388 /* AppController.m in Sources */,
 				9A25CD1B14167BEF002257C7 /* DrumlinPrintPanel.m in Sources */,
+				9A9CEC93141A0EB40065791A /* General.m in Sources */,
+				9A9CEC96141A10C30065791A /* Watermark.m in Sources */,
+				9A9CEC99141A2E9B0065791A /* JavelinPrintView.m in Sources */,
+				9A9CEC9C141A5B110065791A /* Log.m in Sources */,
+				9AD926A0141E586800035878 /* PropertiesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
