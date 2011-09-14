@@ -21,6 +21,8 @@
 		9A9CEC96141A10C30065791A /* Watermark.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9CEC95141A10C30065791A /* Watermark.m */; };
 		9A9CEC99141A2E9B0065791A /* JavelinPrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9CEC98141A2E9A0065791A /* JavelinPrintView.m */; };
 		9A9CEC9C141A5B110065791A /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9CEC9B141A5B100065791A /* Log.m */; };
+		9A9E39CE1420927A0009F10D /* ToolbarMinusAdorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E39CC1420927A0009F10D /* ToolbarMinusAdorn.tif */; };
+		9A9E39CF1420927A0009F10D /* ToolbarPlusAdorn.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9A9E39CD1420927A0009F10D /* ToolbarPlusAdorn.tif */; };
 		9AABD3D013EE9A69008860FB /* JavelinPdfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AABD3CF13EE9A69008860FB /* JavelinPdfView.m */; };
 		9AABD4B213EEB9AF008860FB /* LinkPattern copy 1.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4A813EEB9AF008860FB /* LinkPattern copy 1.tif */; };
 		9AABD4B313EEB9AF008860FB /* LinkPattern copy.tif in Resources */ = {isa = PBXBuildFile; fileRef = 9AABD4A913EEB9AF008860FB /* LinkPattern copy.tif */; };
@@ -101,6 +103,8 @@
 		9A9CEC98141A2E9A0065791A /* JavelinPrintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JavelinPrintView.m; sourceTree = "<group>"; };
 		9A9CEC9A141A5B100065791A /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		9A9CEC9B141A5B100065791A /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
+		9A9E39CC1420927A0009F10D /* ToolbarMinusAdorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarMinusAdorn.tif; path = Javelin/Artwork/ToolbarMinusAdorn.tif; sourceTree = "<group>"; };
+		9A9E39CD1420927A0009F10D /* ToolbarPlusAdorn.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarPlusAdorn.tif; path = Javelin/Artwork/ToolbarPlusAdorn.tif; sourceTree = "<group>"; };
 		9AABD3CE13EE9A69008860FB /* JavelinPdfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavelinPdfView.h; sourceTree = "<group>"; };
 		9AABD3CF13EE9A69008860FB /* JavelinPdfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JavelinPdfView.m; sourceTree = "<group>"; };
 		9AABD4A813EEB9AF008860FB /* LinkPattern copy 1.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "LinkPattern copy 1.tif"; path = "Javelin/Artwork/LinkPattern copy 1.tif"; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 		9AABD3E213EEB974008860FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9A9E39CC1420927A0009F10D /* ToolbarMinusAdorn.tif */,
+				9A9E39CD1420927A0009F10D /* ToolbarPlusAdorn.tif */,
 				9AFF94EB13F003B300784C6D /* ToolbarFirstAdorn.tif */,
 				9AFF94EC13F003B300784C6D /* ToolbarLastAdorn.tif */,
 				9AFF94ED13F003B300784C6D /* ToolbarNextAdorn.tif */,
@@ -428,6 +434,8 @@
 				9AFF94F213F003B300784C6D /* ToolbarPrevAdorn.tif in Resources */,
 				9AD17AC5140A5F25008764F5 /* AuthCode.xib in Resources */,
 				9AD9269C141E53A200035878 /* Properties.xib in Resources */,
+				9A9E39CE1420927A0009F10D /* ToolbarMinusAdorn.tif in Resources */,
+				9A9E39CF1420927A0009F10D /* ToolbarPlusAdorn.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
