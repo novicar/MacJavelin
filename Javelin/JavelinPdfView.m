@@ -2600,6 +2600,44 @@ static NSRect RectPlusScale (NSRect aRect, float scale)
     }
 }
 
+-(void)exportAllNotes
+{
+	if ( [[_javelinDocument annotations] count] > 0 )
+	{
+		NSString* sText = [[_javelinDocument annotations] getAllAnnotations];
+		if ( sText != nil && sText.length > 0 )
+		{
+			NSFileManager* fm = [NSFileManager defaultManager];
+			NSString *guid = [NSString stringWithFormat:@"%@.txt", [[NSProcessInfo processInfo] globallyUniqueString]];
+			NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:guid];
+			/*NSData* data = [sText dataUsingEncoding:NSUTF8StringEncoding];
+			if(![fm createFileAtPath:path contents:data attributes:nil]) 
+			{
+				
+				[[NSWorkspace sharedWorkspace] openFile:path];
+			}*/
+			if ( [fm createFileAtPath:path contents:nil attributes:nil] )
+			{
+				NSString* sFullText = [NSString stringWithFormat:@"Annotations for document\n%@\n\n%@", [_javelinDocument DocumentURL], sText];
+				[sFullText writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+				[[NSWorkspace sharedWorkspace] openFile:path];
+			}
+			else
+			{
+				NSAlert *alert = [[NSAlert alloc] init];
+				[alert setMessageText:@"ERROR: Unable to show annotations."];
+				[alert runModal];
+			}
+		}
+		else
+		{
+			NSAlert *alert = [[NSAlert alloc] init];
+			[alert setMessageText:@"This document doesn't have any annotation"];
+			[alert runModal];
+		}
+	}
+}
+
 
 /////////// END-OF-DRAGGING
 ////////VARIOUS TESTS

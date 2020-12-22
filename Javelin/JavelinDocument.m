@@ -322,6 +322,8 @@ RE_AUTHORISE:
 	}
 	else**/
 	{
+		NSString* s = [m_annotations getAllAnnotations];
+		NSLog(@"ANNOTS:\r\n %@", s);
 		return [self saveAnnotationsNew];
 	}
 }

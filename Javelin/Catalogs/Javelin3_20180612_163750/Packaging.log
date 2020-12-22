@@ -1,0 +1,136 @@
+2018-06-12 14:37:46 +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7fd5836aa560; archive(resolved)='<IDEArchive: 0x7fd569007db0>', distributionTask(resolved)='2', distributionMethod(resolved)='<IDEDistributionMethodDirectDistribution: 0x7fd565b0a190>', team(resolved)='<IDEProvisioningBasicTeam 0x7fd5852042e0: teamID: 55K68TLRFK, teamName: Drumlin Security Ltd>'>
+	Chain (10, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7fd5836aa560; archive = '<IDEArchive: 0x7fd569007db0>', distributionMethod='<IDEDistributionMethodDirectDistribution: 0x7fd565b0a190>', team='<IDEProvisioningBasicTeam 0x7fd5852042e0: teamID: 55K68TLRFK, teamName: Drumlin Security Ltd>'>
+	<IDEDistributionProcessingPipelineContext: 0x7fd56a085150; archive = '<IDEArchive: 0x7fd569007db0>', distributionMethod='<IDEDistributionMethodDirectDistribution: 0x7fd565b0a190>', team='<IDEProvisioningBasicTeam 0x7fd5852042e0: teamID: 55K68TLRFK, teamName: Drumlin Security Ltd>'>
+	<IDEDistributionContext: 0x7fd569183d10; archive = '<IDEArchive: 0x7fd569007db0>', distributionMethod='<IDEDistributionMethodDirectDistribution: 0x7fd565b0a190>', team='<IDEProvisioningBasicTeam 0x7fd5852042e0: teamID: 55K68TLRFK, teamName: Drumlin Security Ltd>'>
+	<IDEDistributionContext: 0x7fd583577660; archive = '<IDEArchive: 0x7fd569007db0>', distributionMethod='<IDEDistributionMethodDirectDistribution: 0x7fd565b0a190>', team='<IDEProvisioningBasicTeam 0x7fd5852042e0: teamID: 55K68TLRFK, teamName: Drumlin Security Ltd>'>
+	<IDEDistributionContext: 0x7fd57ffe3b90; archive = '<IDEArchive: 0x7fd569007db0>', distributionMethod='<IDEDistributionMethodDirectDistribution: 0x7fd565b0a190>', team='<IDEProvisioningBasicTeam 0x7fd5852042e0: teamID: 55K68TLRFK, teamName: Drumlin Security Ltd>'>
+	<IDEDistributionContext: 0x7fd56a08c200; archive = '<IDEArchive: 0x7fd569007db0>', distributionMethod='<IDEDistributionMethodDirectDistribution: 0x7fd565b0a190>', team='<IDEProvisioningBasicTeam 0x7fd5852042e0: teamID: 55K68TLRFK, teamName: Drumlin Security Ltd>'>
+	<IDEDistributionContext: 0x7fd569de9200; archive = '<IDEArchive: 0x7fd569007db0>', distributionMethod='<IDEDistributionMethodDirectDistribution: 0x7fd565b0a190>', team='<IDEProvisioningBasicTeam 0x7fd5852042e0: teamID: 55K68TLRFK, teamName: Drumlin Security Ltd>'>
+	<IDEDistributionContext: 0x7fd569183720; archive = '<IDEArchive: 0x7fd569007db0>', distributionMethod='<IDEDistributionMethodDirectDistribution: 0x7fd565b0a190>', team='<IDEProvisioningBasicTeam 0x7fd5852042e0: teamID: 55K68TLRFK, teamName: Drumlin Security Ltd>'>
+	<IDEDistributionContext: 0x7fd568d82f80; archive = '<IDEArchive: 0x7fd569007db0>', distributionMethod='<IDEDistributionMethodDirectDistribution: 0x7fd565b0a190>', team='(null)'>
+	<IDEDistributionContext: 0x7fd56751ab70; archive = '<IDEArchive: 0x7fd569007db0>', distributionMethod='(null)', team='(null)'>
+</IDEDistributionProcessingPipelineContext: 0x7fd5836aa560>
+2018-06-12 14:37:46 +0000  Processing step: IDEDistributionCreateDestRootStep
+2018-06-12 14:37:46 +0000  Processing step: IDEDistributionCopyItemStep
+2018-06-12 14:37:46 +0000  Running /usr/bin/ditto '-V' '/Users/harry/Library/Developer/Xcode/Archives/2018-06-12/Javelin3 12-06-2018, 16.37.xcarchive/Products/Applications/Javelin3.app' '/var/folders/r2/3pgllgf17czcdj9zk6jwpngm0000gn/T/XcodeDistPipeline.W7M/Root/Applications/Javelin3.app'
+2018-06-12 14:37:46 +0000  >>> Copying /Users/harry/Library/Developer/Xcode/Archives/2018-06-12/Javelin3 12-06-2018, 16.37.xcarchive/Products/Applications/Javelin3.app 
+2018-06-12 14:37:46 +0000  copying file ./Contents/_CodeSignature/CodeResources ... 
+2018-06-12 14:37:46 +0000  18712 bytes for ./Contents/_CodeSignature/CodeResources
+2018-06-12 14:37:46 +0000  copying file ./Contents/Info.plist ... 
+2018-06-12 14:37:46 +0000  4007 bytes for ./Contents/Info.plist
+2018-06-12 14:37:46 +0000  copying file ./Contents/MacOS/Javelin3 ... 
+2018-06-12 14:37:46 +0000  487840 bytes for ./Contents/MacOS/Javelin3
+2018-06-12 14:37:46 +0000  copying file ./Contents/PkgInfo ... 
+2018-06-12 14:37:46 +0000  8 bytes for ./Contents/PkgInfo
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/AnnotationPanel.nib ... 
+2018-06-12 14:37:46 +0000  15495 bytes for ./Contents/Resources/AnnotationPanel.nib
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/archived-expanded-entitlements.xcent ... 
+2018-06-12 14:37:46 +0000  412 bytes for ./Contents/Resources/archived-expanded-entitlements.xcent
+copying file ./Contents/Resources/AuthCode.nib ... 
+2018-06-12 14:37:46 +0000  13106 bytes for ./Contents/Resources/AuthCode.nib
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/back-arrow.png ... 
+2018-06-12 14:37:46 +0000  3105 bytes for ./Contents/Resources/back-arrow.png
+copying file ./Contents/Resources/back.png ... 
+2018-06-12 14:37:46 +0000  19328 bytes for ./Contents/Resources/back.png
+copying file ./Contents/Resources/catalog.xml ... 
+2018-06-12 14:37:46 +0000  19974 bytes for ./Contents/Resources/catalog.xml
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/catalog_200.png ... 
+2018-06-12 14:37:46 +0000  37735 bytes for ./Contents/Resources/catalog_200.png
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/CatalogController.nib ... 
+2018-06-12 14:37:46 +0000  19172 bytes for ./Contents/Resources/CatalogController.nib
+copying file ./Contents/Resources/CatalogItem.nib ... 
+2018-06-12 14:37:46 +0000  14690 bytes for ./Contents/Resources/CatalogItem.nib
+copying file ./Contents/Resources/CatalogView.nib ... 
+2018-06-12 14:37:46 +0000  9535 bytes for ./Contents/Resources/CatalogView.nib
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/CatalogViewNew.nib ... 
+2018-06-12 14:37:46 +0000  9410 bytes for ./Contents/Resources/CatalogViewNew.nib
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/CatalogWindowController.nib ... 
+2018-06-12 14:37:46 +0000  17965 bytes for ./Contents/Resources/CatalogWindowController.nib
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/down-arrow.png ... 
+2018-06-12 14:37:46 +0000  4351 bytes for ./Contents/Resources/down-arrow.png
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/download.png ... 
+2018-06-12 14:37:46 +0000  19589 bytes for ./Contents/Resources/download.png
+copying file ./Contents/Resources/DownloadDocument.nib ... 
+2018-06-12 14:37:46 +0000  17686 bytes for ./Contents/Resources/DownloadDocument.nib
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/en.lproj/Credits.rtf ... 
+2018-06-12 14:37:46 +0000  503 bytes for ./Contents/Resources/en.lproj/Credits.rtf
+copying file ./Contents/Resources/en.lproj/InfoPlist.strings ... 
+2018-06-12 14:37:46 +0000  92 bytes for ./Contents/Resources/en.lproj/InfoPlist.strings
+copying file ./Contents/Resources/en.lproj/JavelinDocument.nib ... 
+2018-06-12 14:37:46 +0000  36976 bytes for ./Contents/Resources/en.lproj/JavelinDocument.nib
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/en.lproj/MainMenu.nib ... 
+2018-06-12 14:37:46 +0000  9988 bytes for ./Contents/Resources/en.lproj/MainMenu.nib
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/EnterDocID.nib ... 
+2018-06-12 14:37:46 +0000  9650 bytes for ./Contents/Resources/EnterDocID.nib
+copying file ./Contents/Resources/exit-arrow.png ... 
+2018-06-12 14:37:46 +0000  3502 bytes for ./Contents/Resources/exit-arrow.png
+2018-06-12 14:37:46 +0000  copying file ./Contents/Resources/exit.png ... 
+2018-06-12 14:37:46 +0000  20674 bytes for ./Contents/Resources/exit.png
+copying file ./Contents/Resources/FreeNoteController.nib ... 
+2018-06-12 14:37:46 +0000  15729 bytes for ./Contents/Resources/FreeNoteController.nib
+copying file ./Contents/Resources/javelin263.png ... 
+2018-06-12 14:37:46 +0000  283890 bytes for ./Contents/Resources/javelin263.png
+copying file ./Contents/Resources/Javelin3.icns ... 
+2018-06-12 14:37:46 +0000  
+2018-06-12 14:37:46 +0000  
+2018-06-12 14:37:46 +0000  /usr/bin/ditto exited with 02018-06-12 14:37:46 +0000  
+
+2018-06-12 14:37:46 +0000  
+2018-06-12 14:37:46 +0000  Processing step: IDEDistributionEmbedProfileStep
+2018-06-12 14:37:46 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fd56890c210 'uk.co.drumlinsecurity.Javelin3' '<DVTFilePath:0x7fd568c57d90:'/Users/harry/Library/Developer/Xcode/Archives/2018-06-12/Javelin3 12-06-2018, 16.37.xcarchive/Products/Applications/Javelin3.app'>'>
+2018-06-12 14:37:46 +0000  Processing step: IDEDistributionAppThinningPlistStep
+2018-06-12 14:37:46 +0000  Processing step: IDEDistributionCompileBitcodeStep
+2018-06-12 14:37:46 +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2018-06-12 14:37:46 +0000  Processing step: IDEDistributionCodeSlimmingStep
+2018-06-12 14:37:46 +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2018-06-12 14:37:46 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2018-06-12 14:37:46 +0000  Processing step: IDEDistributionSymbolsStep
+2018-06-12 14:37:46 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2018-06-12 14:37:46 +0000  Processing step: IDEDistributionAppThinningStep
+2018-06-12 14:37:46 +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2018-06-12 14:37:46 +0000  Processing step: IDEDistributionODRStep
+2018-06-12 14:37:46 +0000  Processing step: IDEDistributionStripXattrsStep
+2018-06-12 14:37:46 +0000  Running /usr/bin/xattr '-crs' '/var/folders/r2/3pgllgf17czcdj9zk6jwpngm0000gn/T/XcodeDistPipeline.W7M/Root/Applications/Javelin3.app'
+2018-06-12 14:37:47 +0000  
+2018-06-12 14:37:47 +0000  
+2018-06-12 14:37:47 +0000  /usr/bin/xattr exited with 02018-06-12 14:37:47 +0000  
+
+2018-06-12 14:37:47 +0000  
+2018-06-12 14:37:47 +0000  Processing step: IDEDistributionCodesignStep
+2018-06-12 14:37:47 +0000  Applying entitlements delta for <IDEDistributionItem: 0x7fd56890c210 'uk.co.drumlinsecurity.Javelin3' '<DVTFilePath:0x7fd568c57d90:'/Users/harry/Library/Developer/Xcode/Archives/2018-06-12/Javelin3 12-06-2018, 16.37.xcarchive/Products/Applications/Javelin3.app'>'> from <IDEiCloudEntitlementsProcessor: 0x7fd58342cde0>: {
+}
+2018-06-12 14:37:47 +0000  Entitlements for <IDEDistributionItem: 0x7fd56890c210 'uk.co.drumlinsecurity.Javelin3' '<DVTFilePath:0x7fd568c57d90:'/Users/harry/Library/Developer/Xcode/Archives/2018-06-12/Javelin3 12-06-2018, 16.37.xcarchive/Products/Applications/Javelin3.app'>'>: {
+    "com.apple.security.app-sandbox" = 1;
+    "com.apple.security.files.user-selected.read-write" = 1;
+    "com.apple.security.network.client" = 1;
+    "com.apple.security.print" = 1;
+}
+2018-06-12 14:37:47 +0000  Writing entitlements for <IDEDistributionItem: 0x7fd56890c210 'uk.co.drumlinsecurity.Javelin3' '<DVTFilePath:0x7fd568c57d90:'/Users/harry/Library/Developer/Xcode/Archives/2018-06-12/Javelin3 12-06-2018, 16.37.xcarchive/Products/Applications/Javelin3.app'>'> to: /var/folders/r2/3pgllgf17czcdj9zk6jwpngm0000gn/T/XcodeDistPipeline.W7M/entitlementsl9xiHi
+2018-06-12 14:37:47 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '69D1F1B61A152BFB5CF35C0D7F5A7249C058CF4B' '--preserve-metadata=identifier,flags' '--entitlements' '/var/folders/r2/3pgllgf17czcdj9zk6jwpngm0000gn/T/XcodeDistPipeline.W7M/entitlementsl9xiHi' '--requirements' '=designated => anchor apple generic  and identifier "$self.identifier" and ((cert leaf[field.1.2.840.113635.100.6.1.9] exists) or ( certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists  and certificate leaf[subject.OU] = "55K68TLRFK" ))' '/var/folders/r2/3pgllgf17czcdj9zk6jwpngm0000gn/T/XcodeDistPipeline.W7M/Root/Applications/Javelin3.app'
+2018-06-12 14:37:47 +0000  /var/folders/r2/3pgllgf17czcdj9zk6jwpngm0000gn/T/XcodeDistPipeline.W7M/Root/Applications/Javelin3.app: replacing existing signature
+2018-06-12 14:37:48 +0000  /var/folders/r2/3pgllgf17czcdj9zk6jwpngm0000gn/T/XcodeDistPipeline.W7M/Root/Applications/Javelin3.app: signed app bundle with Mach-O thin (x86_64) [uk.co.drumlinsecurity.Javelin3]
+2018-06-12 14:37:48 +0000  2018-06-12 14:37:48 +0000  
+
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  2018-06-12 14:37:48 +0000  
+
+2018-06-12 14:37:48 +0000  /usr/bin/codesign exited with 0
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  
+2018-06-12 14:37:48 +0000  Processing step: IDEDistributionStreamingZipItemStep
+2018-06-12 14:37:48 +0000  Skipping step: IDEDistributionStreamingZipItemStep because it said so
+2018-06-12 14:37:48 +0000  Processing step: IDEDistributionSkipPackagingStep
+2018-06-12 14:37:48 +0000  Processing step: IDEDistributionCreateManifestStep
+2018-06-12 14:37:48 +0000  Skipping step: IDEDistributionCreateManifestStep because it said so

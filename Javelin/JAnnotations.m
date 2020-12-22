@@ -160,6 +160,37 @@
     return nil;
 }
 
+-(NSString*)getAllAnnotations
+{
+	NSArray* keys = [[m_annotations allKeys] sortedArrayUsingSelector:@selector(compare:)];
+	NSMutableString* sText = [NSMutableString stringWithString:@""];
+	NSString* sTemp = @"";
+	
+	for( int i=0; i<keys.count; i++ )
+	{
+		NSNumber* page = (NSNumber*)[keys objectAtIndex:i];
+		NSArray* anns = [m_annotations objectForKey:[keys objectAtIndex:i]];
+		
+		if ( anns.count > 0 )
+		{
+			sTemp = [NSString stringWithFormat:@"\r\nPage %ld\r\n", page.longValue];
+			[sText appendString:sTemp];
+			for( int j=0; j<anns.count; j++ )
+			{
+				JAnnotation* ann = [anns objectAtIndex:j];
+				if ( ann.type == ANNOTATION_NOTE )
+				{
+					sTemp = [NSString stringWithFormat:@"%@\r\n", [ann text] ];
+					[sText appendString:sTemp];
+				}
+				//NSLog(@"ANN %@\r\n", sTemp );
+			}
+		}
+	}
+	
+	return sText;
+}
+
 -(NSArray*) notesForIndex:(int)nIndex
 {
     //NSArray* keys = [m_annotations allKeys];

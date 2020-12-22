@@ -29,4 +29,5 @@
 -(NSArray*) annotsForIndex:(int)nIndex;
 -(unsigned int)numberOfPages;
 -(NSArray*) notesForIndex:(int)nIndex;
+-(NSString*)getAllAnnotations;
 @end

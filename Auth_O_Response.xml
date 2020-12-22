@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <Auth_OResponse xmlns="http://drumlinsecurity.co.uk/">
+            <Auth_OResult>/AD6PM4XUUmr4ilj3hgNMQ==</Auth_OResult>
+            <nHash>1443630706</nHash>
+            <sError />
+        </Auth_OResponse>
+    </soap:Body>
+</soap:Envelope>

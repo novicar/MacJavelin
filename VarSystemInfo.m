@@ -64,7 +64,7 @@ static NSString* const kVarSysInfoMachineMacPro      = @"Mac Pro";
 
 - (NSString *) _strControlEntry:(NSString *)ctlKey {
 
-    size_t size = 0;
+ /*   size_t size = 0;
     if ( sysctlbyname([ctlKey UTF8String], NULL, &size, NULL, 0) == -1 ) return nil;
 
     char *machine = calloc( 1, size );
@@ -72,14 +72,17 @@ static NSString* const kVarSysInfoMachineMacPro      = @"Mac Pro";
     sysctlbyname([ctlKey UTF8String], machine, &size, NULL, 0);
     NSString *ctlValue = [NSString stringWithCString:machine encoding:[NSString defaultCStringEncoding]];
 
-    free(machine); return ctlValue;
+    free(machine); return ctlValue;*/
+	return @"";//20201222
 }
 
 - (NSNumber *) _numControlEntry:(NSString *)ctlKey {
 
-    size_t size = sizeof( uint64_t ); uint64_t ctlValue = 0;
+/*    size_t size = sizeof( uint64_t ); uint64_t ctlValue = 0;
     if ( sysctlbyname([ctlKey UTF8String], &ctlValue, &size, NULL, 0) == -1 ) return nil;
-    return [NSNumber numberWithUnsignedLongLong:ctlValue];
+    return [NSNumber numberWithUnsignedLongLong:ctlValue];*/
+	
+	return [NSNumber numberWithUnsignedLong:0];
 }
 
 - (NSString *) _modelNameFromID:(NSString *)modelID {
@@ -143,7 +146,7 @@ static NSString* const kVarSysInfoMachineMacPro      = @"Mac Pro";
 
 - (NSString *) getOSVersionInfoOLD {
 
-    NSString *darwinVer = [self _strControlEntry:kVarSysInfoKeyOSVersion];
+/*    NSString *darwinVer = [self _strControlEntry:kVarSysInfoKeyOSVersion];
     NSString *buildNo = [self _strControlEntry:kVarSysInfoKeyOSBuild];
     if ( !darwinVer || !buildNo ) return nil;
 
@@ -157,7 +160,7 @@ static NSString* const kVarSysInfoMachineMacPro      = @"Mac Pro";
         bugFix = [darwinChunks objectAtIndex:1];
         return [NSString stringWithFormat:kVarSysInfoVersionFormat, majorVer, minorVer, bugFix, buildNo];
 
-    } return nil;
+    } */return nil;
 }
 
 #pragma mark - Initalization:
@@ -169,7 +172,7 @@ static NSString* const kVarSysInfoMachineMacPro      = @"Mac Pro";
     self.sysName = [[NSHost currentHost] localizedName];
     self.sysUserName = NSUserName();
     self.sysFullUserName = NSFullUserName();
-    self.sysOSName = pi.operatingSystemName;
+	self.sysOSName = pi.operatingSystemVersionString;//pi.operatingSystemName;
     self.sysOSVersion = self.getOSVersionInfo;
     self.sysPhysicalMemory = [NSString stringWithFormat:@"%lld", pi.physicalMemory];
 	
@@ -177,9 +180,9 @@ static NSString* const kVarSysInfoMachineMacPro      = @"Mac Pro";
 
     self.sysSerialNumber = [self _strIORegistryEntry:(NSString *)CFSTR(kIOPlatformSerialNumberKey)];
     self.sysUUID = [self _strIORegistryEntry:(NSString *)CFSTR(kIOPlatformUUIDKey)];
-    self.sysModelID = [self _strControlEntry:kVarSysInfoKeyModel];
+    //20201222 self.sysModelID = [self _strControlEntry:kVarSysInfoKeyModel];
     self.sysModelName = [self _modelNameFromID:self.sysModelID];
-    self.sysProcessorName = [self _parseBrandName:[self _strControlEntry:kVarSysInfoKeyCPUBrand]];
+	//20201222 self.sysProcessorName = [self _parseBrandName:[self _strControlEntry:kVarSysInfoKeyCPUBrand]];
     self.sysProcessorSpeed =[NSString stringWithFormat:@"%@", [self _numControlEntry:kVarSysInfoKeyCPUFreq]];
 	//[[self _numControlEntry:kVarSysInfoKeyCPUFreq] strBaseTenSpeedMaxFractionDigits:2];
     self.sysProcessorCount = [self _numControlEntry:kVarSysInfoKeyCPUCount];

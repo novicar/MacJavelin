@@ -14,11 +14,12 @@
 @interface JavelinNotes : NSOutlineView //<NSOutlineViewDataSource, NSOutlineViewDelegate>
 {
     //JavelinPdfView*     __unsafe_unretained m_view;
-    id  m_delNoteView;
+    id  m_pdfView;
     JAnnotation* m_selectedAnnotation;
 }
 
 //@property (readwrite, assign) JavelinPdfView* PdfView;
 -(void)setNoteViewDelegate:(id)del;
 -(void)deleteNote:(id)sender;
+-(void)exportAllNotes:(id)sender;
 @end

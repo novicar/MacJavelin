@@ -22,7 +22,7 @@
     if ( self )
     {
         //[self setDataSource:self];
-        m_delNoteView = nil;
+        m_pdfView = nil;
     }
     return self;
 }
@@ -43,10 +43,10 @@
         NSInteger clickedRow = [self rowAtPoint:localLocation];
 
         //NSLog(@"Mouse double-click occurred");
-        if (m_delNoteView != nil )
+        if (m_pdfView != nil )
         {
             JAnnotation* ann = [self itemAtRow:clickedRow];
-            [m_delNoteView itemDoubleClicked:ann];
+            [m_pdfView itemDoubleClicked:ann];
             //[m_delNoteView itemDoubleClicked:clickedRow];
         }
     }
@@ -57,7 +57,7 @@
 
 -(void)setNoteViewDelegate:(id)del
 {
-    m_delNoteView = del;
+    m_pdfView = del;
 }
 
 - (NSMenu *)defaultMenu 
@@ -67,7 +67,7 @@
 
     NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Model browser context menu"];
     [theMenu insertItemWithTitle:@"Delete note" action:@selector(deleteNote:) keyEquivalent:@"" atIndex:0];
-
+	[theMenu insertItemWithTitle:@"Export all notes" action:@selector(exportAllNotes:) keyEquivalent:@"" atIndex:1];
     return theMenu;
 }
 
@@ -83,9 +83,17 @@
 
 -(void)deleteNote:(id)sender
 {
-    if (m_delNoteView != nil )
+    if (m_pdfView != nil )
     {
-        [m_delNoteView deleteNote:m_selectedAnnotation];
+        [m_pdfView deleteNote:m_selectedAnnotation];
     }
+}
+
+-(void)exportAllNotes:(id)sender
+{
+	if ( m_pdfView != nil )
+	{
+		[m_pdfView exportAllNotes];
+	}
 }
 @end

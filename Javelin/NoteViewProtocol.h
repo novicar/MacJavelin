@@ -14,6 +14,7 @@
 @protocol NoteViewProtocol <NSObject>
 -(void)itemDoubleClicked:(JAnnotation*)annot;
 -(void)deleteNote:(JAnnotation*)annot;
+-(void)exportAllNotes;
 @end
 
 #endif /* NoteViewProtocol_h */
