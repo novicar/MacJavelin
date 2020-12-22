@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JavelinCatalog>
+	<CatalogURL>http://www.drumlinsecurity.co.uk/catalog.xml</CatalogURL>
+	<Document>
+		<Name>Alice in Wonderland - Test Code: abcabcabc</Name>
+		<URL>http://www.drumlinsecurity.co.uk/ipad/alice.drmz</URL>
+		<ThumbURL>http://www.drumlinsecurity.co.uk/ipad/alice.png</ThumbURL>
+		<Subtitle>Sample secure PDF document - Cover image courtesy the Gutenberg Project, Images section</Subtitle>
+		<ISBN>-</ISBN>
+		<PublisherName>Macmillan (in 1866)</PublisherName>
+		<PublisherURL></PublisherURL>
+		<Authors>Lewis Carroll (Charles Lutwidge Dodgson)</Authors>
+		<AuthorURL></AuthorURL>
+		<Language>English</Language>
+		<Edition>1</Edition>
+		<Description>The famous 19th century tale of Alice's adventures underground. Illustrated by John Tenniel. The PDF file in this copy was designed and published by PDFreeBooks.org.</Description>
+		<Review></Review>
+		<PrintLength>78</PrintLength>
+		<PublicationDate>1865-01-01</PublicationDate>
+		<Price>Free</Price>
+		<CurrencyCode></CurrencyCode>
+	</Document>
+	<Document>
+		<Name>Javelin User Guide</Name>
+		<URL>http://www.drumlinsecurity.co.uk/ipad/userguide.pdf</URL>
+		<ThumbURL></ThumbURL>
+		<Subtitle></Subtitle>
+		<ISBN></ISBN>
+		<PublisherName>Drumlin Security Ltd</PublisherName>
+		<PublisherURL>http://www.drumlinsecurity.co.uk/ipad.html</PublisherURL>
+		<Authors></Authors>
+		<AuthorURL></AuthorURL>
+		<Language>English</Language>
+		<Edition></Edition>
+		<Description></Description>
+		<Review></Review>
+		<PrintLength></PrintLength>
+		<PublicationDate>2012-01-01</PublicationDate>
+		<Price></Price>
+		<CurrencyCode></CurrencyCode>
+	</Document>
+</JavelinCatalog>
+
+
+
+
+
+

@@ -183,7 +183,6 @@
 					sTemp = [NSString stringWithFormat:@"%@\r\n", [ann text] ];
 					[sText appendString:sTemp];
 				}
-				//NSLog(@"ANN %@\r\n", sTemp );
 			}
 		}
 	}
