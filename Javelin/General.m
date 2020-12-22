@@ -64,6 +64,7 @@ static DocumentList* g_documentList = nil;
 			sChar[j] = '\x0';
 			break;
 		}
+		
 		sChar[j] = sUni[i];
 		sChar[j+1] = '\x0';
 	}
