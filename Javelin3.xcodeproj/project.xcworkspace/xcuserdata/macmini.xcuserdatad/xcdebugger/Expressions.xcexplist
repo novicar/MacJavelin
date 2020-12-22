@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.1">
+   <ContextStates>
+      <ContextState
+         contextName = "-[JavelinPdfView printDrmx:]:JavelinPdfView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "pArgs">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[JavelinPdfView printPanelDidEnd:returnCode:contextInfo:]:JavelinPdfView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "ob">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CatalogViewNew">
+            <connections>
+                <outlet property="sourceItemView" destination="Hz6-mo-xeY" id="kF0-1M-cPg"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="JavelinApplication">
+            <connections>
+                <outlet property="m_customView" destination="Hz6-mo-xeY" id="Bl5-8x-0W7"/>
+            </connections>
+        </customObject>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="536" height="417"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DT8-mh-aTk">
+                    <rect key="frame" x="0.0" y="0.0" width="536" height="378"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="IpA-fR-85o">
+                        <rect key="frame" x="1" y="1" width="534" height="376"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView ambiguous="YES" id="uCp-ha-dxS">
+                                <rect key="frame" x="0.0" y="0.0" width="534" height="376"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <collectionViewLayout key="collectionViewLayout" id="rAO-nW-53f"/>
+                                <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="kt1-7c-wv6">
+                        <rect key="frame" x="-100" y="-100" width="233" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Tvk-fm-bCs">
+                        <rect key="frame" x="234" y="1" width="15" height="143"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+            </subviews>
+            <point key="canvasLocation" x="163" y="241.5"/>
+        </customView>
+        <collectionViewItem id="lkF-Gf-oU8">
+            <connections>
+                <outlet property="view" destination="PN1-ZS-L3u" id="HfS-e8-kj1"/>
+            </connections>
+        </collectionViewItem>
+        <view id="PN1-ZS-L3u">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+        </view>
+    </objects>
+</document>
