@@ -154,6 +154,7 @@
 -(IBAction) openAboutPanel:(id)sender;
 -(IBAction) doCloseMe:(id)sender;
 -(IBAction) doSaveMe:(id)sender;
+-(IBAction) doExportNotes:(id)sender;
 
 -(void)closeDrawer;
 -(void)setupMyView:(PDOCEX_INFO)pDocInfo withAuthCode:(NSString*)authCode;

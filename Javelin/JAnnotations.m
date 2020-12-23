@@ -173,14 +173,15 @@
 		
 		if ( anns.count > 0 )
 		{
-			sTemp = [NSString stringWithFormat:@"\r\nPage %ld\r\n", page.longValue];
+			sTemp = [NSString stringWithFormat:@"\r\nPage %ld\r\n----------\r\n", page.longValue];
 			[sText appendString:sTemp];
+			int nCount = 1;
 			for( int j=0; j<anns.count; j++ )
 			{
 				JAnnotation* ann = [anns objectAtIndex:j];
 				if ( ann.type == ANNOTATION_NOTE )
 				{
-					sTemp = [NSString stringWithFormat:@"%@\r\n", [ann text] ];
+					sTemp = [NSString stringWithFormat:@"[%d] %@\r\n", nCount++, [ann text] ];
 					[sText appendString:sTemp];
 				}
 			}

@@ -2629,13 +2629,14 @@ static NSRect RectPlusScale (NSRect aRect, float scale)
 				[alert runModal];
 			}
 		}
-		else
-		{
-			NSAlert *alert = [[NSAlert alloc] init];
-			[alert setMessageText:@"This document doesn't have any annotation"];
-			[alert runModal];
-		}
 	}
+	else
+	{
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert setMessageText:@"This document doesn't have any annotation"];
+		[alert runModal];
+	}
+
 }
 
 

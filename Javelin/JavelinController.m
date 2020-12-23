@@ -2099,6 +2099,14 @@ RE_AUTHORISE:
 	}
 }
 
+-(IBAction) doExportNotes:(id)sender
+{
+	if ( _pdfView != nil )
+	{
+		[_pdfView exportAllNotes];
+	}
+}
+
 -(IBAction)doCloseMe:(id)sender
 {
 	if ( [[self window] isDocumentEdited] )

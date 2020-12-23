@@ -8,8 +8,8 @@
 
 #import "Version.h"
 
-#define JAVELIN_VERSION		@"3.05.01"
-#define DATE_BUILT			@"2020-10-07"
+#define JAVELIN_VERSION		@"3.05.02"
+#define DATE_BUILT			@"2020-12-23"
 #define APP_NAME			@"Javelin"
 #define COMPANY				@"Drumlin Security Ltd."
 #define COMPANY_URL			@"http://www.drumlinsecurity.co.uk"
