@@ -16,6 +16,7 @@
 #import "Note.h"
 #import "General.h"
 #import "JAnnotations.h"
+#import "ActivityManager.h"
 
 @implementation JavelinDocument
 
@@ -23,6 +24,7 @@
 @synthesize authCode=m_authCode;
 @synthesize annotations=m_annotations;
 @synthesize DocumentURL=m_docURL;
+@synthesize fileSize = m_nFileSize;
 
 - (id)init
 {
@@ -31,6 +33,7 @@
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
 		_fileContents = nil;
+		m_nFileSize = 0;
 		m_authCode = @"";
         m_annotations = [[JAnnotations alloc] initWithDocument:self];
 	}
@@ -90,6 +93,7 @@
 
     m_document = nil;
 	m_docURL = nil;
+	m_nFileSize = 0;
 	
     fm = [NSFileManager defaultManager];
     if ( [fm isReadableFileAtPath:[url path]] == YES )
@@ -103,6 +107,8 @@
 			m_document = [[PDFDocument alloc] initWithData:data];
             [self readAnnotations];
 			isClosed = NO;
+			m_nFileSize = [data length];
+			//m_nFileSize = [[fm attributesOfItemAtPath:[url path] error:nil] fileSize];
 		}
         return res;
     }
@@ -119,7 +125,7 @@
 	[[Log getLog] addLine:[NSString stringWithFormat:@"DBG: openDrmxFile:%@",url]];
 	
     fm = [NSFileManager defaultManager];
-
+	m_nFileSize = 0;
 RE_AUTHORISE:
     if ( [fm isReadableFileAtPath:[url path]] == YES )
     {
@@ -134,7 +140,7 @@ RE_AUTHORISE:
 			isClosed = NO;
 			[self readAnnotations];
 			[[Log getLog] addLine:[NSString stringWithFormat:@"Opened DRMX file: %@", m_docURL]];
-
+			m_nFileSize = [data length];
 			return YES;
 		}
     }
@@ -143,6 +149,13 @@ RE_AUTHORISE:
 	{
 		[[Log getLog] addLine:[NSString stringWithFormat:@"DBG: openDrmxFile: ERROR CODE: %ld",(long)[pError code]]];
 		[[Log getLog] addLine:[NSString stringWithFormat:@"DBG: openDrmxFile: ERROR DESC: %@",[pError localizedDescription]]];
+		
+		[ActivityManager addActivityWithDocID:0 
+								   activityID:0 
+								  description:
+		 [NSString stringWithFormat:@"ERR: Unable to open document. err:%d desc:%@", (int)[pError code], [pError localizedDescription]] 
+										 text:@"" 
+										error:nil];
 		
 		NSAlert *theAlert = [NSAlert alertWithMessageText:[pError localizedDescription] 
 											defaultButton:@"OK" 
@@ -181,6 +194,7 @@ RE_AUTHORISE:
 	[d setWindow:nil];
 	
 	NSData *pDoc = nil;
+	m_nFileSize = 0;
 	
 	@try{
 		[[Log getLog] addLine:@"DBG: openDrmxDocumentFromData: about to call openDrmxFileFromData"];
@@ -202,6 +216,12 @@ RE_AUTHORISE:
 	{
 		//bool res = [self openPdfDocumentFromData:pDoc];
 		m_document = [[PDFDocument alloc] initWithData: pDoc];
+		m_nFileSize = [data length];
+
+		[ActivityManager addActivityWithDocID:m_documentID 
+								   activityID:987 
+								  description:[NSString stringWithFormat:@"Opened DocID:%d name:%@", m_documentID, [m_docURL lastPathComponent]] 
+										 text:m_authCode error:nil];
 		return YES;
 	}
 	else
@@ -256,6 +276,8 @@ RE_AUTHORISE:
 		m_boolDrm = NO;
 		return [self openPDF:url ofType:typeName error:outError];
 	}
+	
+	m_docURL = url;
 	
 	if ( [typeName caseInsensitiveCompare:@"Javelin Document"] == NSOrderedSame )
 	{

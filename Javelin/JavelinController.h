@@ -78,6 +78,9 @@
 
 	IBOutlet NSMenuItem*			m_print;
 	
+	IBOutlet NSMenuItem*			m_miFind;
+	IBOutlet NSMenuItem*			m_miFindNext;
+	
 	UINT							m_documentID;
 	NSURL							*m_docUrl;
 	PropertiesController			*m_properties;
@@ -135,6 +138,7 @@
 
 - (void) toggleDrawer: (id) sender;
 - (void) downloadFile: (id) sender;
+- (void) rotatePageLeft: (id) sender;
 
 - (IBAction) doGoBackForward: (id) sender;
 
@@ -166,8 +170,19 @@
 -(void)noteDidResignMain:(id)sender;
 
 - (IBAction)doFullScreen:(id)sender;
+- (IBAction)doFind:(id)sender;
+- (IBAction)doFindNext:(id)sender;
+
+- (IBAction) doUpMenu:(id)sender;
+- (IBAction) doDownMenu:(id)sender;
+- (IBAction) doPreviousMenu:(id)sender;
+- (IBAction) doNextMenu:(id)sender;
+- (IBAction) doBackMenu:(id)sender;
+- (IBAction) doForwardMenu:(id)sender;
+
 
 - (BOOL) isEdited;
 - (void) receivedNotificationTerminalRunning:(NSNotification *) notification;
 - (void) terminalWarning;
+- (void) closeProcess:(NSString*)sName;
 @end

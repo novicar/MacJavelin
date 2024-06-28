@@ -10,6 +10,7 @@
 		4A1166901EB8A25D00F24D13 /* JAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A11668F1EB8A25D00F24D13 /* JAnnotations.m */; };
 		4A1166981EC1D6CE00F24D13 /* JavelinNotes.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1166971EC1D6CE00F24D13 /* JavelinNotes.m */; };
 		4A15811F20C9348200D3A661 /* MyGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A15811E20C9348200D3A661 /* MyGrid.m */; };
+		4A2C2DE62BA0715000B688C0 /* ActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C2DE52BA0715000B688C0 /* ActivityManager.m */; };
 		4A42A53B20A0545B00F8B696 /* CatalogItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A42A53920A0545B00F8B696 /* CatalogItem.m */; };
 		4A42A53C20A0545B00F8B696 /* CatalogItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A42A53A20A0545B00F8B696 /* CatalogItem.xib */; };
 		4A42A53E20A0641500F8B696 /* catalog_200.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A42A53D20A0641500F8B696 /* catalog_200.png */; };
@@ -27,11 +28,30 @@
 		4A81051720D2B37A007EAE9C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8EB1E51E97FCE5003EB9CA /* Quartz.framework */; };
 		4A81051920D2B37A007EAE9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A81051820D2B37A007EAE9C /* QuartzCore.framework */; };
 		4A84C7A720C82A1600A10785 /* refresh-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A84C7A620C82A1600A10785 /* refresh-icon.png */; };
-		4A84C7A920C82F3900A10785 /* down-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A84C7A820C82F3900A10785 /* down-arrow.png */; };
-		4A84C7AB20C82F8D00A10785 /* back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A84C7AA20C82F8D00A10785 /* back-arrow.png */; };
-		4A84C7AD20C8333500A10785 /* exit-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A84C7AC20C8333500A10785 /* exit-arrow.png */; };
 		4A8653A520C6D3AC00B5FD96 /* SingleLineTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8653A420C6D3AC00B5FD96 /* SingleLineTextView.m */; };
+		4AAB19062A1CA9F900A69698 /* ToolbarRotateImage.tif in Resources */ = {isa = PBXBuildFile; fileRef = 4AAB19052A1CA9F900A69698 /* ToolbarRotateImage.tif */; };
+		4AAB190F2A27697300A69698 /* FirstOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAB190D2A27697300A69698 /* FirstOne.m */; };
+		4AAB19102A27697300A69698 /* FirstOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AAB190E2A27697300A69698 /* FirstOne.xib */; };
+		4AAB19122A31CAB000A69698 /* back-arrow-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AAB19112A31CAB000A69698 /* back-arrow-1.png */; };
+		4AAB19152A31CB9400A69698 /* exit-arrow-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AAB19132A31CB9400A69698 /* exit-arrow-1.png */; };
+		4AAB19162A31CB9400A69698 /* down-arrow-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AAB19142A31CB9400A69698 /* down-arrow-1.png */; };
+		4AAB19182A31CBAE00A69698 /* refresh-icon-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AAB19172A31CBAE00A69698 /* refresh-icon-1.png */; };
+		4AB918312A3C5F320065CD9E /* back-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB918302A3C5F320065CD9E /* back-white.png */; };
+		4AB918332A3C60130065CD9E /* forth-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB918322A3C60130065CD9E /* forth-white.png */; };
+		4AB918382A3C61900065CD9E /* top-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB918342A3C618F0065CD9E /* top-white.png */; };
+		4AB918392A3C61900065CD9E /* bottom-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB918352A3C61900065CD9E /* bottom-white.png */; };
+		4AB9183A2A3C61900065CD9E /* down-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB918362A3C61900065CD9E /* down-white.png */; };
+		4AB9183B2A3C61900065CD9E /* up-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB918372A3C61900065CD9E /* up-white.png */; };
+		4AB918422A3C63960065CD9E /* down-white-g.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB9183C2A3C63950065CD9E /* down-white-g.png */; };
+		4AB918432A3C63960065CD9E /* back-white-g.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB9183D2A3C63950065CD9E /* back-white-g.png */; };
+		4AB918442A3C63960065CD9E /* bottom-white-g.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB9183E2A3C63960065CD9E /* bottom-white-g.png */; };
+		4AB918452A3C63960065CD9E /* forth-white-g.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB9183F2A3C63960065CD9E /* forth-white-g.png */; };
+		4AB918462A3C63960065CD9E /* up-white-g.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB918402A3C63960065CD9E /* up-white-g.png */; };
+		4AB918472A3C63960065CD9E /* top-white-g.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB918412A3C63960065CD9E /* top-white-g.png */; };
+		4AB9184A2A3C6AE90065CD9E /* minus-w.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB918482A3C6AE90065CD9E /* minus-w.png */; };
+		4AB9184B2A3C6AE90065CD9E /* plus-w.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB918492A3C6AE90065CD9E /* plus-w.png */; };
 		4ABDDD77251CAE8900F953E5 /* DocumentList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABDDD76251CAE8900F953E5 /* DocumentList.m */; };
+		4ABED75A2615C2B9003D451B /* VersionChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABED7592615C2B9003D451B /* VersionChecker.m */; };
 		4AC7460F2062AB1500DDDB79 /* ScannerThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC7460E2062AB1500DDDB79 /* ScannerThread.m */; };
 		4AC7E7562099FEF7001EED63 /* CatalogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC7E7552099FEF7001EED63 /* CatalogView.xib */; };
 		4AC7E75B209A02E0001EED63 /* CatalogDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC7E75A209A02E0001EED63 /* CatalogDocument.m */; };
@@ -127,6 +147,8 @@
 		4A1166971EC1D6CE00F24D13 /* JavelinNotes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JavelinNotes.m; sourceTree = "<group>"; };
 		4A15811D20C9348200D3A661 /* MyGrid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyGrid.h; sourceTree = "<group>"; };
 		4A15811E20C9348200D3A661 /* MyGrid.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyGrid.m; sourceTree = "<group>"; };
+		4A2C2DE42BA0715000B688C0 /* ActivityManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityManager.h; sourceTree = "<group>"; };
+		4A2C2DE52BA0715000B688C0 /* ActivityManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityManager.m; sourceTree = "<group>"; };
 		4A42A53820A0545B00F8B696 /* CatalogItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CatalogItem.h; sourceTree = "<group>"; };
 		4A42A53920A0545B00F8B696 /* CatalogItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CatalogItem.m; sourceTree = "<group>"; };
 		4A42A53A20A0545B00F8B696 /* CatalogItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CatalogItem.xib; sourceTree = "<group>"; };
@@ -147,14 +169,36 @@
 		4A7F954520A9F3A600952A99 /* CatalogWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CatalogWindowController.xib; sourceTree = "<group>"; };
 		4A81051820D2B37A007EAE9C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4A84C7A620C82A1600A10785 /* refresh-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh-icon.png"; sourceTree = "<group>"; };
-		4A84C7A820C82F3900A10785 /* down-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-arrow.png"; sourceTree = "<group>"; };
-		4A84C7AA20C82F8D00A10785 /* back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow.png"; sourceTree = "<group>"; };
-		4A84C7AC20C8333500A10785 /* exit-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exit-arrow.png"; sourceTree = "<group>"; };
 		4A8653A320C6D3AC00B5FD96 /* SingleLineTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleLineTextView.h; sourceTree = "<group>"; };
 		4A8653A420C6D3AC00B5FD96 /* SingleLineTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleLineTextView.m; sourceTree = "<group>"; };
 		4A8EB1E51E97FCE5003EB9CA /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		4AAB19052A1CA9F900A69698 /* ToolbarRotateImage.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = ToolbarRotateImage.tif; path = Javelin/Artwork/ToolbarRotateImage.tif; sourceTree = "<group>"; };
+		4AAB190C2A27697300A69698 /* FirstOne.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstOne.h; sourceTree = "<group>"; };
+		4AAB190D2A27697300A69698 /* FirstOne.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstOne.m; sourceTree = "<group>"; };
+		4AAB190E2A27697300A69698 /* FirstOne.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstOne.xib; sourceTree = "<group>"; };
+		4AAB19112A31CAB000A69698 /* back-arrow-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow-1.png"; sourceTree = "<group>"; };
+		4AAB19132A31CB9400A69698 /* exit-arrow-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exit-arrow-1.png"; sourceTree = "<group>"; };
+		4AAB19142A31CB9400A69698 /* down-arrow-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-arrow-1.png"; sourceTree = "<group>"; };
+		4AAB19172A31CBAE00A69698 /* refresh-icon-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh-icon-1.png"; sourceTree = "<group>"; };
+		4AB918302A3C5F320065CD9E /* back-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-white.png"; sourceTree = "<group>"; };
+		4AB918322A3C60130065CD9E /* forth-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forth-white.png"; sourceTree = "<group>"; };
+		4AB918342A3C618F0065CD9E /* top-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top-white.png"; sourceTree = "<group>"; };
+		4AB918352A3C61900065CD9E /* bottom-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottom-white.png"; sourceTree = "<group>"; };
+		4AB918362A3C61900065CD9E /* down-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-white.png"; sourceTree = "<group>"; };
+		4AB918372A3C61900065CD9E /* up-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up-white.png"; sourceTree = "<group>"; };
+		4AB9183C2A3C63950065CD9E /* down-white-g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-white-g.png"; sourceTree = "<group>"; };
+		4AB9183D2A3C63950065CD9E /* back-white-g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-white-g.png"; sourceTree = "<group>"; };
+		4AB9183E2A3C63960065CD9E /* bottom-white-g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottom-white-g.png"; sourceTree = "<group>"; };
+		4AB9183F2A3C63960065CD9E /* forth-white-g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forth-white-g.png"; sourceTree = "<group>"; };
+		4AB918402A3C63960065CD9E /* up-white-g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up-white-g.png"; sourceTree = "<group>"; };
+		4AB918412A3C63960065CD9E /* top-white-g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top-white-g.png"; sourceTree = "<group>"; };
+		4AB918482A3C6AE90065CD9E /* minus-w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minus-w.png"; sourceTree = "<group>"; };
+		4AB918492A3C6AE90065CD9E /* plus-w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-w.png"; sourceTree = "<group>"; };
 		4ABDDD75251CAE8900F953E5 /* DocumentList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocumentList.h; sourceTree = "<group>"; };
 		4ABDDD76251CAE8900F953E5 /* DocumentList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocumentList.m; sourceTree = "<group>"; };
+		4ABED756261491D9003D451B /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		4ABED7582615C2B9003D451B /* VersionChecker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionChecker.h; sourceTree = "<group>"; };
+		4ABED7592615C2B9003D451B /* VersionChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionChecker.m; sourceTree = "<group>"; };
 		4AC7460D2062AB1500DDDB79 /* ScannerThread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScannerThread.h; sourceTree = "<group>"; };
 		4AC7460E2062AB1500DDDB79 /* ScannerThread.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScannerThread.m; sourceTree = "<group>"; };
 		4AC7E7552099FEF7001EED63 /* CatalogView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CatalogView.xib; sourceTree = "<group>"; };
@@ -372,38 +416,54 @@
 		9AABD3E213EEB974008860FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4ADE2A85212AAE130098D8B5 /* warning.png */,
-				4A84C7AC20C8333500A10785 /* exit-arrow.png */,
-				4A84C7AA20C82F8D00A10785 /* back-arrow.png */,
-				4A84C7A820C82F3900A10785 /* down-arrow.png */,
-				4A84C7A620C82A1600A10785 /* refresh-icon.png */,
-				4A611D3A20AC2F0100E457D2 /* download.png */,
+				4AB918482A3C6AE90065CD9E /* minus-w.png */,
+				4AB918492A3C6AE90065CD9E /* plus-w.png */,
+				4AB9183D2A3C63950065CD9E /* back-white-g.png */,
+				4AB9183E2A3C63960065CD9E /* bottom-white-g.png */,
+				4AB9183C2A3C63950065CD9E /* down-white-g.png */,
+				4AB9183F2A3C63960065CD9E /* forth-white-g.png */,
+				4AB918412A3C63960065CD9E /* top-white-g.png */,
+				4AB918402A3C63960065CD9E /* up-white-g.png */,
+				4AB918352A3C61900065CD9E /* bottom-white.png */,
+				4AB918362A3C61900065CD9E /* down-white.png */,
+				4AB918342A3C618F0065CD9E /* top-white.png */,
+				4AB918372A3C61900065CD9E /* up-white.png */,
+				4AB918322A3C60130065CD9E /* forth-white.png */,
+				4AB918302A3C5F320065CD9E /* back-white.png */,
+				4AAB19112A31CAB000A69698 /* back-arrow-1.png */,
 				4A611D3520AC2C4300E457D2 /* back.png */,
-				4A611D3420AC2C4300E457D2 /* exit.png */,
-				4A611D3620AC2C4400E457D2 /* refresh.png */,
-				4A42A53F20A327A300F8B696 /* pdf.png */,
 				4A42A53D20A0641500F8B696 /* catalog_200.png */,
-				4A4B2F121E94E388005CD43B /* ToolbarSearchImage.tif */,
-				9A67E69717EADB1600DF64F1 /* javelin263.png */,
-				9A4F0BCF17CA11E70037393B /* ToolbarDownloadImage.tif */,
+				4AAB19142A31CB9400A69698 /* down-arrow-1.png */,
+				4A611D3A20AC2F0100E457D2 /* download.png */,
+				4AAB19132A31CB9400A69698 /* exit-arrow-1.png */,
+				4A611D3420AC2C4300E457D2 /* exit.png */,
 				9A8EAC3714EC0BBE00735025 /* Javelin3.icns */,
-				9A9E39CC1420927A0009F10D /* ToolbarMinusAdorn.tif */,
-				9A9E39CD1420927A0009F10D /* ToolbarPlusAdorn.tif */,
-				9AFF94EB13F003B300784C6D /* ToolbarFirstAdorn.tif */,
-				9AFF94EC13F003B300784C6D /* ToolbarLastAdorn.tif */,
-				9AFF94ED13F003B300784C6D /* ToolbarNextAdorn.tif */,
-				9AFF94EE13F003B300784C6D /* ToolbarPrevAdorn.tif */,
-				9AABD4BC13EEBF12008860FB /* ToolbarView4Adorn.tif */,
+				9A67E69717EADB1600DF64F1 /* javelin263.png */,
 				9AABD4A813EEB9AF008860FB /* LinkPattern copy 1.tif */,
 				9AABD4A913EEB9AF008860FB /* LinkPattern copy.tif */,
+				4A42A53F20A327A300F8B696 /* pdf.png */,
+				4AAB19172A31CBAE00A69698 /* refresh-icon-1.png */,
+				4A84C7A620C82A1600A10785 /* refresh-icon.png */,
+				4A611D3620AC2C4400E457D2 /* refresh.png */,
 				9AABD4AA13EEB9AF008860FB /* ToolbarBackAdorn.tif */,
+				9A4F0BCF17CA11E70037393B /* ToolbarDownloadImage.tif */,
 				9AABD4AB13EEB9AF008860FB /* ToolbarDrawerImage.tif */,
+				9AFF94EB13F003B300784C6D /* ToolbarFirstAdorn.tif */,
 				9AABD4AC13EEB9AF008860FB /* ToolbarForwardAdorn.tif */,
+				9AFF94EC13F003B300784C6D /* ToolbarLastAdorn.tif */,
+				9A9E39CC1420927A0009F10D /* ToolbarMinusAdorn.tif */,
+				9AFF94ED13F003B300784C6D /* ToolbarNextAdorn.tif */,
 				9AABD4AD13EEB9AF008860FB /* ToolbarNextPageImage.tif */,
+				9A9E39CD1420927A0009F10D /* ToolbarPlusAdorn.tif */,
+				9AFF94EE13F003B300784C6D /* ToolbarPrevAdorn.tif */,
 				9AABD4AE13EEB9AF008860FB /* ToolbarPreviousPageImage.tif */,
+				4AAB19052A1CA9F900A69698 /* ToolbarRotateImage.tif */,
+				4A4B2F121E94E388005CD43B /* ToolbarSearchImage.tif */,
 				9AABD4AF13EEB9AF008860FB /* ToolbarView1Adorn.tif */,
 				9AABD4B013EEB9AF008860FB /* ToolbarView2Adorn.tif */,
 				9AABD4B113EEB9AF008860FB /* ToolbarView3Adorn.tif */,
+				9AABD4BC13EEBF12008860FB /* ToolbarView4Adorn.tif */,
+				4ADE2A85212AAE130098D8B5 /* warning.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -411,6 +471,14 @@
 		9AF19D8413EADEEE0046A907 = {
 			isa = PBXGroup;
 			children = (
+				4A2C2DE42BA0715000B688C0 /* ActivityManager.h */,
+				4A2C2DE52BA0715000B688C0 /* ActivityManager.m */,
+				4AAB190C2A27697300A69698 /* FirstOne.h */,
+				4AAB190D2A27697300A69698 /* FirstOne.m */,
+				4AAB190E2A27697300A69698 /* FirstOne.xib */,
+				4ABED7582615C2B9003D451B /* VersionChecker.h */,
+				4ABED7592615C2B9003D451B /* VersionChecker.m */,
+				4ABED756261491D9003D451B /* Constants.h */,
 				4ABDDD75251CAE8900F953E5 /* DocumentList.h */,
 				4ABDDD76251CAE8900F953E5 /* DocumentList.m */,
 				4ADE2A80212AACF50098D8B5 /* WarningController.h */,
@@ -620,7 +688,6 @@
 				TargetAttributes = {
 					9AF19D8E13EADEEE0046A907 = {
 						DevelopmentTeam = 55K68TLRFK;
-						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -653,9 +720,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AF19D9E13EADEEE0046A907 /* InfoPlist.strings in Resources */,
-				4A84C7A920C82F3900A10785 /* down-arrow.png in Resources */,
 				4AC7E7562099FEF7001EED63 /* CatalogView.xib in Resources */,
-				4A84C7AB20C82F8D00A10785 /* back-arrow.png in Resources */,
+				4AAB19152A31CB9400A69698 /* exit-arrow-1.png in Resources */,
+				4AB918422A3C63960065CD9E /* down-white-g.png in Resources */,
 				9AC6B7FC1A7BF02F00B9F79E /* Note.xib in Resources */,
 				9AF19DA413EADEEE0046A907 /* Credits.rtf in Resources */,
 				9AFF5EDD1A8E4D020068BF2F /* FreeNoteController.xib in Resources */,
@@ -663,27 +730,42 @@
 				9A1595C4185F0BD60093903B /* DownloadDocument.xib in Resources */,
 				9AF19DAD13EADEEF0046A907 /* MainMenu.xib in Resources */,
 				9AABD4B213EEB9AF008860FB /* LinkPattern copy 1.tif in Resources */,
+				4AB918472A3C63960065CD9E /* top-white-g.png in Resources */,
 				9AABD4B313EEB9AF008860FB /* LinkPattern copy.tif in Resources */,
+				4AB918332A3C60130065CD9E /* forth-white.png in Resources */,
 				9AABD4B413EEB9AF008860FB /* ToolbarBackAdorn.tif in Resources */,
 				4ADE2A84212AACF50098D8B5 /* WarningController.xib in Resources */,
 				9AABD4B513EEB9AF008860FB /* ToolbarDrawerImage.tif in Resources */,
 				9AC6B7FA1A7BCECD00B9F79E /* AnnotationPanel.xib in Resources */,
 				4AC7E75D209A061F001EED63 /* catalog.xml in Resources */,
+				4AB918382A3C61900065CD9E /* top-white.png in Resources */,
+				4AB9183B2A3C61900065CD9E /* up-white.png in Resources */,
 				4A611D3720AC2C4400E457D2 /* exit.png in Resources */,
+				4AB9184A2A3C6AE90065CD9E /* minus-w.png in Resources */,
 				9AABD4B613EEB9AF008860FB /* ToolbarForwardAdorn.tif in Resources */,
 				4A4B2F131E94E388005CD43B /* ToolbarSearchImage.tif in Resources */,
 				9AC2A39C1DB8FC3D0042822B /* SearchController.xib in Resources */,
+				4AB918432A3C63960065CD9E /* back-white-g.png in Resources */,
 				9AABD4B713EEB9AF008860FB /* ToolbarNextPageImage.tif in Resources */,
 				4A611D3B20AC2F0100E457D2 /* download.png in Resources */,
 				4A7F953C20A9E74700952A99 /* CatalogViewNew.xib in Resources */,
 				9AABD4B813EEB9AF008860FB /* ToolbarPreviousPageImage.tif in Resources */,
 				9AABD4B913EEB9AF008860FB /* ToolbarView1Adorn.tif in Resources */,
 				4AC7E763209C6753001EED63 /* CatalogController.xib in Resources */,
+				4AB918452A3C63960065CD9E /* forth-white-g.png in Resources */,
+				4AAB19102A27697300A69698 /* FirstOne.xib in Resources */,
 				9ADB8DBA185B3D76005CBA53 /* JavelinSplash.pdf in Resources */,
+				4AAB19162A31CB9400A69698 /* down-arrow-1.png in Resources */,
+				4AB9183A2A3C61900065CD9E /* down-white.png in Resources */,
 				4A42A53E20A0641500F8B696 /* catalog_200.png in Resources */,
 				9AF2BC2C1A84F30800F01B2B /* EnterDocID.xib in Resources */,
+				4AAB19062A1CA9F900A69698 /* ToolbarRotateImage.tif in Resources */,
+				4AB918392A3C61900065CD9E /* bottom-white.png in Resources */,
+				4AB918312A3C5F320065CD9E /* back-white.png in Resources */,
 				9AABD4BA13EEB9AF008860FB /* ToolbarView2Adorn.tif in Resources */,
 				9AABD4BB13EEB9AF008860FB /* ToolbarView3Adorn.tif in Resources */,
+				4AAB19182A31CBAE00A69698 /* refresh-icon-1.png in Resources */,
+				4AAB19122A31CAB000A69698 /* back-arrow-1.png in Resources */,
 				9AABD4BD13EEBF12008860FB /* ToolbarView4Adorn.tif in Resources */,
 				9AFF94EF13F003B300784C6D /* ToolbarFirstAdorn.tif in Resources */,
 				9AFF94F013F003B300784C6D /* ToolbarLastAdorn.tif in Resources */,
@@ -691,16 +773,18 @@
 				9AFF94F213F003B300784C6D /* ToolbarPrevAdorn.tif in Resources */,
 				4A42A53C20A0545B00F8B696 /* CatalogItem.xib in Resources */,
 				4A84C7A720C82A1600A10785 /* refresh-icon.png in Resources */,
+				4AB918462A3C63960065CD9E /* up-white-g.png in Resources */,
 				4A611D3920AC2C4400E457D2 /* refresh.png in Resources */,
 				9AD17AC5140A5F25008764F5 /* AuthCode.xib in Resources */,
 				9AD9269C141E53A200035878 /* Properties.xib in Resources */,
 				9A9E39CE1420927A0009F10D /* ToolbarMinusAdorn.tif in Resources */,
 				9A9E39CF1420927A0009F10D /* ToolbarPlusAdorn.tif in Resources */,
-				4A84C7AD20C8333500A10785 /* exit-arrow.png in Resources */,
+				4AB9184B2A3C6AE90065CD9E /* plus-w.png in Resources */,
 				4A42A54020A327A300F8B696 /* pdf.png in Resources */,
 				9A8EAC3814EC0BBE00735025 /* Javelin3.icns in Resources */,
 				4A611D3820AC2C4400E457D2 /* back.png in Resources */,
 				4ADE2A86212AAE130098D8B5 /* warning.png in Resources */,
+				4AB918442A3C63960065CD9E /* bottom-white-g.png in Resources */,
 				9A4F0BD017CA11E70037393B /* ToolbarDownloadImage.tif in Resources */,
 				9A67E69817EADB1600DF64F1 /* javelin263.png in Resources */,
 				4A7F954720A9F3A600952A99 /* CatalogWindowController.xib in Resources */,
@@ -720,6 +804,7 @@
 				9AC6B7FF1A7BF15700B9F79E /* Note.m in Sources */,
 				9AF19DA713EADEEE0046A907 /* JavelinDocument.m in Sources */,
 				9AFD212813ED99740060F352 /* JavelinController.m in Sources */,
+				4ABED75A2615C2B9003D451B /* VersionChecker.m in Sources */,
 				9AABD3D013EE9A69008860FB /* JavelinPdfView.m in Sources */,
 				4AC7E762209C6753001EED63 /* CatalogController.m in Sources */,
 				9A1595BF185F0BA70093903B /* DownloadDocument.m in Sources */,
@@ -766,6 +851,8 @@
 				9A60ACEF1421FEE80043D50F /* Version.m in Sources */,
 				9A684B56156D09B0007FE98A /* JavelinApplication.m in Sources */,
 				9A5AB28C17C6082F009652A1 /* VarSystemInfo.m in Sources */,
+				4AAB190F2A27697300A69698 /* FirstOne.m in Sources */,
+				4A2C2DE62BA0715000B688C0 /* ActivityManager.m in Sources */,
 				9AB5BFFD17CB5FE200D1B1E3 /* DownloadItem.m in Sources */,
 				9A86274E17CC971E008DC24C /* DownloadCell.m in Sources */,
 				4A1166901EB8A25D00F24D13 /* JAnnotations.m in Sources */,
@@ -881,13 +968,13 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = JavelinM.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 30502;
+				CURRENT_PROJECT_VERSION = 30528;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 55K68TLRFK;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -898,7 +985,7 @@
 				);
 				INFOPLIST_FILE = "Javelin/Javelin3-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 3.05.02;
+				MARKETING_VERSION = 3.05.28;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.drumlinsecurity.Javelin3;
 				PRODUCT_NAME = Javelin3;
@@ -916,19 +1003,20 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = JavelinM.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 30502;
+				CURRENT_PROJECT_VERSION = 30528;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 55K68TLRFK;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Javelin/Javelin3-Prefix.pch";
 				INFOPLIST_FILE = "Javelin/Javelin3-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 3.05.02;
+				MARKETING_VERSION = 3.05.28;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.drumlinsecurity.Javelin3;
 				PRODUCT_NAME = Javelin3;

@@ -21,6 +21,8 @@
 #include "NoteProtocol.h"
 #include "JAnnotation.h"
 #include "JAnnotations.h"
+#include "JavelinApplication.h"
+#include "ActivityManager.h"
 
 //un-comment if you want to debug by printing to PDF file
 //#define DEBUG_PRINT	1
@@ -272,6 +274,17 @@
     [delegate editFreeNote:annNew inWindow:[self window] viewRect:[self convertRect:[annNew boundary] fromPage:[self currentPage]] pdfView:self];
 }
 
+- (void) removeAuthorisation: (id)sender
+{
+	JavelinApplication* pApp = (JavelinApplication*)[NSApplication sharedApplication];
+	
+	if ( pApp != nil )
+	{
+		[pApp removeCurrentDocumentAuthorization];
+		//[[self window] performClose:nil];
+	}
+}
+
 - (void) addFreeNote:(id)sender
 {
 /*	PDFAnnotationFreeText * ann = [[PDFAnnotationFreeText alloc] initWithBounds:NSMakeRect(m_ptAnnotation.x, m_ptAnnotation.y, FREE_NOTE_WIDTH, FREE_NOTE_HEIGHT)];
@@ -450,6 +463,12 @@ static NSRect RectPlusScale (NSRect aRect, float scale);
 - (void) setJavelinDocument: (JavelinDocument*)pDoc
 {
 	_javelinDocument = pDoc;
+	
+	if ( pDoc != nil && pDoc.docInfo != nil )
+	{
+		NSMenuItem *removeAuth = [[NSMenuItem alloc] initWithTitle: @"Remove Authorization" action:@selector(removeAuthorisation:) keyEquivalent:@""];
+		[m_normalMenu addItem:removeAuth];
+	}
 }
 
 - (JavelinDocument*) javelinDocument
@@ -1458,6 +1477,16 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 
 - (void) keyDown: (NSEvent *) theEvent
 {
+/*	JavelinDocument* jd = [self javelinDocument];
+	if ( jd != nil && [jd docInfo] != NULL )
+	{
+		//We have a protected document
+		//check screen-shot keys
+		NSLog(@"flg:%d %@",
+			  (unsigned int)theEvent.modifierFlags,
+			  theEvent.characters);
+	}*/
+	
 	if ( [self displayMode] == kPDFDisplayTwoUp || [self displayMode] == kPDFDisplayTwoUpContinuous )
 	{
 		UINT nCode = [theEvent keyCode];
@@ -1517,7 +1546,7 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 
 - (int) printJvlnDocument: (id) sender
 {
-	[[Log getLog] addLine:@"JavelinPdfView::printJvlnDocument"];
+//	[[Log getLog] addLine:@"JavelinPdfView::printJvlnDocument"];
 	JavelinDocument* jd = [self javelinDocument];
 	
 	if ( m_defaultPrintDict == nil )
@@ -1605,7 +1634,7 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 
 - (void) printDrmx: (DocumentRecord*)docRec
 {
-	[[Log getLog] addLine:@"JavelinPdfView::printDrmx"];
+//	[[Log getLog] addLine:@"JavelinPdfView::printDrmx"];
 	NSPrintInfo* pi = [NSPrintInfo sharedPrintInfo];//[[NSPrintInfo alloc] initWithDictionary:m_defaultPrintDict];//[NSPrintInfo sharedPrintInfo];
 	//NSArray *pArgs = [[NSArray alloc] initWithObjects:pi, docRec, nil];
 	//[NSArray arrayWithObjects:pi, docRec, nil];
@@ -1831,6 +1860,7 @@ NSPrintOperation* op = nil;
 
 	//check if the destination is a normal (hardware) printer
 	NSDictionary *d = [pi printSettings];
+	NSPrinter *pr = nil;
 	if ( d == nil )
 	{
 		[[Log getLog] addLine:@"Unable to retrieve printer settings."];
@@ -1841,28 +1871,7 @@ NSPrintOperation* op = nil;
 	{
 		[[Log getLog] addLine:@"PrintSettings dictionary OK - getting NSPrinter"];
 		
-/*			NSArray* keys;
-		NSArray* vals;
-		
-		keys = [d allKeys];
-		vals = [d allValues];
-		
-		if ( [d count] == 0 )
-		{
-			[[Log getLog] addLine:@"Zero entries in printer settings?!"];
-		}
-		else
-		{
-			[[Log getLog] addLine:
-				[NSString stringWithFormat:@"Dict items: %lu", (unsigned long)[d count] ] ];
-				
-			for( int i=0; i<[keys count]; i++)
-			{
-				[[Log getLog] addLine:[NSString stringWithFormat:@"%@ -> %@", [keys objectAtIndex:i], [vals objectAtIndex:i]]];
-			}
-		}*/
-		
-		NSPrinter *pr   = [pi printer];
+		pr   = [pi printer];
 
 		if ( pr == nil )
 		{
@@ -1880,7 +1889,7 @@ NSPrintOperation* op = nil;
 	[[Log getLog] addLine:[NSString stringWithFormat:@"Printing to device of type:%@", val]];
 
 /* 2013-12-19 PDF PRINTING*/
-#ifndef DEBUG_PRINT
+#ifndef DEBUG_PRINTx
 	if ( val == nil || [val intValue] != kPMDestinationPrinter )
 	{
 		//2015-10-30 alternate method to get printing destination (from Apple's docs)
@@ -2061,10 +2070,62 @@ NSPrintOperation* op = nil;
 
 	[[Log getLog] addLine:[NSString stringWithFormat:@"Printing from:%d to %d", nFirstPage, nLastPage ]];
 	
-	//printWithInfo:(NSPrintInfo *)printInfo autoRotate:(BOOL)doRotate;
 	
+	//[[Log getLog] addLine:[NSString stringWithFormat:@"Printer name: %@", [pr name]]];
+	//[[Log getLog] addLine:[NSString stringWithFormat:@"Printer type: %@", [pr type]]];
+	NSString* sDesc = [NSString stringWithFormat:@"Printing %@ [%d] on %@ [%@]", 
+					   [[jd DocumentURL] lastPathComponent], 
+					   [jd documentID], [pr name], [pr type] ];
+	NSString* sText = [NSString stringWithFormat:@"Page count: %d", nLastPage-nFirstPage+1];
+	
+	[ActivityManager addActivityWithDocID:[jd docInfo]->dwDocID 
+							   activityID:142 
+							  description:sDesc 
+									 text:sText 
+									error:nil];
 	for( int nPage=nFirstPage; nPage<=nLastPage; nPage++ )
 	{
+		PMPrinterState printerState;
+		OSStatus status = PMPrinterGetState(currentPrinter, &printerState);
+		
+		if (status != 0 )
+		{
+			[[Log getLog] addLine:[NSString stringWithFormat:@"ERROR: Unable to retrieve queue status (error:%d page:%d)", status, nPage ]];
+			continue;
+		}
+		
+		if (printerState == kPMPrinterStopped)
+		{
+			[[Log getLog] addLine:@"ERROR: Printer queue paused or not acccessible"];
+			continue;
+		}
+// Commented out on 2023-06-22
+//		else if (printerState == kPMPrinterProcessing)
+//		{
+//			[[Log getLog] addLine:[NSString stringWithFormat:@"ERROR: Printer queue is busy. Skipping page:%d", nPage]];
+//			continue;
+//		}
+// END
+		
+/*		CFURLRef urlref;
+		status = PMPrinterCopyDeviceURI(currentPrinter, &urlref);
+
+		if (status != 0 )
+		{
+			CFRelease(urlref);
+			[[Log getLog] addLine:[NSString stringWithFormat:@"ERROR: Unable to retrieve printer status (error:%d page:%d)", status, nPage ]];
+			continue;
+		}
+		
+		CFRelease(urlref);*/
+		
+/*		CFStringRef hostName;
+		status = PMPrinterCopyHostName(currentPrinter, &hostName);
+		CFRange range;
+		range.location=0;
+		range.length = CFStringGetLength(hostName);
+		CFStringDelete(hostName, range);
+*/		
 		PDFPage *page = [[[self document] pageAtIndex:nPage-1] copy];
 		int nRotation = [page rotation];
 		BOOL bLandscape = NO;
@@ -2253,7 +2314,12 @@ NSPrintOperation* op = nil;
 	if ( [sPrinterName rangeOfString:@"c360creative"].location != NSNotFound ) return YES;
 	if ( [sPrinterName rangeOfString:@"c280creative"].location != NSNotFound ) return YES;
 	if ( [sPrinterName rangeOfString:@"c220creative"].location != NSNotFound ) return YES;
-
+	//added 2021-10-04 Pantum device 
+	if ( [sPrinterName rangeOfString:@"pantum"].location != NSNotFound ) return YES;
+	//2021-10-29 DocuCentre (Xerox)
+	if ( [sPrinterName rangeOfString:@"docucentre"].location != NSNotFound ) return YES;
+	//2021-11-11 Taskalfa
+	if ( [sPrinterName rangeOfString:@"taskalfa"].location != NSNotFound ) return YES;
 	return NO;
 #endif
 }

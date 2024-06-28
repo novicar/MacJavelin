@@ -8,12 +8,7 @@
 
 #import "Version.h"
 
-#define JAVELIN_VERSION		@"3.05.02"
-#define DATE_BUILT			@"2020-12-23"
-#define APP_NAME			@"Javelin"
-#define COMPANY				@"Drumlin Security Ltd."
-#define COMPANY_URL			@"http://www.drumlinsecurity.co.uk"
-
+//#define JAVELIN_VERSION		@"3.05.02"
 
 @implementation Version
 
@@ -36,7 +31,9 @@
 
 + (NSString*)version
 {
-	return JAVELIN_VERSION;
+	//return JAVELIN_VERSION;
+	NSString* s = [NSString stringWithFormat:@"%d.%02d.%02d", MAJOR_VER, MINOR_VER, REVISION];
+	return s;
 }
 
 + (NSString*)date
@@ -57,5 +54,25 @@
 + (NSString*)companyURL
 {
 	return COMPANY_URL;
+}
+
+//return YES if server version is newer
++ (BOOL)isServerVersionNewer:(int)nServerMaj serverMin:(int)nServerMin serverRev:(int)nServerRev
+{
+	if ( nServerMaj > MAJOR_VER )
+		return YES;
+	
+	if ( nServerMin > MINOR_VER )
+		return YES;
+	
+	if ( nServerRev > REVISION )
+		return YES;
+	
+	return NO;
+}
+
++ (NSString*)getAppNameAndVersion
+{
+	return [NSString stringWithFormat:@"%@3 v%@", APP_NAME, [self version]];
 }
 @end

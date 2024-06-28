@@ -27,6 +27,7 @@
 #import "JavelinNotes.h"
 #import "XmlParser.h"
 #import "DocumentList.h"
+#import "ActivityManager.h"
 
 //#import "NewThumbItem.h"
 
@@ -45,6 +46,7 @@ static NSString *ToolbarToggleDrawer				= @"ToggleDrawer";
 static NSString *ToolbarZoomInOut                   = @"Zoom In/Out";
 static NSString *ToolbarDownload					= @"Download";
 static NSString *TooolbarFindText					= @"Find Text";
+static NSString *ToolbarRotateLeft					= @"RotateLeft";
 
 static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 
@@ -65,7 +67,7 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 	if ( self )
 	{
         m_documentID = 0;
-		[[Log getLog] addLine:@"Controller initialised"];
+		//[[Log getLog] addLine:@"Controller initialised"];
 		m_docUrl = nil;
 		m_searchController = nil;
 		m_bWarningDisplayed = NO;
@@ -81,8 +83,8 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 		PDOCEX_INFO pDocInfo = [_pdfView.javelinDocument docInfo];
 		if ( pDocInfo != nil )
 		{
-			NSLog(@"JavelinController - terminal running DRMZ DocID:[%d]", pDocInfo->dwDocID);
-			[[Log getLog] addLine:[NSString stringWithFormat:@"Terminal is running. The document ID:%d will NOT be closed.", pDocInfo->dwDocID]];
+			//NSLog(@"JavelinController - bad process running DRMZ DocID:[%d]", pDocInfo->dwDocID);
+			[[Log getLog] addLine:[NSString stringWithFormat:@"Terminal is running. The document ID:%d", pDocInfo->dwDocID]];
 			//[self close];//close - don't save
 
 			//[self performSelectorOnMainThread:@selector(close) withObject:nil waitUntilDone:NO];
@@ -95,14 +97,18 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 
 -(void)closeAndDisplayWarning
 {
-	[self performSelectorOnMainThread:@selector(close) withObject:nil waitUntilDone:YES];
-	dispatch_async(dispatch_get_main_queue(), ^
+	JavelinApplication* pApp = (JavelinApplication*)[NSApplication sharedApplication];
+	if ( [pApp isTerminalRunning])
 	{
-	   //[self close];
-	   JavelinApplication* pApp = (JavelinApplication*)[NSApplication sharedApplication];
-	   [pApp displayTerminalWarning];
-	   //[self terminalWarning];
-	});
+		[self performSelectorOnMainThread:@selector(close) withObject:nil waitUntilDone:YES];
+		dispatch_async(dispatch_get_main_queue(), ^
+		{
+		   JavelinApplication* pApp = (JavelinApplication*)[NSApplication sharedApplication];
+		   [pApp displayTerminalWarning];
+		});
+	}
+	else
+		[self performSelectorOnMainThread:@selector(terminalWarning) withObject:nil waitUntilDone:YES];
 }
 
 -(void)closeAndDisplayCodeWarning:(unsigned int)docID
@@ -121,18 +127,68 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 {
 	if ( m_bWarningDisplayed == YES )
 		return;
-	// Replacement for alertWithMessageText:defaultButton:alternateButton:otherButton:informativeTextWithFormat:
-	NSAlert *alert = [[NSAlert alloc] init];
-	[alert setMessageText:@"WARNING: Terminal is running!"];
-	[alert addButtonWithTitle:@"OK"];
-	[alert setInformativeText:@"Please close the Terminal application."];
 	
-	
-	[alert beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
-		m_bWarningDisplayed = NO;
-	}];
+	if ( _pdfView != nil )
+	{
+		JavelinDocument* doc = _pdfView.javelinDocument;
+		
+		if ( doc != nil )
+		{
+			PDOCEX_INFO pDocInfo = [doc docInfo];
+			if ( pDocInfo != nil )
+			{
+				if ( pDocInfo->sBlockGrabbers )
+				{
+					// Replacement for alertWithMessageText:defaultButton:alternateButton:otherButton:informativeTextWithFormat:
+					NSAlert *alert = [[NSAlert alloc] init];
+					JavelinApplication* pApp = (JavelinApplication*)[NSApplication sharedApplication];
+					[alert setMessageText:[NSString stringWithFormat:@"WARNING: %@ is running!", [pApp isBadProcessRunning]]];
+					[alert addButtonWithTitle:@"OK"];
+					[alert addButtonWithTitle:@"Close document"];
+					[alert addButtonWithTitle:@"Bring suspicious process to front"];
+					[alert setInformativeText:[NSString stringWithFormat:@"Please close %@ application.\nClose the current document.\nOr close suspicious process", [pApp isBadProcessRunning]]];
+					//NSLog(@"About to display ALERT");
+					m_bWarningDisplayed = YES;
+					[alert beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
+						if ( result == NSAlertSecondButtonReturn )
+						{
+							[self performSelectorOnMainThread:@selector(close) withObject:nil waitUntilDone:YES];
+						}
+						else if ( result == NSAlertThirdButtonReturn )
+						{
+							[self performSelectorOnMainThread:@selector(closeProcess:) withObject:[pApp isBadProcessRunning] waitUntilDone:YES];
+						}
+						m_bWarningDisplayed = NO;
+					}];
 
+				}
+			}
+		}
+	}	
 }
+
+- (void) closeProcess:(NSString*)sName
+{
+	if ( sName != nil )
+	{
+		//NSArray<NSRunningApplication *> *apps = [NSWorkspace runningApplications];
+		NSArray<NSRunningApplication*> *apps = 
+			[NSRunningApplication runningApplicationsWithBundleIdentifier:sName];
+	
+		if ( apps != nil && apps.count > 0 )
+		{
+			NSRunningApplication* app = apps[0];
+
+			if ( app != nil )
+			{
+				//pid_t pid = [app processIdentifier];
+				//[app forceTerminate];
+				//killpg(getpgid(pid), SIGTERM);
+				[app activateWithOptions:NSApplicationActivateAllWindows];
+			}
+		}
+	}
+}	
 
 
 - (id)initWithWindow:(NSWindow *)window
@@ -140,7 +196,7 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
     self = [super initWithWindow:window];
     if (self) {
         m_documentID = 0;
-		[[Log getLog] addLine:@"Controller initialised"];
+		//[[Log getLog] addLine:@"Controller initialised"];
 		m_docUrl = nil;
 		m_searchController = nil;
 		
@@ -231,6 +287,7 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
     NSData *data;
 	NSError* pError = nil;
     
+	
 	[[Log getLog] addLine:[NSString stringWithFormat:@"DBG: openDrmxFile:%@",[[self document] fileURL]]];
 	
     fm = [NSFileManager defaultManager];
@@ -666,6 +723,9 @@ RE_AUTHORISE:
 
 	[self.window setDelegate:self];
 	
+	self.window.titleVisibility = NSWindowTitleVisible;
+	self.window.backgroundColor = NSColor.blackColor;
+	
 		NSRect visibleScreen = [[NSScreen mainScreen] visibleFrame];
 	
 	// Taking into account the toolbars, etc. in the UI.
@@ -694,7 +754,7 @@ RE_AUTHORISE:
 	// Set the window size.
 	[[self window] setContentSize: pageSize];
 	
-	[[Log getLog] addLine:[NSString stringWithFormat:@"window:%@ size:%@", [self window], NSStringFromSize(pageSize)]];
+	//[[Log getLog] addLine:[NSString stringWithFormat:@"window:%@ size:%@", [self window], NSStringFromSize(pageSize)]];
 	
 	// Close the search results.
 	[self setSearchResultsViewHeight: 0];
@@ -1320,6 +1380,39 @@ RE_AUTHORISE:
 	}
 	*/
 }
+
+#pragma mark -------- Go Menu items
+
+- (IBAction) doUpMenu:(id)sender
+{
+	[_pdfView scrollLineUp:sender];
+}
+
+- (IBAction) doDownMenu:(id)sender
+{
+	[_pdfView scrollLineDown:sender];
+}
+
+- (IBAction) doPreviousMenu:(id)sender
+{
+	[_pdfView goToPreviousPage:sender];
+}
+
+- (IBAction) doNextMenu:(id)sender
+{
+	[_pdfView goToNextPage:sender];
+}
+
+- (IBAction) doBackMenu:(id)sender
+{
+	[_pdfView goBack: sender];
+}
+
+- (IBAction) doForwardMenu:(id)sender
+{
+	[_pdfView goForward:sender];
+}
+
 
 // ------------------------------------------------------------------------------------------- setSearchResultsViewHeight
 
@@ -1957,6 +2050,22 @@ RE_AUTHORISE:
 		[toolbarItem setTarget: self];
 		[toolbarItem setAction: @selector(downloadFile:)];
 	}
+	else if ([itemIdent isEqualToString: ToolbarRotateLeft])
+	{
+		//ROTATE - toolbar
+		// Set the text label to be displayed in the toolbar and customization palette 
+		[toolbarItem setLabel: NSLocalizedString(@"Rotate", NULL)];
+		[toolbarItem setPaletteLabel: NSLocalizedString(@"Rotate", NULL)];
+		
+		// Set up a reasonable tooltip, and image.
+		[toolbarItem setToolTip: NSLocalizedString(@"Rotate Page Anti-clockwise", NULL)];
+		[toolbarItem setImage: [NSImage imageNamed: @"ToolbarRotateImage"]];
+		
+		// Tell the item what message to send when it is clicked.
+		[toolbarItem setTarget: self];
+		[toolbarItem setAction: @selector(rotatePageLeft:)];
+	}
+
 	else if ([itemIdent isEqualToString: TooolbarFindText])
 	{
 		//Text find 2016-10-20
@@ -1990,7 +2099,7 @@ RE_AUTHORISE:
 {
 	return [NSArray arrayWithObjects: 
 			ToolbarBackForward, ToolbarNavigation, ToolbarPageNumber, ToolbarPageCount, ToolbarSearch, ToolbarViewMode,
-			NSToolbarFlexibleSpaceItemIdentifier, ToolbarZoomInOut, ToolbarDownload, //TooolbarFindText,
+			NSToolbarFlexibleSpaceItemIdentifier, ToolbarZoomInOut, ToolbarDownload, ToolbarRotateLeft, //TooolbarFindText,
 			ToolbarToggleDrawer, 
 			NULL];
 }
@@ -2005,7 +2114,7 @@ RE_AUTHORISE:
 {
 	return [NSArray arrayWithObjects:  
 			ToolbarBackForward, ToolbarNavigation, ToolbarPageNumber, ToolbarPageCount, ToolbarSearch, ToolbarViewMode,
-			NSToolbarFlexibleSpaceItemIdentifier, ToolbarZoomInOut, ToolbarDownload, //TooolbarFindText,
+			NSToolbarFlexibleSpaceItemIdentifier, ToolbarZoomInOut, ToolbarDownload, ToolbarRotateLeft, //TooolbarFindText,
 			ToolbarToggleDrawer,
 			NSToolbarSeparatorItemIdentifier, 
             NSToolbarSpaceItemIdentifier,  
@@ -2142,8 +2251,11 @@ RE_AUTHORISE:
 	NSString* sDoc = _pdfView.javelinDocument.fileURL.filePathURL.absoluteString;
 	
 	//NSLog(@"PAGE: %d %@", nPage, sDoc );
-	[[General documentList] addDocument:sDoc startPage:nPage];
-	[[General documentList] saveMe];
+	if ( sDoc != nil )
+	{
+		[[General documentList] addDocument:sDoc startPage:nPage];
+		[[General documentList] saveMe];
+	}
 	
     [_pdfView setJavelinDocument:nil];
     _pdfView = nil;
@@ -2245,6 +2357,19 @@ RE_AUTHORISE:
 	_outlineView = nil;
 }
 
+- (void) rotatePageLeft: (id) sender
+{
+	PDFPage* page = [_pdfView currentPage];
+	if ( page != nil )
+	{
+		NSInteger nRotation = page.rotation;
+		nRotation -= 90;
+		if ( nRotation == -360)
+			nRotation = 0;
+		[page setRotation:nRotation];
+	}
+}
+
 - (void) downloadFile: (id) sender
 {
 	[NSApp downloadFile:sender];
@@ -2293,6 +2418,10 @@ RE_AUTHORISE:
 		enable = YES;
 	}
 	else if ([toolbarItem action] == @selector(downloadFile:))
+	{
+		enable = YES;
+	}
+	else if ([toolbarItem action] == @selector(rotatePageLeft:))
 	{
 		enable = YES;
 	}
@@ -2475,6 +2604,8 @@ bail:
 	JavelinDocument *docJavelin = [_pdfView javelinDocument];
 	DocumentRecord *docRec = nil;
 	BOOL bSelfAuth = NO;
+	NSUInteger nPublisherID = 0;
+	BOOL bDisableScreenCapture = NO;
 	
 	if ( docJavelin != nil )
 	{
@@ -2483,11 +2614,23 @@ bail:
 		{
 			docRec = [DocumentDB getDocument:pDocInfo->dwDocID];
 			bSelfAuth = (pDocInfo->byAdditional[127] == 80);
+			nPublisherID = pDocInfo->dwCreatorID;
+			bDisableScreenCapture = (pDocInfo->sBlockGrabbers == 0)?NO:YES;
 		}
 	}
 	
 	[m_properties setSelfAuth:bSelfAuth];
-	[m_properties fillProperties:[doc documentAttributes] docRecord:docRec inWindow:self.window];
+	NSUInteger nPages = [doc pageCount];
+	NSUInteger nFileSize = [docJavelin fileSize];
+	
+	[m_properties fillProperties:[doc documentAttributes] 
+					   docRecord:docRec 
+						fileName:[[docJavelin DocumentURL] path] 
+						fileSize:nFileSize 
+				   blockGrabbers:bDisableScreenCapture
+					 publisherID:nPublisherID
+						   pages:nPages 
+						inWindow:self.window];
 
 /*	[NSApp beginSheet: m_properties.properties
 	   modalForWindow: self.window
@@ -2715,6 +2858,15 @@ downloadsURL = [fm URLForDirectory:NSDownloadsDirectory
 		[_pdfView setDisplayMode:kPDFDisplaySinglePage];
 		[_pdfView enterFullScreenMode:[NSScreen mainScreen] withOptions:FullScreen_Options];
 	}
+}
+
+- (IBAction)doFind:(id)sender
+{
+	[self doFindText:sender];
+}
+
+- (IBAction)doFindNext:(id)sender
+{
 }
 
 -(void)cancelOperation:(id)sender

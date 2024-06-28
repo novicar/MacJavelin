@@ -25,12 +25,14 @@
 	unsigned int		m_documentID;
 	BOOL				m_boolDrm;
     JAnnotations*       m_annotations;
+	NSUInteger			m_nFileSize;
 }
 
 @property (readonly) PDFDocument* pdfDocument;
 @property (readonly) NSString* authCode;
 @property (readonly) JAnnotations* annotations;
 @property (readonly) NSURL* DocumentURL;
+@property (readonly) NSUInteger fileSize; 
 
 - (NSAttributedString*) getFileContents;
 

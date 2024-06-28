@@ -102,6 +102,7 @@
 - (void) addNote:(id)sender;
 - (void) selectAnnotation:(PDFAnnotation*)annot clickNo:(int)nClicks;
 - (void) annotationChanged: (id) sender;
+- (void) removeAuthorisation: (id)sender;
 - (void) annotationChanged1;
 -(int)getPageNumber:(PDFPage*)page;
 -(void) drawNote: (CGContextRef) context inRect:(CGRect) rect withColor:(CGColorRef) color text:(NSString*) sText withOffset:(CGPoint) ptOffset;

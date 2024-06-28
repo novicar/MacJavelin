@@ -8,8 +8,8 @@
 #import <Cocoa/Cocoa.h>
 #import "CatalogProtocol.h"
 #import "CatalogWindowController.h"
+#import "Constants.h"
 
-#define CATALOG_FILENAME	@"catalog.xml"
 
 extern NSString* const CatDocumentUTI;
 

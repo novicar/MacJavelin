@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,7 +12,9 @@
                 <outlet property="m_btnDownload" destination="adG-BB-mg6" id="90R-tV-CtP"/>
                 <outlet property="m_btnRefresh" destination="23l-Od-EKN" id="eSI-tM-d8t"/>
                 <outlet property="m_collectionView" destination="W6R-5u-7Rb" id="hxm-rR-aqK"/>
+                <outlet property="m_lblBytes" destination="qwR-F0-qrg" id="lAU-PF-6mT"/>
                 <outlet property="m_lblError" destination="LO8-Ic-NSd" id="6Hr-oA-UmJ"/>
+                <outlet property="m_lblPercent" destination="LH6-Tx-HeN" id="JIk-PW-sDg"/>
                 <outlet property="m_progress" destination="0q4-ua-rOc" id="WH4-1U-Zjr"/>
                 <outlet property="m_txtURL" destination="mtp-44-7Rj" id="gFD-fs-6jn"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -20,11 +22,11 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Catalogs" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+        <window title="Catalogs" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" appearanceType="darkAqua" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="789" height="589"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1175"/>
             <value key="minSize" type="size" width="650" height="450"/>
             <value key="minFullScreenContentSize" type="size" width="750" height="600"/>
             <view key="contentView" wantsLayer="YES" appearanceType="darkAqua" id="se5-gp-TjO">
@@ -32,14 +34,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKQ-uG-Edy">
-                        <rect key="frame" x="-1" y="-1" width="791" height="538"/>
+                        <rect key="frame" x="-1" y="-1" width="791" height="505"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <clipView key="contentView" ambiguous="YES" id="d9X-Qc-mjw">
-                            <rect key="frame" x="1" y="1" width="789" height="536"/>
+                        <clipView key="contentView" id="d9X-Qc-mjw">
+                            <rect key="frame" x="1" y="1" width="789" height="503"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <collectionView ambiguous="YES" id="W6R-5u-7Rb" customClass="MyGrid">
-                                    <rect key="frame" x="0.0" y="0.0" width="789" height="536"/>
+                                <collectionView id="W6R-5u-7Rb" customClass="MyGrid">
+                                    <rect key="frame" x="0.0" y="0.0" width="789" height="503"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="A9g-yV-KWm">
                                         <size key="itemSize" width="150" height="200"/>
@@ -61,10 +63,11 @@
                     <button toolTip="Back" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lde-zM-kYe">
                         <rect key="frame" x="9" y="545" width="35" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Back" bezelStyle="shadowlessSquare" image="back-arrow" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="pzs-Tt-Lee">
+                        <buttonCell key="cell" type="square" title="Back" bezelStyle="shadowlessSquare" image="back-arrow-1" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="pzs-Tt-Lee">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <color key="bezelColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <connections>
                             <action selector="back:" target="-2" id="IYg-Xx-e8v"/>
                         </connections>
@@ -72,7 +75,7 @@
                     <button toolTip="Refresh" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="23l-Od-EKN">
                         <rect key="frame" x="54" y="545" width="35" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Refresh" bezelStyle="shadowlessSquare" image="refresh-icon" imagePosition="only" alignment="center" alternateImage="refresh" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="cca-YI-w6F">
+                        <buttonCell key="cell" type="square" title="Refresh" bezelStyle="shadowlessSquare" image="refresh-icon-1" imagePosition="only" alignment="center" alternateImage="refresh" imageScaling="proportionallyUpOrDown" inset="2" id="cca-YI-w6F">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -84,7 +87,7 @@
                     <button toolTip="Download catalog" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="adG-BB-mg6">
                         <rect key="frame" x="745" y="545" width="35" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Download" bezelStyle="shadowlessSquare" image="down-arrow" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="6ok-LT-Cph">
+                        <buttonCell key="cell" type="square" title="Download" bezelStyle="shadowlessSquare" image="down-arrow-1" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="6ok-LT-Cph">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="miniSystem"/>
                         </buttonCell>
@@ -111,23 +114,41 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="0q4-ua-rOc">
-                        <rect key="frame" x="705" y="547" width="32" height="32"/>
+                    <progressIndicator toolTip="Download Progress" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="0q4-ua-rOc">
+                        <rect key="frame" x="147" y="516" width="548" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     </progressIndicator>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qwR-F0-qrg">
+                        <rect key="frame" x="9" y="518" width="132" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="gbM-GB-8Mg">
+                            <font key="font" metaFont="system" size="10"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LH6-Tx-HeN">
+                        <rect key="frame" x="703" y="519" width="79" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="dqe-MG-BmS">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="392" y="147"/>
+            <point key="canvasLocation" x="235.5" y="36.5"/>
         </window>
         <collectionViewItem id="gFF-pj-NhS" customClass="CatalogItem"/>
     </objects>
     <resources>
-        <image name="back-arrow" width="256" height="256"/>
-        <image name="down-arrow" width="256" height="256"/>
+        <image name="back-arrow-1" width="256" height="256"/>
+        <image name="down-arrow-1" width="256" height="256"/>
         <image name="refresh" width="20.803611755371094" height="20.803611755371094"/>
-        <image name="refresh-icon" width="303" height="251"/>
+        <image name="refresh-icon-1" width="303" height="251"/>
     </resources>
 </document>

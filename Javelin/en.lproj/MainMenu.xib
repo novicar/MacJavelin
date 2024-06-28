@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="JavelinController">
@@ -63,7 +63,7 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="File" id="83">
+                <menuItem title="File" tag="234567" id="83">
                     <menu key="submenu" title="File" id="81">
                         <items>
                             <menuItem title="New" hidden="YES" enabled="NO" keyEquivalent="n" id="82">
@@ -141,6 +141,12 @@
                                     <action selector="writeLogFile:" target="-3" id="570"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Check Version" id="ctd-l3-zwl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkNewVersion:" target="-3" id="hob-sC-q6I"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="74">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -192,6 +198,54 @@
                                     <action selector="doFullScreen:" target="-1" id="589"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Find" keyEquivalent="f" toolTip="Find Item" id="MkL-wF-AhJ">
+                                <accessibility description="Find" help="Find" identifier="find"/>
+                                <connections>
+                                    <action selector="doFind:" target="-1" id="fJ7-nA-f9u"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Go" id="iA8-0I-t0Z">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Go" id="J3b-h1-HWA">
+                        <items>
+                            <menuItem title="Up" keyEquivalent="" id="5dH-as-nVF">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doUpMenu:" target="-1" id="WdI-SR-yDp"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Down" keyEquivalent="" id="BYj-B3-Z9l">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doDownMenu:" target="-1" id="01P-uj-s3m"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Previous Item" keyEquivalent="" id="zlW-Uo-qPc">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                <connections>
+                                    <action selector="doPreviousMenu:" target="-1" id="D7J-tu-l3a"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Next Item" keyEquivalent="" id="R3d-6v-4xB">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                <connections>
+                                    <action selector="doNextMenu:" target="-1" id="URW-A1-nJk"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="oYR-LZ-91t"/>
+                            <menuItem title="Back" keyEquivalent="[" id="szc-lZ-3iD">
+                                <connections>
+                                    <action selector="doBackMenu:" target="-1" id="glt-uo-csh"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Forward" keyEquivalent="]" id="2vg-Es-adp">
+                                <connections>
+                                    <action selector="doForwardMenu:" target="-1" id="PZF-d6-67Q"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -240,5 +294,8 @@
             </items>
             <point key="canvasLocation" x="140" y="154"/>
         </menu>
+        <menuItem title="Item" id="9vf-IQ-csV">
+            <modifierMask key="keyEquivalentModifierMask"/>
+        </menuItem>
     </objects>
 </document>

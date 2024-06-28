@@ -24,6 +24,7 @@
 #import "Version.h"
 #import "Log.h"
 #import "VarSystemInfo.h"
+#import "ActivityManager.h"
 
 //#import <SCNetworkConfiguration.h>
 
@@ -94,6 +95,119 @@
 	}
  
     return nil;
+}
+
+- (int)readHeader:(NSString*)sDrmFile header:(DOCEX_INFO*)pdiex
+{
+	NSFileManager* fm = [NSFileManager defaultManager];
+	if ([fm isReadableFileAtPath:sDrmFile] == YES )
+	{
+		CFiler Filer;
+		//PDOCEX_INFO pdiex = new DOCEX_INFO;//Document information structure
+		ENCRYP	enc;
+		
+		NSFileHandle* file = [NSFileHandle fileHandleForReadingAtPath:sDrmFile];
+		NSData* data = [file readDataOfLength:2048];
+		
+		char key[32];
+		char iv[32];
+		//char keySPLIT[32];
+		
+		//set header and data decryption keys
+		CKeyGen::Iv( iv );
+		CKeyGen::Key( key );
+		
+		enc.nBlockSize = 32;
+		enc.nKeyLen = 32;
+		enc.pHeaderIV = (BYTE*)iv;
+		enc.pHeaderKey = (BYTE*)key;
+		enc.pDataIV = (BYTE*)iv;
+		enc.pDataKey = (BYTE*)key;
+		
+		unsigned int uLen = 0;
+		int nOffset = 0;
+		int nPDKVer = 0;
+		int nSimple = 0;
+		pdiex->dwDocID = 0;    
+		
+		int fh = Filer.LoadHeaderFromData( pdiex, (BYTE*)[data bytes], (UINT)[data length], &uLen, &nOffset, &nPDKVer, &enc );
+		
+		if ( fh <= 0 )
+		{
+			//try with "SIMPLE" encryption
+			nSimple = 1;
+			fh = Filer.LoadHeaderFromData( pdiex, (BYTE*)[data bytes], (UINT)[data length], &uLen, &nOffset, &nPDKVer, NULL );
+
+			if ( fh <= 0 )
+				return -1;
+		}
+		return 1;
+	}
+	return -2;
+}
+
+- (NSInteger)readDocumentID:(NSString*)sDrmFile
+{
+	PDOCEX_INFO pdiex = new DOCEX_INFO;//Document information structure
+	int nRes = [self readHeader:sDrmFile header:pdiex];
+	NSInteger docID = pdiex->dwDocID;
+
+	delete pdiex;
+	
+	if ( nRes > 0 )
+	{
+		return docID;
+	}
+	
+	return 0;
+/*	NSFileManager* fm = [NSFileManager defaultManager];
+	if ([fm isReadableFileAtPath:sDrmFile] == YES )
+	{
+		CFiler Filer;
+		PDOCEX_INFO pdiex = new DOCEX_INFO;//Document information structure
+		ENCRYP	enc;
+		
+		NSFileHandle* file = [NSFileHandle fileHandleForReadingAtPath:sDrmFile];
+		NSData* data = [file readDataOfLength:2048];
+		
+		char key[32];
+		char iv[32];
+		//char keySPLIT[32];
+		
+		//set header and data decryption keys
+		CKeyGen::Iv( iv );
+		CKeyGen::Key( key );
+		
+		enc.nBlockSize = 32;
+		enc.nKeyLen = 32;
+		enc.pHeaderIV = (BYTE*)iv;
+		enc.pHeaderKey = (BYTE*)key;
+		enc.pDataIV = (BYTE*)iv;
+		enc.pDataKey = (BYTE*)key;
+		
+		unsigned int uLen = 0;
+		int nOffset = 0;
+		int nPDKVer = 0;
+		int nSimple = 0;
+		pdiex->dwDocID = 0;    
+		
+		int fh = Filer.LoadHeaderFromData( pdiex, (BYTE*)[data bytes], (UINT)[data length], &uLen, &nOffset, &nPDKVer, &enc );
+		
+		if ( fh <= 0 )
+		{
+			//try with "SIMPLE" encryption
+			nSimple = 1;
+			[[Log getLog] addLine:@"DBG: openDrmxFileFromData - trying with simple encryption"];
+			fh = Filer.LoadHeaderFromData( pdiex, (BYTE*)[data bytes], (UINT)[data length], &uLen, &nOffset, &nPDKVer, NULL );
+		}
+
+		NSInteger docID = pdiex->dwDocID;
+		delete pdiex;
+		
+		return docID;
+	}
+	
+	return 0;*/
 }
 
 -(NSData*) openDrmxFileFromData:(NSData *)data error:(NSError**)ppError
@@ -764,10 +878,15 @@
 				[[Log getLog] addLine:[NSString stringWithFormat:@"DBG: canOpenDocument - Auth error: %d", nRes]];
 				return nRes;//error during authorisation
 			}
-			
+			sCode = [NSString stringWithCString:szAuthCode encoding:NSASCIIStringEncoding];
+			NSString* sDocName = [General stringFromWchar:(const wchar_t *)pDocInfo->szDocName length:256];
+			[ActivityManager addActivityWithDocID:pDocInfo->dwDocID 
+									   activityID:151 
+									  description:[NSString stringWithFormat:@"Auth.DocID:%d [%@]",pDocInfo->dwDocID, sDocName]
+											 text:sCode error:nil];
 			docRec = [[DocumentRecord alloc] init];
 			//[docRec retain];
-			sCode = [NSString stringWithCString:szAuthCode encoding:NSASCIIStringEncoding];
+			
 			[docRec initWithDocExInfo:pDocInfo hcks:pKey andAuthCode:sCode];
 		}
 	}
