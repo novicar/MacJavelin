@@ -33,5 +33,7 @@
 - (PDOCEX_INFO)docInfo;
 - (UINT) getDocID;
 - (NSString*)getAuthCode;
+- (NSInteger)readDocumentID:(NSString*)sDrmFile;
+- (int)readHeader:(NSString*)sDrmFile header:(DOCEX_INFO*)pdiex;
 //- (NSString*) getMACAddress: (BOOL)stripColons;
 @end

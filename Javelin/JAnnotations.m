@@ -155,7 +155,7 @@
     NSArray* keys = [[m_annotations allKeys] sortedArrayUsingSelector:@selector(compare:)];
     if ( nIndex < keys.count)
     {
-        return [m_annotations objectForKey:[keys objectAtIndex:nIndex]];
+        return  [m_annotations objectForKey:[keys objectAtIndex:nIndex]];
     }
     return nil;
 }

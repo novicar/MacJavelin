@@ -9,7 +9,7 @@
 @implementation ThreadArgs
 @synthesize IntValue = m_nIntValue;
 @synthesize Run = m_bRun;
-@synthesize TerminalRunning = m_bTerminalRunning;
+@synthesize BadProcessName = m_bBadProcessRunning;
 
 @end
 
@@ -18,6 +18,8 @@
 @implementation ScannerThread
 -(void)startThread:(ThreadArgs*)args
 {
+	m_processNames = 
+		[NSArray arrayWithObjects:@"com.apple.terminal",@"screengrab",@"grab",@"droplr",@"snip", @"snap", @"capture", @"shot", @"recordit", @"dropshare", @"xnapper", @"gifox", @"capto", @"movavi", @"skitch", @"snagit", @"cloudapp", @"setapp", @"gimp", nil];
 	m_args = args;
 	[m_args setRun:YES];
 	
@@ -33,15 +35,15 @@
 -(void)entryPoint
 {
 	NSTimeInterval interval = 5;//seconds
-	BOOL bTerminalRunning = NO;
+	NSString* sBadProcessName = @"";
 	
 	while( [m_args Run] )
 	{
 		//NSLog(@"Thread func");
 		
-		bTerminalRunning = [self scanProcesses];
-		[m_args setTerminalRunning:bTerminalRunning];
-		if ( bTerminalRunning )
+		sBadProcessName = [self scanProcesses];
+		[m_args setBadProcessName:sBadProcessName];
+		if ( sBadProcessName.length > 0 )
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"terminal_running" object:nil];
 		
 		[NSThread sleepForTimeInterval:interval];
@@ -50,30 +52,46 @@
 	//NSLog(@"Thread func ENDED");
 }
 
--(BOOL)scanProcesses
+-(NSString*)scanProcesses
 {
 	NSString *uniqueName = nil;
 	
-	for (NSRunningApplication* app in [[NSWorkspace sharedWorkspace] runningApplications]) {
-		uniqueName = app.bundleIdentifier;
-		//.location == NSNotFound
-		if ( uniqueName != nil && [uniqueName rangeOfString:@"com.apple.Terminal"].location != NSNotFound )
+	for (NSRunningApplication* app in [[NSWorkspace sharedWorkspace] runningApplications]) 
+	{
+		uniqueName = [app.bundleIdentifier lowercaseString];
+
+//		if ( uniqueName != nil && [uniqueName rangeOfString:@"com.apple.Terminal"].location != NSNotFound )
+//		{
+//			//NSLog(@"TERMINAL!!");
+//			return YES;
+//		}
+		
+		if ( uniqueName != nil )
 		{
-			//NSLog(@"TERMINAL!!");
-			return YES;
+			NSString* sName = @"";
+			
+			for( int i=0; i<m_processNames.count; i++ )
+			{
+				sName = [m_processNames objectAtIndex:i];
+				if ([uniqueName rangeOfString:sName].location != NSNotFound)
+				{
+					//NSLog(@"BAD PROCESS %@ %@\n", app.description, app.bundleIdentifier);
+					return app.bundleIdentifier;
+				}
+			}
 		}
-		//BOOL hasWindow = (app.activationPolicy == NSApplicationActivationPolicyRegular)?YES:NO;
-		//NSLog(@"APP:%@ hasWindow:%d", uniqueName, hasWindow );
+		
+		//NSLog(@"%@ %@\n", app.description, app.bundleIdentifier);
 	}
-	return NO;
+	return nil;
 }
 
-- (BOOL) isTerminalRunning
+- (NSString*) isBadGuyRunning
 {
 	if ( m_args != nil )
 	{
-		return [m_args TerminalRunning];
+		return [m_args BadProcessName];
 	}
-	return NO;
+	return nil;
 }
 @end

@@ -12,6 +12,7 @@
 #import "ScannerThread.h"
 #import "CatalogWindowController.h"
 #import "WarningController.h"
+#import "FirstOne.h"
 
 @class DownloadDocument;
 @class CatalogController;
@@ -23,6 +24,7 @@
 	CatalogController* m_catalogs;
 	CatalogWindowController* m_catalogWindowController;
 	WarningController* m_controllerWarning;
+	FirstOne*	m_firstOne;
 	
 	IBOutlet	NSMenuItem*	m_menuRemoveAuth;
 	IBOutlet NSView *m_customView;
@@ -42,12 +44,14 @@
 - (IBAction)downloadFile:(id)sender;
 - (IBAction)catalog:(id)sender;
 - (IBAction)test:(id)sender;
-
 - (IBAction)doFullScreenChange:(id)sender;
+- (IBAction)checkNewVersion:(id)sender;
+- (IBAction)autoRefreshCatalog:(id)sender;
 
 - (void)enableRemovingAuth:(BOOL)bEnable;
 
 - (IBAction)removeAuthorisation:(id)sender;
+- (void)removeCurrentDocumentAuthorization;
 
 - (void) removeDocument:(unsigned int)docID;
 - (void) doRemoveDocument:(unsigned int)docID;
@@ -58,10 +62,15 @@
 - (NSString *)runCommand:(NSString *)commandToRun;
 - (void) checkCatalogDir;
 
+- (NSString*)isBadProcessRunning;
 - (BOOL)isTerminalRunning;
 - (void)displayTerminalWarning;
 - (void)hideWarning;
 - (void)displayCodeWarning:(unsigned int)docID;
 - (void)loadDocumentList;
 - (void)saveDocumentList;
+- (void)doCheckVersion:(BOOL)bSilent;
+
+- (void) openFirstWindow;
+
 @end

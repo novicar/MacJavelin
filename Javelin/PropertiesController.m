@@ -52,7 +52,14 @@
 	}
 }
 
-- (void)fillProperties:(NSDictionary*)attrs docRecord:(DocumentRecord*)docRec inWindow:(NSWindow*)window
+- (void)fillProperties:(NSDictionary*)attrs 
+			 docRecord:(DocumentRecord*)docRec 
+			  fileName:(NSString*)sFileName  
+			  fileSize:(NSUInteger)nFileSize 
+		 blockGrabbers:(BOOL)bBlockGrabbers
+			publisherID:(NSUInteger)nPublisherID	
+				 pages:(NSUInteger)nPages 
+			  inWindow:(NSWindow*)window
 {
 	[NSBundle loadNibNamed: @"Properties" owner: self];
 	
@@ -69,6 +76,9 @@
 		[self set:title withText:[attrs objectForKey:@"Title"]];
 		[self set:author withText:[attrs objectForKey:@"Author"]];
 		[self set:subject withText:[attrs objectForKey:@"Subject"]];
+		[self set:pages withText:[NSString stringWithFormat:@"%lu", nPages]];
+		[self set:filesize withText:[NSString stringWithFormat:@"%lu", nFileSize]];
+		[self set:filename withText:sFileName];
 		
 		id keywords1 = [attrs objectForKey:@"Keywords"];
 		if ( keywords1 != nil )
@@ -93,6 +103,7 @@
 		if ( d != nil )
 		{
 			NSString *ss1 = [dateFormatter stringFromDate:d];
+//			NSString* ss1 = [NSString stringWithFormat:@"%04d-%02d-%02d", d.year, d.month, d.day ];
 			[self set:created withText:ss1];
 		}
 		else [self set:created withText:@"N/A"];
@@ -110,26 +121,35 @@
 	
 	if ( docRec != nil )
 	{
-		if ( [docRec openCount] >= 0 )
-			[openedNo setStringValue:[NSString stringWithFormat:@"%d", [docRec openCount]]];
+		if ( [docRec openCount] > 0 )
+			[openedNo setStringValue:[NSString stringWithFormat:@"%d views", [docRec openCount]]];
+		else if ( [docRec openCount] == 0 )
+			[openedNo setStringValue:@"Not allowed"];
 		else
-			[openedNo setStringValue:@"<unlimited>"];
+			[openedNo setStringValue:@"Unlimited"];
 
-		if ( [docRec printCount] >= 0 )
-			[printedNo setStringValue:[NSString stringWithFormat:@"%d", [docRec printCount]]];
+		if ( [docRec printCount] > 0 && [docRec pagesCount] != 0 )
+			[printedNo setStringValue:[NSString stringWithFormat:@"%d prints", [docRec printCount]]];
+		else if ( [docRec printCount] == 0 || [docRec pagesCount] == 0 )
+			[printedNo setStringValue:@"No printing allowed"];
 		else
-			[printedNo setStringValue:@"<unlimited>"];
+			[printedNo setStringValue:@"Unlimited"];
 
-		if ( [docRec pagesCount] >= 0 )
-			[printPages setStringValue:[NSString stringWithFormat:@"%d", [docRec pagesCount]]];
+		if ( [docRec pagesCount] > 0 && [docRec printCount] != 0)
+			[printPages setStringValue:[NSString stringWithFormat:@"%d pages", [docRec pagesCount]]];
+		else if ( [docRec printCount] == 0 || [docRec pagesCount] == 0  )
+			[printPages setStringValue:@"No printing allowed"];
 		else
-			[printPages setStringValue:@"<unlimited>"];
+			[printPages setStringValue:@"Unlimited"];
 
 		[endDate setStringValue:[docRec expiresString]]; 
 		[startDate setStringValue:@"N/A"];
 		[docID setStringValue:[NSString stringWithFormat:@"%d", [docRec docID]]];
 		
 		[txSelfAuth setStringValue:(m_bSelfAuth?@"YES":@"NO")];
+		
+		[disableScreenCapture setStringValue:(bBlockGrabbers?@"YES":@"NO")];
+		[publisherID setStringValue:[NSString stringWithFormat:@"%lu", nPublisherID]];
 	}
 
     [NSApp beginSheet: properties

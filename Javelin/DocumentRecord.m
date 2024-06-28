@@ -254,6 +254,22 @@
 	UINT nMonth = (expires & 0x0000ff00) >> 8;
 	UINT nDay = (expires & 0x000000ff);
 	
-	return [NSString stringWithFormat:@"%04d-%02d-%02d", nYear, nMonth, nDay ];
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+	[dateFormatter setDateStyle:NSDateFormatterMediumStyle];		
+
+	NSDateComponents* dc = [[NSDateComponents alloc]init];
+	[dc setYear:nYear];
+	[dc setMonth:nMonth];
+	[dc setDay:nDay];
+	[dc setHour:0];
+	[dc setMinute:0];
+	[dc setSecond:1];
+	[dc setCalendar:[NSCalendar currentCalendar]];
+	[dc setTimeZone:[NSTimeZone systemTimeZone]];
+	
+	NSString *ss1 = [dateFormatter stringFromDate:[dc date]];
+	return ss1;
+//	return [NSString stringWithFormat:@"%04d-%02d-%02d", nYear, nMonth, nDay ];
 }
 @end

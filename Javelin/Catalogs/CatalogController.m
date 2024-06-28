@@ -143,7 +143,7 @@
 			if ( [[NSFileManager defaultManager] fileExistsAtPath:sDestFileName] == NO )
 			{
 				sUrl = [pItem.ThumbURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
-				NSURL* url = [NSURL URLWithString:sUrl];
+				NSURL* url = [NSURL URLWithString:sUrl]; 
 				if ( url != nil )
 				{
 					if ( [url host] != nil && [url scheme] != nil && [url path] != nil )

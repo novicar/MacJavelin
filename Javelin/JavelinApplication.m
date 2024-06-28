@@ -21,8 +21,10 @@
 #import "CatalogController.h"
 #import "CatalogViewNew.h"
 #import "DocumentList.h"
-
-
+#import "Constants.h"
+#import "VersionChecker.h"
+#import "General.h"
+#import "ActivityManager.h"
 
 //#import "JavelinDocumentController.h"
 
@@ -61,6 +63,59 @@
 	[self loadDocumentList];
 	[self setDelegate:self];
 	[self checkCatalogDir];
+	
+	[self doCheckVersion:YES];
+	
+	[self openFirstWindow];
+}
+
+- (void) openFirstWindow
+{
+	if ( m_firstOne == nil )
+	{
+		m_firstOne = [[FirstOne alloc] initWithParameter:@""];
+	}
+	[m_firstOne showWindow:self];
+}
+
+- (void)doCheckVersion:(BOOL)bSilent
+{
+	int nMaj, nMin, nRev;
+	NSError* pError = nil;
+	BOOL bNewVersion = [VersionChecker checkLatestVersion:&nMaj minor:&nMin rev:&nRev error:&pError];
+	if ( bNewVersion )
+	{
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert addButtonWithTitle:@"YES"];
+		[alert addButtonWithTitle:@"NO"];
+		[alert setMessageText:[Version getAppNameAndVersion]];
+		[alert setInformativeText:[NSString stringWithFormat:@"There is a new version (v%d.%02d.%02d) on the server.\n\rDo you want to download it?", nMaj, nMin, nRev]];
+		[alert setAlertStyle:NSAlertStyleInformational];
+
+		[[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
+		NSModalResponse res = [alert runModal];
+		
+		if ( res == NSAlertFirstButtonReturn )
+		{
+			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://www.drumlinsecurity.com/javelindownloads.php"]];
+		}
+	}
+	else if ( bSilent == NO )
+	{
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert addButtonWithTitle:@"OK"];
+		[alert setMessageText:[Version getAppNameAndVersion]];
+		[alert setInformativeText:@"You're currently running the latest version of Javelin Reader"];
+		[alert setAlertStyle:NSAlertStyleInformational];
+
+		[[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
+		[alert runModal];
+	}
+}
+
+- (IBAction)checkNewVersion:(id)sender
+{
+	[self doCheckVersion:NO];
 }
 
 -(void)checkCatalogDir
@@ -73,7 +128,7 @@
 	if ( bRes )
 	{
 		NSString* catalogFromResources = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Contents/Resources/catalog.xml"];
-		NSString* sDest = [sCatalogPath stringByAppendingPathComponent:@"catalog.xml"];
+		NSString* sDest = [sCatalogPath stringByAppendingPathComponent:CATALOG_FILENAME];
 		
 		if ( [fm fileExistsAtPath:sDest] == NO )
 			bRes = [fm copyItemAtPath:catalogFromResources toPath:sDest error:nil];
@@ -153,11 +208,22 @@
 			   [Version date], @"Version",
 			   [Version appName], @"ApplicationName",
 			   //img, @"ApplicationIcon",
-			   [NSString stringWithFormat:@"Copyright 2020, %@",[Version company]], @"Copyright",
+			   [NSString stringWithFormat:@"Copyright 2024, %@",[Version company]], @"Copyright",
 			   [NSString stringWithFormat:@"%@ v%@",[Version appName],[Version version]], @"ApplicationVersion",
 			   nil];
 	
     [[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:options];
+}
+
+- (IBAction)autoRefreshCatalog:(id)sender
+{
+	NSString* sVal = [General getUserValue:@"AutoUpdate"];
+	if ( [sVal isEqualToString:@"NO"] )
+		sVal = @"YES";
+	else
+		sVal = @"NO";
+	
+	[General setUserValue:sVal key:@"AutoUpdate"];
 }
 
 - (NSString *)runCommand:(NSString *)commandToRun
@@ -183,6 +249,26 @@
 	
 	NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	return output;
+}
+
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)item
+{
+	NSObject* myItem = (NSObject*)item;
+	
+	if ( [myItem isKindOfClass:[NSMenuItem class]] )
+	{
+		NSMenuItem* mi = (NSMenuItem*)myItem;
+		if ( mi.tag == 12345 )
+		{
+			NSString* s = [General getUserValue:@"AutoUpdate"];
+			if ( [s isEqualToString:@"NO"] == NO )
+				mi.title = @"Auto Update ON";
+			else
+				mi.title = @"Auto Update OFF";
+		}
+	}
+	
+	return YES;
 }
 
 -(IBAction) writeLogFile: (id) sender
@@ -226,12 +312,12 @@
 
 -(IBAction) showDrumlinHelp: (id) sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.drumlinsecurity.com/help.html"]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://www.drumlinsecurity.com/help.php"]];
 }
 
 - (IBAction)gotoDrumlinWeb:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.drumlinsecurity.com/"]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://www.drumlinsecurity.com/"]];
 }
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
@@ -449,17 +535,34 @@
 	[m_menuRemoveAuth setEnabled:bEnable];
 }
 
-- (BOOL)isTerminalRunning
+- (NSString*)isBadProcessRunning
 {
 	if ( m_thread != nil )
 	{
-		return [m_thread isTerminalRunning];
+		return [m_thread isBadGuyRunning];
 	}
 	
-	return NO;
+	return nil;
+}
+
+- (BOOL)isTerminalRunning
+{
+	NSString* sProcess = [self isBadProcessRunning];
+	if ( sProcess == nil )
+		return NO;
+	
+	if ([sProcess rangeOfString:@"Terminal"].location != NSNotFound)
+		return YES;
+	else
+		return NO;
 }
 
 - (IBAction)removeAuthorisation:(id)sender
+{
+	[self removeCurrentDocumentAuthorization];
+}
+
+- (void)removeCurrentDocumentAuthorization
 {
 	NSArray* docs = [self orderedDocuments];
 	if ( docs != nil && docs.count > 0 )
@@ -561,7 +664,12 @@
 
 - (int) removeAuthOnline:(unsigned int)docID code:(NSString *)sCode
 {
-	NSString *sTemp = nil;
+	[ActivityManager addActivityWithDocID:docID 
+							   activityID:157 
+							  	description:[NSString stringWithFormat:@"Auth.removed DocID:%d Code:%@", docID, sCode] 
+									 text:sCode 
+									error:nil];
+/*	NSString *sTemp = nil;
 	
 	NSMutableString *sRequest = [[NSMutableString alloc]init];
 
@@ -625,7 +733,7 @@
 	
 	//NSLog( @"WS Response: %@", res );
 	
-	NSString* sError = [res objectForKey:@"sError"];
+	NSString* sError = [res objectForKey:@"sError"];*/
 
 	return 1;
 }

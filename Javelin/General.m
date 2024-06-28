@@ -11,6 +11,7 @@
 @implementation General
 
 static CatalogStack* g_catalogStack = nil;
+static CatalogStack* g_catalogStackNames = nil;
 static DocumentList* g_documentList = nil;
 
 + (DocumentList*)documentList
@@ -27,6 +28,14 @@ static DocumentList* g_documentList = nil;
 		g_catalogStack = [[CatalogStack alloc] init];
 	
 	return g_catalogStack;
+}
+
++ (CatalogStack*)catalogStackNames
+{
+	if ( g_catalogStackNames == nil )
+		g_catalogStackNames = [[CatalogStack alloc] init];
+	
+	return g_catalogStackNames;
 }
 
 - (id)init
@@ -294,6 +303,23 @@ static DocumentList* g_documentList = nil;
 	NSString* sCatalogPath = [[urlAppSupport path] stringByAppendingPathComponent:@"/Catalogs"];
 	
 	return sCatalogPath;
+}
+
++ (NSString*)getUserValue:(NSString*)sKey
+{
+	NSString *savedValue = [[NSUserDefaults standardUserDefaults]
+		stringForKey:sKey];
+	
+	return savedValue;
+}
+
++ (void)setUserValue:(NSString*)sValue key:(NSString*)sKey
+{
+	if ( sKey != nil )
+	{
+		[[NSUserDefaults standardUserDefaults] setObject:sValue forKey:sKey];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}
 }
 
 @end

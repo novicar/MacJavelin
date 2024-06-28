@@ -26,6 +26,8 @@
 	IBOutlet MyTextField*		m_txtURL;
 	IBOutlet NSTextField*		m_lblError;
 	IBOutlet NSProgressIndicator*	m_progress;
+	IBOutlet NSTextField*		m_lblPercent;
+	IBOutlet NSTextField*		m_lblBytes;
 	
 	NSString*					m_sElementName;
 	NSMutableDictionary*		m_item;
@@ -38,8 +40,15 @@
 	
 	NSImage*					m_imageDownload;
 	NSImage*					m_imageExit;
+	NSImage*					m_imageBack;
 	
 	CatalogItem*				m_selectedItem;
+	
+	//NSString*					m_sInitialCatalogName;
+	BOOL						m_bAskToRefresh;
+	BOOL						m_bOpenFile;
+	NSString*					m_sDestFile;
+	NSURL*						m_urlFile;
 }
 
 - (id)initWithDirectory:(NSString*)sDirectory;
@@ -55,6 +64,7 @@
 -(void)openDocumentAndCloseWindow:(NSString*)sDocument;
 -(BOOL)downloadNewCatalog:(NSString*)sURL toDirectory:(NSString*)sDestDir openCatalog:(NSString*)sCatalogPath;
 -(void)downloadFile:(NSURL*)urlFile toLocation:(NSString*)sDestFIle autoOpen:(BOOL)bOpenFile fromDropbox:(BOOL)bDropbox;
+-(void)downloadIcon:(NSURL*)urlFile toLocation:(NSString*)sDestFIle fromDropbox:(BOOL)bDropbox;
 -(void)deleteItem:(CatalogItem*)pItem;
 -(void)refreshItem:(CatalogItem*)pItem;
 -(void)displayItem:(CatalogItem*)pItem;
@@ -64,9 +74,10 @@
 -(IBAction) download:(id)sender;
 -(IBAction) refresh:(id)sender;
 
+-(void)setMyTitle:(NSString*)sTitle;
 -(void)doRefresh;
 -(BOOL)unzip:(NSString*)sZipFile toDestinationDir:(NSString*)sDestDir;
--(BOOL)openZippedCatalog:(NSString*)sZipFile;
+-(BOOL)openZippedCatalog:(NSString*)sZipFile title:(NSString*)sTitle;
 
 -(void)deleteCatalog:(id)sender;
 -(void)refreshCatalog:(id)sender;
@@ -77,4 +88,9 @@
 -(void)openFolder:(id)sender;
 -(void)openCatalogAsText:(id)sender;
 -(void)refreshDocumentImage:(id)sender;
+-(void)removeAuthorization:(id)sender;
+
+-(void)removeAuthorizationFromItem:(CatalogItem*)pItem withPrompt:(BOOL)bPrompt;
+
+-(void)openDocument:(NSString*) sDocument withDelay:(NSTimeInterval)seconds;
 @end

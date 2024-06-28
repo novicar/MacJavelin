@@ -25,6 +25,8 @@
 	if ( s != nil && nCount > 0 )
 	{
 		[m_stackOfCatalogs removeObjectAtIndex:nCount-1];
+		
+		//NSLog(@"REMOVED TOP: %lu", [m_stackOfCatalogs count]);
 	}
 	
 	return s;
@@ -49,6 +51,8 @@
 	if ( m_stackOfCatalogs == nil )
 		m_stackOfCatalogs = [[NSMutableArray alloc] init];
 	[m_stackOfCatalogs addObject:sPath];
+	
+	//NSLog(@"[%lu] ADDED: %@ ", (unsigned long)[m_stackOfCatalogs count], sPath );
 	return [self count];
 }
 

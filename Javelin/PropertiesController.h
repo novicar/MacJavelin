@@ -32,6 +32,8 @@
 	IBOutlet		NSTextField		*startDate;
 	IBOutlet		NSTextField		*endDate;
 	IBOutlet		NSTextField		*txSelfAuth;
+	IBOutlet		NSTextField		*publisherID;
+	IBOutlet		NSTextField		*disableScreenCapture;
 	
 	IBOutlet		NSWindow		*properties;
 	
@@ -42,7 +44,14 @@
 
 //- (void) setProperties: (NSDictionary*)attrs;
 //- (void)showProperties:(NSWindow *)window attributes:(NSDictionary*)attrs docRecord:(DocumentRecord*)docRec;
-- (void)fillProperties:(NSDictionary*)attrs docRecord:(DocumentRecord*)docRec inWindow:(NSWindow*)window;
+- (void)fillProperties:(NSDictionary*)attrs 
+			 docRecord:(DocumentRecord*)docRec 
+			  fileName:(NSString*)sFileName 
+			  fileSize:(NSUInteger)nFileSize
+		blockGrabbers:(BOOL)bBlockGrabbers
+		   publisherID:(NSUInteger)nPublisherID	
+				 pages:(NSUInteger)nPages 
+			  inWindow:(NSWindow*)window;
 
 - (IBAction)closeProperties: (id)sender;
 

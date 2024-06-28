@@ -9,12 +9,24 @@
 #import "CatalogStack.h"
 #import "General.h"
 #import "Log.h"
+#import "Constants.h"
+#import "VersionChecker.h"
+#import "Version.h"
+#import "Drumlin.h"
+#import "JavelinApplication.h"
 
 @interface CatalogWindowController ()
 
 @end
 
 @implementation CatalogWindowController
+
+-(void) setButton:(NSButton *)button fontColor:(NSColor *)color 
+{
+	NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[button attributedTitle]];
+	[colorTitle addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, button.attributedTitle.length)];
+	[button setAttributedTitle:colorTitle];
+}
 
 - (id)initWithDirectory:(NSString*)sDirectory
 {
@@ -23,10 +35,19 @@
 	{
 		// Initialization code here.
 		m_sInitialPath = sDirectory;
-		NSString *path = [[NSBundle mainBundle] pathForResource:@"exit-arrow" ofType:@"png"];
+		NSString *path = [[NSBundle mainBundle] pathForResource:@"exit-arrow-1" ofType:@"png"];
 		m_imageExit = [[NSImage alloc] initWithContentsOfFile:path];
-		path = [[NSBundle mainBundle] pathForResource:@"down-arrow" ofType:@"png"];
+		path = [[NSBundle mainBundle] pathForResource:@"down-arrow-1" ofType:@"png"];
 		m_imageDownload = [[NSImage alloc] initWithContentsOfFile:path];
+		path = [[NSBundle mainBundle] pathForResource:@"back-arrow-1" ofType:@"png"];
+		m_imageBack = [[NSImage alloc] initWithContentsOfFile:path];
+
+
+		NSString* s = [General getUserValue:@"AutoUpdate"];
+		if ( [s isEqualToString:@"NO"] == NO )
+			m_bAskToRefresh = YES;
+		else
+			m_bAskToRefresh = NO;
 	}
 	
 	return self;
@@ -53,11 +74,14 @@
 	m_contents = nil;
 	[m_lblError setHidden:YES];
 	[m_progress setHidden:YES];
+	[m_lblBytes setHidden:YES];
+	[m_lblPercent setHidden:YES];
+
 	
 	[m_collectionView setDataSource:self];
 	//[self loadData:nil];
 	[self loadXMLCatalog:[ppp getTop]];
-	
+
 	if (@available(macOS 10.13, *)) {
 		[m_collectionView setFrameSize: m_collectionView.collectionViewLayout.collectionViewContentSize];
 	}
@@ -65,6 +89,8 @@
 	[m_txtURL setTarget:self];
 	[m_txtURL setAction:@selector(download:)];
 	//[m_collectionView becomeFirstResponder];
+	
+	//[[m_btnBack cell] setBackgroundColor:[NSColor lightGrayColor]];
 	[self.window makeFirstResponder:m_collectionView];
 }
 
@@ -177,7 +203,8 @@
 		[m_btnDownload setEnabled:YES];
 		[m_txtURL setHidden:NO];
 		[m_txtURL setEnabled:YES];
-		[[self window] setTitle:@"Catalogs"];
+		//[[self window] setTitle:@"Catalogs"];
+		[self performSelector:@selector(setMyTitle:) withObject:@"Catalogs" afterDelay:0.2];
 		return YES;
 	}
 	else
@@ -185,12 +212,10 @@
 		//open catalog XML file
 		[m_btnBack setEnabled:YES];
 		//[m_btnDownload setEnabled:NO];
-		[m_btnDownload setEnabled:NO];
+		[m_btnDownload setEnabled:YES];
 		[m_btnDownload setImage:m_imageExit];
 		[m_txtURL setEnabled:NO];
 		[m_txtURL setHidden:YES];
-
-		[[self window] setTitle:[[sCatalogPath lastPathComponent] stringByDeletingPathExtension]];
 		m_sCurrentCatalog = sCatalogPath;
 		BOOL bRes = [self parseXMLFile:sCatalogPath];
 		if ( bRes )
@@ -198,6 +223,7 @@
 			m_catalogItem = [[CatalogItem alloc] init];
 			[m_catalogItem setCatalogDirectory:sCatalogPath];
 			[m_catalogItem setProt:self];
+			
 			int nCount = (int)[m_collectionView numberOfItemsInSection:0];
 			for( int i=0; i<nCount; i++)
 			{
@@ -354,6 +380,11 @@
 	}
 }
 
+-(void)openDocument:(NSString*) sDocument withDelay:(NSTimeInterval)seconds
+{
+	[self performSelector:@selector(openDocumentAndCloseWindow:) withObject:sDocument afterDelay:seconds];
+}
+
 -(void)openDocumentAndCloseWindow:(NSString*)sDocument
 {
 	NSString* sExt = [[sDocument pathExtension] lowercaseString];
@@ -370,32 +401,115 @@
 		[[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:url display:YES completionHandler:
 		 ^(NSDocument * _Nullable document, BOOL documentWasAlreadyOpen, NSError * _Nullable error) 
 		 {
-			 if ( error == nil )
-			 {
-				 NSLog(@"CLOSE");
-				 //[NSApp endSheet:[self window] returnCode:0];
-				 //[[self window] orderOut: self];
-				 //[[self window] close];
-			 }
+			if ( error == nil )
+			{
+				NSLog(@"CLOSE");
+				//[NSApp endSheet:[self window] returnCode:0];
+				//[[self window] orderOut: self];
+				//[[self window] close];
+			}
+			else
+			{
+				NSLog(@"ERROR: %@", error.description);
+			}
+			
 		 }
 		 ];
 	}
 }
 
+-(void)downloadIcon:(NSURL*)urlFile toLocation:(NSString*)sDestFIle fromDropbox:(BOOL)bDropbox
+{
+	NSURLSession* session = [NSURLSession sharedSession];
+	NSURLSessionDownloadTask* downloadTask = 
+		[session downloadTaskWithURL:urlFile 
+				   completionHandler:
+		 ^(NSURL *location, NSURLResponse *response, NSError *error) 
+		 {
+	 
+			 if (error == nil) 
+			 {
+				 //NSLog(@"FINISHED: %@", location);
+				 BOOL bOK = YES;
+				 if ( response != nil && [[response MIMEType] isEqualToString:@"text/html"] == YES )
+				 {
+					 bOK = NO;
+					 NSFileManager *fm = [NSFileManager defaultManager];
+					 if ( [fm isReadableFileAtPath:[location path]] )
+					 {
+						 NSURL* url = [location URLByAppendingPathExtension:@"html"];
+						 BOOL b = [fm moveItemAtURL:location toURL:url error:nil];
+						 
+						 if ( b )
+							 [[NSWorkspace sharedWorkspace] openURL:url];
+					 } 
+				 }
+				 NSError *err = nil;
+				 NSFileManager *fileManager = [NSFileManager defaultManager];
+				 
+				 if ( bOK && [fileManager isReadableFileAtPath:[location path]] )
+				 {
+					 dispatch_async(dispatch_get_main_queue(), ^(void){
+						 [self doRefresh];
+					 });
+					 
+					 NSURL* urlDest = [NSURL fileURLWithPath:sDestFIle isDirectory:NO];
+					 [fileManager removeItemAtURL:urlDest error:nil];
+					 BOOL bRes = [fileManager moveItemAtURL:location toURL:urlDest error:&err];
+					 //BOOL bRes = [fileManager copyItemAtURL:location toURL:urlDest error:&err];
 
+					 if ( err != nil )
+					 {
+						 //error while moving the downloaded file
+						 dispatch_async(dispatch_get_main_queue(), ^(void){
+							 [m_lblError setHidden:NO];
+							 [m_lblError setStringValue:[err localizedDescription]];
+						 });
+					 }
+					 else
+					 {
+						 dispatch_async(dispatch_get_main_queue(), ^(void){
+							[m_lblError setHidden:NO];
+							[m_lblError setStringValue:@"Unknown error occured. Unable to download document."];
+							NSLog(@"downloadFile: %@", urlFile);
+						 });
+					 }
+					 
+				 }
+			 }
+			 else
+			 {
+				 dispatch_async(dispatch_get_main_queue(), ^(void){
+					 [m_lblError setHidden:NO];
+					 [m_lblError setStringValue:[error localizedDescription]];
+					 
+				 });
+			 }//endif
+		 }//endfunc
+		 ];
+		
+		[downloadTask resume];
+}
 
 -(void)downloadFile:(NSURL*)urlFile toLocation:(NSString*)sDestFIle autoOpen:(BOOL)bOpenFile fromDropbox:(BOOL)bDropbox
 {
 	//NSURLRequest* theRequest = [NSURLRequest requestWithURL:urlFile];
-	
 	//m_bDownloadIsIndeterminate = YES;
 	//m_fDownloadProgress = 0.0f;
 	m_bDownloading = YES;
-	if ( bOpenFile )
+	m_bOpenFile = bOpenFile;
+	m_urlFile = urlFile;
+	[m_progress setMinValue:0.0];
+	[m_progress setMaxValue:100.0];
+	[m_progress setDoubleValue:0];
+	[m_lblBytes setHidden:NO];
+	[m_lblPercent setHidden:NO];
+
+	if ( m_bOpenFile )
 	{
 		[m_progress setHidden:NO];
-		[m_progress setIndeterminate:YES];
-		[m_progress setUsesThreadedAnimation:YES];
+		[m_progress setIndeterminate:NO];
+		[m_progress setUsesThreadedAnimation:NO];
 		[m_progress startAnimation:nil];
 		[m_btnDownload setImage:m_imageExit];
 		[m_btnDownload setEnabled:YES];
@@ -413,13 +527,17 @@
 		//urlFile que
 	}
 
-	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:urlFile                                                                        
+/*	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:urlFile                                                                        
 															  cachePolicy:NSURLRequestReloadIgnoringCacheData
 														  timeoutInterval:30.0];
+	*/
+	m_sDestFile = sDestFIle;
+	NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+	NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];//[NSOperationQueue mainQueue]];
+	m_downloadTask = [session downloadTaskWithURL:urlFile];
+	[m_downloadTask resume];
 	
-	//[[NSRunLoop currentRunLoop] run];
-	NSURLSession* session = [NSURLSession sharedSession];
-	
+/*	NSURLSession* session = [NSURLSession sharedSession];
 	m_downloadTask = 
 	[session downloadTaskWithURL:urlFile 
 			   completionHandler:
@@ -476,7 +594,7 @@
 					 if ( bOpenFile )
 					 {
 						 if ( [sExt isEqualToString:@"zip" ] )
-							 [self openZippedCatalog:sDestFIle];
+							 [self openZippedCatalog:sDestFIle title:@""];
 						 else
 							 [self openDocumentAndCloseWindow:sDestFIle];
 					 }
@@ -519,17 +637,12 @@
 				 [m_lblError setHidden:NO];
 				 [m_lblError setStringValue:[error localizedDescription]];
 				 
-			/*	 NSLog(@"1 %@", [error description]);
-				 NSLog(@"2 %d", (int)[error code]);
-				 NSLog(@"3 %@", [error userInfo]);
-				 NSLog(@"4 %@", [error localizedFailureReason]);
-				 NSLog(@"1 %@", [error localizedRecoverySuggestion]);*/
 			 });
-		 }
-	 }
+		 }//endif
+	 }//endfunc
 	 ];
 	
-	[m_downloadTask resume];
+	[m_downloadTask resume];*/
 }
 
 
@@ -561,11 +674,14 @@
 			//OK - you can download that
 			////////////
 			[m_progress setHidden:NO];
-			[m_progress setIndeterminate:YES];
-			[m_progress setUsesThreadedAnimation:YES];
+			[m_progress setIndeterminate:NO];
+			[m_progress setUsesThreadedAnimation:NO];
 			[m_progress startAnimation:nil];
 			[m_btnDownload setImage:m_imageExit];
 			[m_btnDownload setEnabled:YES];
+			[m_lblBytes setHidden:YES];
+			[m_lblPercent setHidden:YES];
+
 			
 			NSURLSession* session = [NSURLSession sharedSession];
 			
@@ -638,7 +754,7 @@
 									 //we have a zipped catalog
 									 //NSString* sZippedCatalog = [[General catalogDirectory] stringByAppendingPathComponent:[sPath lastPathComponent]];
 									 NSString* sZippedCatalog = [[sDestinationFile stringByDeletingPathExtension] stringByAppendingPathExtension:sExt];
-									 [self openZippedCatalog:sZippedCatalog];
+									 [self openZippedCatalog:sZippedCatalog title:@""];
 								 }
 								 else if ( [self openCatalog:sCatalogPath] )
 								 {
@@ -648,6 +764,8 @@
 									 {
 										// [self addLevel:sCatalogPath];
 										 [[General catalogStack] add:sCatalogPath];
+										 [[General catalogStackNames] add:@"Downloaded"];
+										 NSLog(@"ADDED CAT NAME: %@", @"DWNLD" );
 									 }
 								 }
 								 
@@ -749,10 +867,45 @@
 	{
 		NSError* err = nil;
 		//delete document
+		[self removeAuthorizationFromItem:pItem withPrompt:NO];
 		BOOL bRes = [[NSFileManager defaultManager] removeItemAtPath:sDestFileName error:&err];
 		[self doRefresh];
 	}
 
+}
+
+-(void)removeAuthorizationFromItem:(CatalogItem*)pItem withPrompt:(BOOL)bPrompt
+{
+	if ( m_sCurrentCatalog == nil )
+		return;
+	
+	NSString* sCatName = [[m_sCurrentCatalog stringByDeletingPathExtension] stringByAppendingPathExtension:@"catdir"];
+	NSString* sExtension = [[pItem.URL pathExtension] lowercaseString];
+	
+	if ( [sExtension isEqualTo:@"drmz"] || [sExtension isEqualTo:@"drmx"])
+	{
+		//NSString* sItemURL = pItem.URL;
+		NSString* sDestFileName = [sCatName stringByAppendingPathComponent:[[pItem URL] lastPathComponent]];
+		Drumlin *d = [[Drumlin alloc] init];
+		NSInteger docID = [d readDocumentID:sDestFileName];
+		
+		//NSLog(@"FILE:%@", sDestFileName);
+		//NSLog(@"ID:%ld", (long)docID);
+		//NSLog(@"EXT: %@", sExtension );
+		
+		if ( docID > 0 )
+		{
+			JavelinApplication* pApp = (JavelinApplication*)[NSApplication sharedApplication];
+			
+			if ( pApp != nil )
+			{
+				if ( bPrompt == YES )
+					[pApp removeDocument:(unsigned int)docID];
+				else
+					[pApp doRemoveDocument:(unsigned int)docID];
+			}
+		}
+	}
 }
 
 -(void)displayItem:(CatalogItem*)pItem
@@ -878,19 +1031,24 @@
 {
 	if(returnCode == NSAlertFirstButtonReturn)
 	{
-		NSLog(@"if (returnCode == NSAlertFirstButtonReturn)");
+		NSLog(@"if (returnCode0 == NSAlertFirstButtonReturn)");
+		[m_downloadTask cancel];
+		[m_lblError setHidden:YES];
+		[m_progress setHidden:YES];
+		[m_btnDownload setImage:m_imageDownload];
+		m_bDownloading = NO;
 	}
 	else if (returnCode == NSAlertSecondButtonReturn)
 	{
-		NSLog(@"else if (returnCode == NSAlertSecondButtonReturn)");
+		NSLog(@"else if (returnCode0 == NSAlertSecondButtonReturn)");
 	}
 	else if (returnCode == NSAlertThirdButtonReturn)
 	{
-		NSLog(@"else if (returnCode == NSAlertThirdButtonReturn)");
+		NSLog(@"else if (returnCode0 == NSAlertThirdButtonReturn)");
 	}
 	else
 	{
-		NSLog(@"All Other return code %ld",(long)returnCode);
+		NSLog(@"All Other return code0 %ld",(long)returnCode);
 	}
 }
 
@@ -903,6 +1061,10 @@
 		[m_lblError setHidden:YES];
 		[m_progress setHidden:YES];
 		[m_btnDownload setImage:m_imageDownload];
+		m_bDownloading = NO;
+		[m_lblBytes setHidden:YES];
+		[m_lblPercent setHidden:YES];
+
 	}
 	else if (returnCode == NSAlertSecondButtonReturn)
 	{
@@ -1029,27 +1191,55 @@ referenceSizeForFooterInSection:(NSInteger)section
 	sFile = [[General catalogStack] getTop];
 	[self loadXMLCatalog:sFile];
 
+	NSString* sCatName = [[General catalogStackNames] getAndRemoveTop];
+	sCatName = [[General catalogStackNames] getTop];
+	
+	//NSLog(@"BACK TO CAT NAME: %@", sCatName);
+	
+	if ( sCatName != nil )
+		[self performSelector:@selector(setMyTitle:) withObject:sCatName afterDelay:0.2];
+		//[[self window] setTitle:sCatName];
+	else
+		[self performSelector:@selector(setMyTitle:) withObject:@"Catalogs" afterDelay:0.2];
+		//[[self window] setTitle:@"Catalogs"];
+
+}
+
+-(void)setMyTitle:(NSString*)sTitle
+{
+	[[self window] setTitle:sTitle];
 }
 
 -(IBAction) download:(id)sender
 {
-	[m_lblError setHidden:YES];
-
-	if ( [[m_txtURL stringValue] length] == 0 && m_bDownloading == NO )
-		return;
-	
 	if ( m_bDownloading )
 	{
 		NSAlert *alert = [[NSAlert alloc] init];
+		
 		[alert addButtonWithTitle:@"Cancel download"];
 		[alert addButtonWithTitle:@"Continue"];
 		[alert setMessageText:@"Download In Progress"];
 		[alert setInformativeText:@"Download in progress. Do you want to cancel download?"];
 		[alert setAlertStyle:NSWarningAlertStyle];
-		[alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd1:returnCode:contextInfo:) contextInfo:nil];
+		[alert beginSheetModalForWindow:[self window] 
+						  modalDelegate:self 
+						 didEndSelector:@selector(alertDidEnd1:returnCode:contextInfo:) 
+							contextInfo:nil];
 	}
 	else
 	{
+		if ( m_sInitialPath != nil )
+		{
+			[[self window] close];
+			return;
+		}
+		
+		[m_lblError setHidden:YES];
+
+		if ( [[m_txtURL stringValue] length] == 0 && m_bDownloading == NO )
+			return;
+
+
 		NSString* sURL = [[m_txtURL stringValue] stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
 		
 		if ( sURL.length == 0 )
@@ -1095,8 +1285,8 @@ referenceSizeForFooterInSection:(NSInteger)section
 		m_bDownloading = YES;
 		////////////
 		[m_progress setHidden:NO];
-		[m_progress setIndeterminate:YES];
-		[m_progress setUsesThreadedAnimation:YES];
+		[m_progress setIndeterminate:NO];
+		[m_progress setUsesThreadedAnimation:NO];
 		[m_progress startAnimation:nil];
 		
 		NSURLSession* session = [NSURLSession sharedSession];
@@ -1294,8 +1484,10 @@ referenceSizeForFooterInSection:(NSInteger)section
 	NSURLComponents *components = nil;
 	
 	if ( pItem.URL != nil )
+	{
 		components = [[NSURLComponents alloc] initWithString:pItem.URL];
-	
+		//NSLog(@"Title: %@\n", pItem.Name);
+	}
 	/*	if ( components == nil )
 	 {
 	 NSString* sErr = [NSString stringWithFormat:@"ERROR: Wrong URL %@", pItem.URL];
@@ -1320,13 +1512,43 @@ referenceSizeForFooterInSection:(NSInteger)section
 		sItemURL = [NSString stringWithFormat:@"%@://%@%@?dl=1", [components scheme], [components host], [components path]];
 		sDestFileName = [sCatName stringByAppendingPathComponent:[[components path] lastPathComponent]];
 	}
+	if ( m_bAskToRefresh == YES && m_sCurrentCatalog == nil && [[sDestFileName lastPathComponent] isEqualToString:CATALOG_FILENAME])
+	{
+		m_bAskToRefresh = NO;
+		[General setUserValue:@"NO" key:@"AutoUpdate"];
+		
+		//ask user to refresh initial catalog
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert addButtonWithTitle:@"Yes"];
+		[alert addButtonWithTitle:@"No"];
+		[alert setMessageText:@"Refresh Catalog"];
+		[alert setInformativeText:@"Do you want to reload initial catalog?"];
+		[alert setAlertStyle:NSAlertStyleInformational];
+		
+		[alert beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result)
+		 {
+			 if (result == NSAlertFirstButtonReturn) 
+			 {
+				 //OK - delete catalog
+				 [self doRefresh];
+				 return;
+			 }
+			 else if ( result == NSAlertSecondButtonReturn )
+			 {
+				 //Cancel - don't delete
+			 }
+		 }];
+	}
 	
 	if ( [sExtension isEqualToString:@"xml"] )
 	{
 		//NSURL* url = [NSURL URLWithString:pItem.URL];
 		
 		//NSLog(@"Current catalog: %@", m_sCurrentCatalog );
-		
+		[[General catalogStackNames] add:pItem.Name];
+		NSLog(@"ADDED CAT NAME: %@", pItem.Name );
+		//[[self window] setTitle:pItem.Name];
+		[self performSelector:@selector(setMyTitle:) withObject:pItem.Name afterDelay:0.2];
 		if ( m_sCurrentCatalog == nil )
 		{
 			//top level
@@ -1380,13 +1602,16 @@ referenceSizeForFooterInSection:(NSInteger)section
 				{
 					if ( [url host] != nil && [url scheme] != nil && [url path] != nil )
 					{
-						[self downloadFile:url toLocation:sDestFileName autoOpen:NO fromDropbox:bDropbox];
+						//[self downloadFile:url toLocation:sDestFileName autoOpen:NO fromDropbox:bDropbox];
+						[self downloadIcon:url toLocation:sDestFileName fromDropbox:bDropbox];
+						[NSThread sleepForTimeInterval:1];
 					}
 				}
 			}
 			
 			sUrl = [sItemURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
 			NSURL* url = [NSURL URLWithString:sUrl];
+			//NSURL* url = [NSURL URLWithString:@"https://www.radonic.net/harry.pdf"];
 			if ( url == nil )
 			{
 				sUrl = [sUrl stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
@@ -1398,8 +1623,8 @@ referenceSizeForFooterInSection:(NSInteger)section
 				sDestFileName = [sCatName stringByAppendingPathComponent:[sItemURL lastPathComponent]];
 			
 			[m_progress setHidden:NO];
-			[m_progress setIndeterminate:YES];
-			[m_progress setUsesThreadedAnimation:YES];
+			[m_progress setIndeterminate:NO];
+			[m_progress setUsesThreadedAnimation:NO];
 			[m_progress startAnimation:nil];
 			
 			[self downloadFile:url toLocation:sDestFileName autoOpen:YES fromDropbox:bDropbox];
@@ -1409,7 +1634,7 @@ referenceSizeForFooterInSection:(NSInteger)section
 	{
 		if ( [[NSFileManager defaultManager] fileExistsAtPath:sDestFileName] )
 		{
-			[self openZippedCatalog:sDestFileName];
+			[self openZippedCatalog:sDestFileName title:pItem.Name];
 		}
 		else
 		{
@@ -1443,8 +1668,8 @@ referenceSizeForFooterInSection:(NSInteger)section
 			sDestFileName = [sCatName stringByAppendingPathComponent:[sItemURL lastPathComponent]];
 			
 			[m_progress setHidden:NO];
-			[m_progress setIndeterminate:YES];
-			[m_progress setUsesThreadedAnimation:YES];
+			[m_progress setIndeterminate:NO];
+			[m_progress setUsesThreadedAnimation:NO];
 			[m_progress startAnimation:nil];
 			
 			if ( bDropbox )
@@ -1470,7 +1695,7 @@ referenceSizeForFooterInSection:(NSInteger)section
 	}
 }
 
--(BOOL)openZippedCatalog:(NSString*)sZipFile
+-(BOOL)openZippedCatalog:(NSString*)sZipFile title:(NSString*)sTitle
 {
 	//we already have this zip file
 	//check if we have the XML file
@@ -1480,6 +1705,20 @@ referenceSizeForFooterInSection:(NSInteger)section
 		//the catalog xml file is there - open it
 		[self openCatalog:sXmlFile];
 		[[General catalogStack] add:sXmlFile];
+		if ( sTitle != nil )
+		{
+			[[General catalogStackNames] add:sTitle];
+			NSLog(@"ADDED CAT NAME: %@", sTitle );
+			//[[self window] setTitle:sTitle];
+			[self performSelector:@selector(setMyTitle:) withObject:sTitle afterDelay:0.2];
+		}
+		else
+		{
+			[[General catalogStackNames] add:@"ZIP FILE"];
+			NSLog(@"ADDED CAT NAME: %@", @"ZIP FILE" );
+			//[[self window] setTitle:@""];
+			[self performSelector:@selector(setMyTitle:) withObject:@"ZIP FILE|" afterDelay:0.2];
+		}
 		return YES;
 	}
 	else
@@ -1493,6 +1732,17 @@ referenceSizeForFooterInSection:(NSInteger)section
 			
 			//[self performSelector:@selector(openCatalog:) withObject:sXmlFile afterDelay:1];
 			[[General catalogStack] add:sXmlFile];
+			if ( sTitle != nil )
+			{
+				[[General catalogStackNames] add:sTitle];
+				NSLog(@"ADDED CAT NAME: %@", sTitle );
+			}
+			else
+			{
+				[[General catalogStackNames] add:@"ZIP FILE 1"];
+				NSLog(@"ADDED CAT NAME: %@", @"ZIP FILE 1" );
+			}
+
 			return YES;
 		}
 	}
@@ -1560,6 +1810,7 @@ referenceSizeForFooterInSection:(NSInteger)section
 		[theMenu insertItemWithTitle:@"Document Info" action:@selector(documentInfo:) keyEquivalent:@"" atIndex:1];
 		[theMenu insertItemWithTitle:@"Refresh Document" action:@selector(refreshDocument:) keyEquivalent:@"" atIndex:2];
 		[theMenu insertItemWithTitle:@"Open Document Folder" action:@selector(openFolder:) keyEquivalent:@"" atIndex:3];
+		[theMenu insertItemWithTitle:@"Remove Authorization" action:@selector(removeAuthorization:) keyEquivalent:@"" atIndex:1];
 		if ( pItem.ThumbURL != nil && pItem.ThumbURL.length > 0 )
 			[theMenu insertItemWithTitle:@"Refresh Document Image" action:@selector(refreshDocumentImage:) keyEquivalent:@"" atIndex:4];
 		[NSMenu popUpContextMenu:theMenu withEvent:event forView:m_collectionView];
@@ -1676,6 +1927,11 @@ referenceSizeForFooterInSection:(NSInteger)section
 	[self displayItem:m_selectedItem];
 }
 
+- (void)removeAuthorization:(id)sender
+{
+	[self removeAuthorizationFromItem:m_selectedItem withPrompt:YES];
+}
+
 -(void)refreshDocumentImage:(id)sender
 {
 	NSString* sCatName = nil;
@@ -1695,6 +1951,204 @@ referenceSizeForFooterInSection:(NSInteger)section
 		{
 			[self downloadFile:url toLocation:sDestFileName autoOpen:NO fromDropbox:NO];
 		}
+	}
+}
+/*
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+	NSLog(@"TASK ENDED");
+	m_bDownloading = NO;
+	dispatch_async(dispatch_get_main_queue(), ^(void){
+		[m_lblError setHidden:NO];
+		[m_lblError setStringValue:[error localizedDescription]];
+		
+	});
+}*/
+
+//NSURLSessionDownloadDelegate
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location 
+{
+	NSURLResponse* response = downloadTask.response;
+	//NSError* err1 = downloadTask.error;
+	//NSString* sss = response.description;
+	//NSString* mime = response.MIMEType;
+	//NSData *data = [NSData dataWithContentsOfURL:location];
+	//NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	
+	NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+	NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+	/*NSDictionary* dict = [httpResponse allHeaderFields];
+	for (NSString *key in dict) {
+		id value = dict[key];
+		NSLog(@"Value: %@ for key: %@", value, key);
+	}*/
+	NSError *err = nil;
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	m_bDownloading = NO;
+	
+	dispatch_async(dispatch_get_main_queue(), ^(void){
+		[m_lblBytes setHidden:YES];
+		[m_lblPercent setHidden:YES];
+		[m_lblBytes setStringValue:@""];
+		[m_lblPercent setStringValue:@""];
+	});
+	
+	if ( httpResponse.statusCode != 200 )
+	{
+		//error occured - report it
+		dispatch_async(dispatch_get_main_queue(), ^(void){
+			[m_progress stopAnimation:nil];
+			[m_progress setHidden:YES];
+			[m_btnDownload setEnabled:(m_sCurrentCatalog==nil)];
+			[m_btnDownload setImage:m_imageDownload];
+			[m_txtURL setEnabled:(m_sCurrentCatalog==nil)];
+			[m_txtURL setHidden:(m_sCurrentCatalog!=nil)];
+			long lErrCode = (long)httpResponse.statusCode;
+			NSString* sErr = [NSString stringWithFormat:@"ERROR: %@ (code:%ld)",
+				[NSHTTPURLResponse localizedStringForStatusCode:lErrCode], lErrCode];
+			NSAlert *alert = [[NSAlert alloc] init];
+			[alert addButtonWithTitle:@"OK"];
+			[alert setMessageText:@"Download Error"];
+			[alert setInformativeText:sErr];
+			[alert setAlertStyle:NSCriticalAlertStyle];
+			[alert beginSheetModalForWindow:[self window] 
+							  modalDelegate:self 
+							 didEndSelector:nil
+								contextInfo:nil];	
+		});
+		
+		if ( [fileManager isReadableFileAtPath:[location path]] )
+		{
+			[fileManager removeItemAtPath:[location path] error:&err];
+		}
+		return;
+	}
+	if ( m_bOpenFile )
+	{
+		dispatch_async(dispatch_get_main_queue(), ^(void){
+			//Run UI Updates
+			[m_progress stopAnimation:nil];
+			[m_progress setHidden:YES];
+			[m_btnDownload setEnabled:(m_sCurrentCatalog==nil)];
+			[m_btnDownload setImage:m_imageDownload];
+			[m_txtURL setEnabled:(m_sCurrentCatalog==nil)];
+			[m_txtURL setHidden:(m_sCurrentCatalog!=nil)];
+		});
+	}
+	
+	//NSLog(@"FINISHED: %@", location);
+	
+
+	NSLog(@"FINISHED: %@", location);
+
+
+	BOOL bOK = YES;
+	/*if ( response != nil && [[response MIMEType] isEqualToString:@"text/html"] == YES )
+	{
+		bOK = NO;
+		NSFileManager *fm = [NSFileManager defaultManager];
+		if ( [fm isReadableFileAtPath:[location path]] )
+		{
+			NSURL* url = [location URLByAppendingPathExtension:@"html"];
+			BOOL b = [fm moveItemAtURL:location toURL:url error:nil];
+			
+			if ( b )
+				[[NSWorkspace sharedWorkspace] openURL:url];
+		} 
+	}*/
+	
+	
+	if ( bOK && [fileManager isReadableFileAtPath:[location path]] )
+	{
+		dispatch_async(dispatch_get_main_queue(), ^(void){
+			[self doRefresh];
+		});
+		
+		NSURL* urlDest = [NSURL fileURLWithPath:m_sDestFile isDirectory:NO];
+		[fileManager removeItemAtURL:urlDest error:nil];
+		BOOL bRes = [fileManager moveItemAtURL:location toURL:urlDest error:&err];
+		
+		if ( bRes )
+		{
+			NSString* sExt = [[[m_urlFile absoluteString] pathExtension] lowercaseString]; 
+			BOOL isImage = ([sExt isEqualToString:@"png" ] || [sExt isEqualToString:@"jpg" ]);
+			NSLog(@"Downloaded: %@", urlDest.path);
+			
+			if ( m_bOpenFile && isImage == NO )
+			{
+				if ( isImage == NO )
+				{
+					dispatch_async(dispatch_get_main_queue(), ^(void){
+						NSLog(@"Will open:  %@", m_sDestFile);
+						if ( [sExt isEqualToString:@"zip" ] )
+							[self openZippedCatalog:m_sDestFile title:@""];
+						else
+							[self openDocument:m_sDestFile withDelay:1.0];
+						//[self openDocumentAndCloseWindow:m_sDestFile];
+					});
+				}
+			}
+			m_bDownloading = NO;
+		}
+		else if ( err != nil )
+		{
+			m_bDownloading = NO;
+			//error while moving the downloaded file
+			dispatch_async(dispatch_get_main_queue(), ^(void){
+				[m_lblError setHidden:NO];
+				[m_lblError setStringValue:[err localizedDescription]];
+				[m_lblBytes setHidden:YES];
+				[m_lblPercent setHidden:YES];
+				
+				//NSLog(@"1 %@", [err description]);
+				//NSLog(@"2 %d", (int)[err code]);
+				//NSLog(@"3 %@", [err userInfo]);
+				//NSLog(@"4 %@", [err localizedFailureReason]);
+				//NSLog(@"1 %@", [err localizedRecoverySuggestion]);
+				
+			});
+		}
+		else
+		{
+			m_bDownloading = NO;
+			dispatch_async(dispatch_get_main_queue(), ^(void){
+			   [m_lblError setHidden:NO];
+			   [m_lblError setStringValue:@"Unknown error occured. Unable to download document."];
+			   //NSLog(@"downloadFile: %@", urlFile);
+			});
+		}
+		
+	}
+	else
+		m_bDownloading = NO;
+
+}//endfunc	
+
+
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes {
+	
+	NSLog(@"RESUME");
+}
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite 
+{
+	if ( totalBytesExpectedToWrite != -1 )
+	{
+		double progress = ((double)totalBytesWritten / (double)totalBytesExpectedToWrite) * 100.0;
+		NSString* sBytes = [NSString stringWithFormat:@"%lld/%lld", totalBytesWritten, totalBytesExpectedToWrite];
+		NSString* sPercent = [NSString stringWithFormat:@"%d%%", (int)progress];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			//[self.progressView setProgress:progress];
+			[m_progress setDoubleValue:progress];
+			//NSLog(@"Progress %f", progress);
+			[m_lblBytes setStringValue:sBytes];
+			[m_lblPercent setStringValue:sPercent];
+		});
+	}
+	else
+	{
+		NSLog(@"ERROR?");
 	}
 }
 @end

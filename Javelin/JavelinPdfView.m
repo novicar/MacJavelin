@@ -21,12 +21,14 @@
 #include "NoteProtocol.h"
 #include "JAnnotation.h"
 #include "JAnnotations.h"
+#include "JavelinApplication.h"
+#include "ActivityManager.h"
 
 //un-comment if you want to debug by printing to PDF file
 //#define DEBUG_PRINT	1
 #define NOTE_WIDTH  (80)
 #define NOTE_HEIGHT (30)
-#define NOTE_FONT_SIZE (12)
+#define NOTE_FONT_SIZE (10)
 
 @implementation JavelinPdfView
 
@@ -45,7 +47,7 @@
 		/// Make a copy of the default paragraph style
 		NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 		/// Set line break mode
-		paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;//NSLineBreakByTruncatingTail;
 		/// Set text alignment
 		paragraphStyle.alignment = NSTextAlignmentCenter;
 		
@@ -72,7 +74,7 @@
 		/// Make a copy of the default paragraph style
 		NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 		/// Set line break mode
-		paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;//NSLineBreakByTruncatingTail;
 		/// Set text alignment
 		paragraphStyle.alignment = NSTextAlignmentCenter;
 		
@@ -106,7 +108,7 @@
 		/// Make a copy of the default paragraph style
 		NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 		/// Set line break mode
-		paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;//NSLineBreakByTruncatingTail;
 		/// Set text alignment
 		paragraphStyle.alignment = NSTextAlignmentCenter;
 		
@@ -270,6 +272,17 @@
 	//NSLog(@"NewAnnot: %@", NSStringFromRect(annNew.boundary));
 				//[delegate editNote:annot inWindow:[self window]];
     [delegate editFreeNote:annNew inWindow:[self window] viewRect:[self convertRect:[annNew boundary] fromPage:[self currentPage]] pdfView:self];
+}
+
+- (void) removeAuthorisation: (id)sender
+{
+	JavelinApplication* pApp = (JavelinApplication*)[NSApplication sharedApplication];
+	
+	if ( pApp != nil )
+	{
+		[pApp removeCurrentDocumentAuthorization];
+		//[[self window] performClose:nil];
+	}
 }
 
 - (void) addFreeNote:(id)sender
@@ -450,6 +463,12 @@ static NSRect RectPlusScale (NSRect aRect, float scale);
 - (void) setJavelinDocument: (JavelinDocument*)pDoc
 {
 	_javelinDocument = pDoc;
+	
+	if ( pDoc != nil && pDoc.docInfo != nil )
+	{
+		NSMenuItem *removeAuth = [[NSMenuItem alloc] initWithTitle: @"Remove Authorization" action:@selector(removeAuthorisation:) keyEquivalent:@""];
+		[m_normalMenu addItem:removeAuth];
+	}
 }
 
 - (JavelinDocument*) javelinDocument
@@ -480,6 +499,14 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 	
 	//rect.origin.x -= ptOffset.x;
 	//rect.origin.y -= ptOffset.y;
+    
+//    CGRect rect2 = [sText boundingRectWithSize:rect.size
+//                                       options:NSStringDrawingUsesLineFragmentOrigin
+//                                    attributes:m_annotAttributes
+//                                       context:nil];
+    
+    rect.size.width = ceil(rect.size.width);
+    rect.size.height = ceil(rect.size.height);
 	
 	[sText drawInRect:rect withAttributes:m_annotAttributes];
 	
@@ -594,28 +621,19 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 						rect.origin.x -= rrCrop.origin.x;
 						rect.origin.y -= rrCrop.origin.y;
 
-						//underline
-                        /*CGContextMoveToPoint(myContext, rect.origin.x, rect.origin.y );
-                        CGContextSetRGBStrokeColor(myContext, 1.0, 0.0, 1.0, 1.0);
-                        CGContextAddLineToPoint(myContext, rect.size.width+rect.origin.x, rect.origin.y + rect.size.height);
-                        CGContextMoveToPoint(myContext, 10, 10 );
-                        CGContextAddLineToPoint(myContext, 200, 300);
-                        */
                         draw1PxStroke(myContext, CGPointMake(rect.origin.x, rect.origin.y), CGPointMake(rect.origin.x+rect.size.width, rect.origin.y), CGColorCreateGenericRGB(0, 0, 0, 1));
                     }
                     else if ( an.type == ANNOTATION_NOTE )
                     {
-/*                        draw1PxStroke(myContext,
-                                      CGPointMake(rect.origin.x, rect.origin.y), CGPointMake(rect.origin.x+NOTE_WIDTH, rect.origin.y), CGColorCreateGenericRGB(0, 0, 0, 1));
-                        draw1PxStroke(myContext,
-                                      CGPointMake(rect.origin.x+NOTE_WIDTH, rect.origin.y), CGPointMake(rect.origin.x+NOTE_WIDTH, rect.origin.y-NOTE_HEIGHT), CGColorCreateGenericRGB(0, 0, 0, 1));
-                        draw1PxStroke(myContext,
-                                      CGPointMake(rect.origin.x+NOTE_WIDTH, rect.origin.y-NOTE_HEIGHT), CGPointMake(rect.origin.x, rect.origin.y-NOTE_HEIGHT), CGColorCreateGenericRGB(0, 0, 0, 1));
-                        draw1PxStroke(myContext,
-                                      CGPointMake(rect.origin.x, rect.origin.y-NOTE_HEIGHT), CGPointMake(rect.origin.x, rect.origin.y), CGColorCreateGenericRGB(0, 0, 0, 1));*/
                         CGSize size = [[an text] sizeWithAttributes:m_annotAttributes];
 						size.width += 5;
 						size.height += 5;
+                        
+                        if ( size.width > 400 )
+                        {
+                            size.width = 400;
+                            size.height *= 2;
+                        }
 
 						CGRect rect1 = {rect.origin.x, rect.origin.y, (size.width>0)?size.width:NOTE_WIDTH, (size.height>0)?size.height:NOTE_HEIGHT };
 						//rect1.origin.x -= rr.origin.x;
@@ -771,34 +789,16 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 	{
 		if ( delegate != nil )
 		{
-//			if ([[annot type] caseInsensitiveCompare:@"Text"] == NSOrderedSame)
-//			{
-				m_annotationType = ANNOTATION_NOTE;
-				//[delegate editNote:annot inWindow:[self window]];
-                [delegate editFreeNote:annot inWindow:[self window] viewRect:[self convertRect:[annot boundary] fromPage:[self currentPage]] pdfView:self];
-//			}
-//			else if ( [[annot type] caseInsensitiveCompare:@"FreeText"] == NSOrderedSame )
-//			{
-//				m_annotationType = ANNOTATION_FREE_NOTE;
-//				[delegate editFreeNote:(PDFAnnotationFreeText*)annot inWindow:[self window] viewRect:[self convertRect:[annot bounds] fromPage:[self currentPage]] pdfView:self];
-//			}
+            m_annotationType = ANNOTATION_NOTE;
+            //[delegate editNote:annot inWindow:[self window]];
+            [delegate editFreeNote:annot inWindow:[self window] viewRect:[self convertRect:[annot boundary] fromPage:[self currentPage]] pdfView:self];
 		}
 		
 	}
 	else
 	{
-		//if ( [[_activeAnnotation type] isEqualToString:@"Text"] )
-			m_annotationType = ANNOTATION_NOTE;
-		//else if ( [[_activeAnnotation type] isEqualToString:@"FreeText"] )
-		//	m_annotationType = ANNOTATION_FREE_NOTE;
+		m_annotationType = ANNOTATION_NOTE;
 	}
-/*	if ( _activeAnnotation )
-	{
-		_wasBounds = [_activeAnnotation bounds];
-	}
-*/
-	//if ( annot == nil )
-	//	[self clearSelection];
 }
 
 - (void)annotPanelDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
@@ -843,7 +843,7 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 	// Get mouse in "page space".
 	pagePoint = [self convertPoint: _mouseDownLoc toPage: activePage];
     int nPage = [self getPageNumber:activePage];
-	
+    //NSLog(@"Mouse down");
     JAnnotation* ann = [[_javelinDocument annotations] getAnnotationAtPoint:pagePoint onPage:nPage];
 	// Hit test for annotation.
     if ( ann != nil )
@@ -853,6 +853,8 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
         newActiveAnnotation = ann;
         _clickDelta.x = pagePoint.x - ann.boundary.origin.x;
         _clickDelta.y = pagePoint.y - ann.boundary.origin.y;
+        m_annotationType = ann.type;
+        //NSLog(@"Mouse down in ANNOT");
     }
     else
     {
@@ -987,8 +989,8 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 
 				newBounds.origin.x = fX;
 				newBounds.origin.y = fY;
-				
-				//NSLog(@"in %@", NSStringFromRect(newBounds));
+                [[self window] setDocumentEdited: YES];
+                //NSLog(@"in %@", NSStringFromRect(newBounds));
 			}
 			else
 			{
@@ -1458,6 +1460,16 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 
 - (void) keyDown: (NSEvent *) theEvent
 {
+/*	JavelinDocument* jd = [self javelinDocument];
+	if ( jd != nil && [jd docInfo] != NULL )
+	{
+		//We have a protected document
+		//check screen-shot keys
+		NSLog(@"flg:%d %@",
+			  (unsigned int)theEvent.modifierFlags,
+			  theEvent.characters);
+	}*/
+	
 	if ( [self displayMode] == kPDFDisplayTwoUp || [self displayMode] == kPDFDisplayTwoUpContinuous )
 	{
 		UINT nCode = [theEvent keyCode];
@@ -1517,7 +1529,7 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 
 - (int) printJvlnDocument: (id) sender
 {
-	[[Log getLog] addLine:@"JavelinPdfView::printJvlnDocument"];
+//	[[Log getLog] addLine:@"JavelinPdfView::printJvlnDocument"];
 	JavelinDocument* jd = [self javelinDocument];
 	
 	if ( m_defaultPrintDict == nil )
@@ -1605,7 +1617,7 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 
 - (void) printDrmx: (DocumentRecord*)docRec
 {
-	[[Log getLog] addLine:@"JavelinPdfView::printDrmx"];
+//	[[Log getLog] addLine:@"JavelinPdfView::printDrmx"];
 	NSPrintInfo* pi = [NSPrintInfo sharedPrintInfo];//[[NSPrintInfo alloc] initWithDictionary:m_defaultPrintDict];//[NSPrintInfo sharedPrintInfo];
 	//NSArray *pArgs = [[NSArray alloc] initWithObjects:pi, docRec, nil];
 	//[NSArray arrayWithObjects:pi, docRec, nil];
@@ -1831,6 +1843,7 @@ NSPrintOperation* op = nil;
 
 	//check if the destination is a normal (hardware) printer
 	NSDictionary *d = [pi printSettings];
+	NSPrinter *pr = nil;
 	if ( d == nil )
 	{
 		[[Log getLog] addLine:@"Unable to retrieve printer settings."];
@@ -1841,28 +1854,7 @@ NSPrintOperation* op = nil;
 	{
 		[[Log getLog] addLine:@"PrintSettings dictionary OK - getting NSPrinter"];
 		
-/*			NSArray* keys;
-		NSArray* vals;
-		
-		keys = [d allKeys];
-		vals = [d allValues];
-		
-		if ( [d count] == 0 )
-		{
-			[[Log getLog] addLine:@"Zero entries in printer settings?!"];
-		}
-		else
-		{
-			[[Log getLog] addLine:
-				[NSString stringWithFormat:@"Dict items: %lu", (unsigned long)[d count] ] ];
-				
-			for( int i=0; i<[keys count]; i++)
-			{
-				[[Log getLog] addLine:[NSString stringWithFormat:@"%@ -> %@", [keys objectAtIndex:i], [vals objectAtIndex:i]]];
-			}
-		}*/
-		
-		NSPrinter *pr   = [pi printer];
+		pr   = [pi printer];
 
 		if ( pr == nil )
 		{
@@ -1880,7 +1872,7 @@ NSPrintOperation* op = nil;
 	[[Log getLog] addLine:[NSString stringWithFormat:@"Printing to device of type:%@", val]];
 
 /* 2013-12-19 PDF PRINTING*/
-#ifndef DEBUG_PRINT
+#ifndef DEBUG_PRINTx
 	if ( val == nil || [val intValue] != kPMDestinationPrinter )
 	{
 		//2015-10-30 alternate method to get printing destination (from Apple's docs)
@@ -2061,10 +2053,62 @@ NSPrintOperation* op = nil;
 
 	[[Log getLog] addLine:[NSString stringWithFormat:@"Printing from:%d to %d", nFirstPage, nLastPage ]];
 	
-	//printWithInfo:(NSPrintInfo *)printInfo autoRotate:(BOOL)doRotate;
 	
+	//[[Log getLog] addLine:[NSString stringWithFormat:@"Printer name: %@", [pr name]]];
+	//[[Log getLog] addLine:[NSString stringWithFormat:@"Printer type: %@", [pr type]]];
+	NSString* sDesc = [NSString stringWithFormat:@"Printing %@ [%d] on %@ [%@]", 
+					   [[jd DocumentURL] lastPathComponent], 
+					   [jd documentID], [pr name], [pr type] ];
+	NSString* sText = [NSString stringWithFormat:@"Page count: %d", nLastPage-nFirstPage+1];
+	
+	[ActivityManager addActivityWithDocID:[jd docInfo]->dwDocID 
+							   activityID:142 
+							  description:sDesc 
+									 text:sText 
+									error:nil];
 	for( int nPage=nFirstPage; nPage<=nLastPage; nPage++ )
 	{
+		PMPrinterState printerState;
+		OSStatus status = PMPrinterGetState(currentPrinter, &printerState);
+		
+		if (status != 0 )
+		{
+			[[Log getLog] addLine:[NSString stringWithFormat:@"ERROR: Unable to retrieve queue status (error:%d page:%d)", status, nPage ]];
+			continue;
+		}
+		
+		if (printerState == kPMPrinterStopped)
+		{
+			[[Log getLog] addLine:@"ERROR: Printer queue paused or not acccessible"];
+			continue;
+		}
+// Commented out on 2023-06-22
+//		else if (printerState == kPMPrinterProcessing)
+//		{
+//			[[Log getLog] addLine:[NSString stringWithFormat:@"ERROR: Printer queue is busy. Skipping page:%d", nPage]];
+//			continue;
+//		}
+// END
+		
+/*		CFURLRef urlref;
+		status = PMPrinterCopyDeviceURI(currentPrinter, &urlref);
+
+		if (status != 0 )
+		{
+			CFRelease(urlref);
+			[[Log getLog] addLine:[NSString stringWithFormat:@"ERROR: Unable to retrieve printer status (error:%d page:%d)", status, nPage ]];
+			continue;
+		}
+		
+		CFRelease(urlref);*/
+		
+/*		CFStringRef hostName;
+		status = PMPrinterCopyHostName(currentPrinter, &hostName);
+		CFRange range;
+		range.location=0;
+		range.length = CFStringGetLength(hostName);
+		CFStringDelete(hostName, range);
+*/		
 		PDFPage *page = [[[self document] pageAtIndex:nPage-1] copy];
 		int nRotation = [page rotation];
 		BOOL bLandscape = NO;
@@ -2253,7 +2297,12 @@ NSPrintOperation* op = nil;
 	if ( [sPrinterName rangeOfString:@"c360creative"].location != NSNotFound ) return YES;
 	if ( [sPrinterName rangeOfString:@"c280creative"].location != NSNotFound ) return YES;
 	if ( [sPrinterName rangeOfString:@"c220creative"].location != NSNotFound ) return YES;
-
+	//added 2021-10-04 Pantum device 
+	if ( [sPrinterName rangeOfString:@"pantum"].location != NSNotFound ) return YES;
+	//2021-10-29 DocuCentre (Xerox)
+	if ( [sPrinterName rangeOfString:@"docucentre"].location != NSNotFound ) return YES;
+	//2021-11-11 Taskalfa
+	if ( [sPrinterName rangeOfString:@"taskalfa"].location != NSNotFound ) return YES;
 	return NO;
 #endif
 }

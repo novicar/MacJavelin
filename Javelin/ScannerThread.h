@@ -11,25 +11,26 @@
 {
 	int m_nIntValue;
 	BOOL m_bRun;
-	BOOL m_bTerminalRunning;
+	NSString* m_badProcessName;
 }
 
 @property (readwrite) int IntValue;
 @property (readwrite) BOOL Run;
-@property (readwrite) BOOL TerminalRunning;
+@property (readwrite, copy) NSString* BadProcessName;
 
 @end
 
 @interface ScannerThread : NSObject
 {
 	ThreadArgs* m_args;
+	NSArray*	m_processNames;
 }
 
 -(void)startThread:(ThreadArgs*)args;
 -(void)stopThread;
 -(void)entryPoint;
--(BOOL)scanProcesses;
-- (BOOL) isTerminalRunning;
+-(NSString*)scanProcesses;
+- (NSString*) isBadGuyRunning;
 @end
 
 

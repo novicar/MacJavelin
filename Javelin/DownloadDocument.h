@@ -52,7 +52,7 @@
 #import <Quartz/Quartz.h>
 #import "DownloadProtocol.h"
 
-#define DWN_FILENAME	@"javelin.dwnlds"
+#define DWN_FILENAME	@"Javelin3 Downloads"
 #define DOWNLOAD		@"Download"
 #define STOP			@"Stop"
 

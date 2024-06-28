@@ -24,5 +24,9 @@
 + (NSURL*)applicationDataDirectory;
 + (NSString*)catalogDirectory;
 + (CatalogStack*)catalogStack;
++ (CatalogStack*)catalogStackNames;
 + (DocumentList*)documentList;
+
++ (NSString*)getUserValue:(NSString*)sKey;
++ (void)setUserValue:(NSString*)sValue key:(NSString*)sKey;
 @end
