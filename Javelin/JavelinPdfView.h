@@ -55,6 +55,7 @@
     //NSFont*             m_fontAnnotation;
     //NSMutableDictionary* m_annotations; moved to JavelinDocument
     NSDictionary*       m_annotAttributes;
+    NSCursor*           m_currentCursor;
 }
 
 -(void)setDelegate:(id)del;

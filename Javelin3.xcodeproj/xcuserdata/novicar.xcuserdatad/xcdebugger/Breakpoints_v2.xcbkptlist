@@ -14,8 +14,8 @@
             filePath = "Javelin/JavelinPdfView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1086"
-            endingLineNumber = "1086"
+            startingLineNumber = "1062"
+            endingLineNumber = "1062"
             landmarkName = "-mouseUp:"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "Javelin/JavelinPdfView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "851"
-            endingLineNumber = "851"
+            startingLineNumber = "824"
+            endingLineNumber = "824"
             landmarkName = "-mouseDown:"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "Javelin/JavelinPdfView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "514"
-            endingLineNumber = "514"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
             landmarkName = "-drawNote:inRect:withColor:text:withOffset:"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "Javelin/JavelinPdfView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "992"
-            endingLineNumber = "992"
+            startingLineNumber = "965"
+            endingLineNumber = "965"
             landmarkName = "-mouseDragged:"
             landmarkType = "7">
          </BreakpointContent>

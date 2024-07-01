@@ -493,18 +493,9 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 {
     CGContextSaveGState(context);
     CGContextSetLineCap(context, kCGLineCapSquare);
-    //CGContextSetRGBStrokeColor(context, .5, .5, .5, 0.7);
+
+    //NSLog(@"DrawAnnot: %@ -> %@", NSStringFromRect(rect), sText);
 	
-	//NSLog(@"DrawAnnot: %@ -> %@", NSStringFromRect(rect), sText);
-	
-	//rect.origin.x -= ptOffset.x;
-	//rect.origin.y -= ptOffset.y;
-    
-//    CGRect rect2 = [sText boundingRectWithSize:rect.size
-//                                       options:NSStringDrawingUsesLineFragmentOrigin
-//                                    attributes:m_annotAttributes
-//                                       context:nil];
-    
     rect.size.width = ceil(rect.size.width);
     rect.size.height = ceil(rect.size.height);
 	
@@ -540,19 +531,6 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
     struct CGPDFPage* pp = pdfPage.pageRef;
     int nPage = (int)CGPDFPageGetPageNumber(pp);
 	CGRect rrCrop = CGPDFPageGetBoxRect(pp, kCGPDFCropBox);
-/*	NSLog(@"Crop x:%f y:%f w:%f h:%f", rrCrop.origin.x, rrCrop.origin.y, rrCrop.size.width, rrCrop.size.height );
-    CGRect rrMedia = CGPDFPageGetBoxRect(pp, kCGPDFMediaBox);
-	NSLog(@"Media x:%f y:%f w:%f h:%f", rrMedia.origin.x, rrMedia.origin.y, rrMedia.size.width, rrMedia.size.height );
-    //rr = CGPDFPageGetBoxRect(pp, kCGPDFBleedBox);
-	//NSLog(@"Bleed x:%f y:%f w:%f h:%f", rr.origin.x, rr.origin.y, rr.size.width, rr.size.height );
-    //rr = CGPDFPageGetBoxRect(pp, kCGPDFTrimBox);
-	//NSLog(@"Trim x:%f y:%f w:%f h:%f", rr.origin.x, rr.origin.y, rr.size.width, rr.size.height );
-    //rr = CGPDFPageGetBoxRect(pp, kCGPDFArtBox);
-	//NSLog(@"Art x:%f y:%f w:%f h:%f", rr.origin.x, rr.origin.y, rr.size.width, rr.size.height );
-
-	CGPoint ptOffset;
-	ptOffset.x = rrCrop.origin.x;
-	ptOffset.y = rrMedia.size.height - rrCrop.size.height - rrCrop.origin.y;*/
 	
 	CGPoint ptOffset = [self getOffset:pdfPage];
 	
@@ -560,33 +538,7 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 	{
 		NSRect myRect = [pdfPage boundsForBox:[self displayBox]]; 
 		[_watermark drawAt:NSMakePoint(5, 5) rect:myRect]; //TOP
-		//[_watermark drawFixedAt:NSMakePoint(10, 10) rect:myRect]; //BOTTOM
-		//[self setNeedsDisplay:YES];
 	}
-    /*
-    NSArray<PDFAnnotation *> *annotations = [pdfPage annotations];
-    if ( annotations != nil )
-    {
-        NSString* s = nil;
-        CGContextRef myContext = [[NSGraphicsContext currentContext] graphicsPort];
-        NSLog(@"Annotations %lu", (unsigned long)[annotations count]);
-        for( int i=0; i<[annotations count]; i++)
-        {
-            PDFAnnotation* an = [annotations objectAtIndex:i];
-            s = [an type];
-            if ( [s isEqualToString:@"Highlight"] )
-            {
-                NSRect rect = [self convertRect:[an bounds] toView:self];
-                
-                NSLog(@"%d annotation: %@", i, NSStringFromRect(rect));
-                CGContextSetRGBFillColor(myContext, 1.0, 1.0, 0.0, 0.2);
-                CGContextSetRGBStrokeColor(myContext, 1.0, 1.0, 0.0, 0.2);
-                CGContextFillRect(myContext, rect);
-                
-                [an setColor:[NSColor colorWithWhite:0 alpha:0]];
-            }
-        }
-    }*/
     
     //if ( m_annotations != nil )
     {
@@ -625,7 +577,7 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
                     }
                     else if ( an.type == ANNOTATION_NOTE )
                     {
-                        CGSize size = [[an text] sizeWithAttributes:m_annotAttributes];
+                        /*CGSize size = [[an text] sizeWithAttributes:m_annotAttributes];
 						size.width += 5;
 						size.height += 5;
                         
@@ -633,17 +585,21 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
                         {
                             size.width = 400;
                             size.height *= 2;
-                        }
-
-						CGRect rect1 = {rect.origin.x, rect.origin.y, (size.width>0)?size.width:NOTE_WIDTH, (size.height>0)?size.height:NOTE_HEIGHT };
-						//rect1.origin.x -= rr.origin.x;
-						//rect1.origin.y -= rr.origin.y;
+                        }*/
+                        
+                        CGRect rect1 = [[an text] boundingRectWithSize:CGSizeMake(100, CGFLOAT_MAX)
+                                                                  options:NSStringDrawingUsesLineFragmentOrigin
+                                                               attributes:m_annotAttributes
+                                                                  context:nil];
+                        rect1.origin.x = rect.origin.x;
+                        rect1.origin.y = rect.origin.y;
+                        
+						//CGRect rect1 = {rect.origin.x, rect.origin.y, (size.width>0)?size.width:NOTE_WIDTH, (size.height>0)?size.height:NOTE_HEIGHT };
 
                         NSRect rect2 = [self convertRect:rect1 fromView:self];
                         [an setBoundary:rect2];
-                        //drawNote(myContext, rect1, [CGColorCreateGenericRGB(0.1, .9, 0, .4), [an text]);
 
-						[self drawNote:myContext inRect:rect1 withColor:CGColorCreateGenericRGB(1.0, 1.0, 0, .4) text:[an text] withOffset:ptOffset];//rrCrop.origin];
+                        [self drawNote:myContext inRect:rect1 withColor:CGColorCreateGenericRGB(1.0, 1.0, 0, .6) text:[an text] withOffset:ptOffset];//rrCrop.origin];
                     }
                     else
                     {
@@ -814,6 +770,23 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
     int nPage = (int)CGPDFPageGetPageNumber([page pageRef]);
     return nPage;
 }
+- (void) mouseMoved: (NSEvent *) theEvent
+{
+    NSPoint mouseDownLoc = [self convertPoint: [theEvent locationInWindow] fromView: NULL];
+    PDFPage* activePage = [self pageForPoint: mouseDownLoc nearest: YES];//[self currentPage]
+    NSPoint pagePoint = [self convertPoint: mouseDownLoc toPage: activePage];
+    int nPage = [self getPageNumber:activePage];
+    //NSLog(@"Mouse down");
+    JAnnotation* ann = [[_javelinDocument annotations] getAnnotationAtPoint:pagePoint onPage:nPage];
+    
+    if ( ann != nil )
+    {
+        [[NSCursor openHandCursor] set];
+        return;
+    }
+    
+    [super mouseMoved:theEvent];
+}
 - (void) mouseDown: (NSEvent *) theEvent
 {
     //[super mouseDown: theEvent];
@@ -855,6 +828,8 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
         _clickDelta.y = pagePoint.y - ann.boundary.origin.y;
         m_annotationType = ann.type;
         //NSLog(@"Mouse down in ANNOT");
+        
+        NSCursor.closedHandCursor.set;
     }
     else
     {
@@ -872,8 +847,6 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 				newActiveAnnotation = ann;
 				_clickDelta.x = pagePoint.x - ann.boundary.origin.x;
 				_clickDelta.y = pagePoint.y - ann.boundary.origin.y;
-
-				return;
 			}
 		}
 		
@@ -1066,6 +1039,9 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 
 - (void) mouseUp: (NSEvent *) theEvent
 {
+    if ( _dragging == YES )
+        NSCursor.openHandCursor.set;
+    
 	_dragging = NO;
 	[super mouseUp: theEvent];	// Handle link-edit mode.
     int nPage = (int)CGPDFPageGetPageNumber([[self currentPage] pageRef]);
