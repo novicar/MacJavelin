@@ -493,19 +493,19 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 {
     CGContextSaveGState(context);
     CGContextSetLineCap(context, kCGLineCapSquare);
-
+    
     //NSLog(@"DrawAnnot: %@ -> %@", NSStringFromRect(rect), sText);
-	
+    
     rect.size.width = ceil(rect.size.width);
     rect.size.height = ceil(rect.size.height);
-	
-	[sText drawInRect:rect withAttributes:m_annotAttributes];
-	
+    
     CGContextSetFillColorWithColor(context, color);
-	CGContextSetStrokeColorWithColor(context, CGColorCreateGenericRGB(.7, .7, .2, .9) );
+    CGContextSetStrokeColorWithColor(context, CGColorCreateGenericRGB(.6, .6, .2, .5) );
     CGContextFillRect(context, rect);
-	CGContextStrokeRect(context, rect);
-	CGContextRestoreGState(context);
+    CGContextStrokeRect(context, rect);
+    CGContextRestoreGState(context);
+    
+    [sText drawInRect:rect withAttributes:m_annotAttributes];
 }
 
 -(CGPoint)getOffset:(PDFPage*)pdfPage
@@ -599,7 +599,7 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
                         NSRect rect2 = [self convertRect:rect1 fromView:self];
                         [an setBoundary:rect2];
 
-                        [self drawNote:myContext inRect:rect1 withColor:CGColorCreateGenericRGB(1.0, 1.0, 0, .6) text:[an text] withOffset:ptOffset];//rrCrop.origin];
+                        [self drawNote:myContext inRect:rect1 withColor:CGColorCreateGenericRGB(1.0, 1.0, 0, .8) text:[an text] withOffset:ptOffset];//rrCrop.origin];
                     }
                     else
                     {
@@ -1356,6 +1356,8 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
         m_selectedAnnotation = ann;
 		if ( ann.type == ANNOTATION_NOTE )
 		{
+            //NSLog(@"rightmouse");
+            [[self window] makeFirstResponder:self];
 			[m_deleteAndEditMenu popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
 		}
 		else
@@ -1385,10 +1387,12 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 		if ( ann != nil && ann.type == ANNOTATION_NOTE )
 		{
 			m_selectedAnnotation = ann;
+            //NSLog(@"mkonji");
 			[m_deleteAndEditMenu popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
 		}
 		else
 		{
+            //NSLog(@"aaaaa");
 			m_ptAnnotation = loc1;
 			[[self window] makeFirstResponder:self];
 			[m_normalMenu popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
