@@ -73,11 +73,7 @@
 
     if ( theEvent.clickCount == 2 )
         [m_pdfView itemDoubleClicked:ann];
-    
-    
-    // call this to get the usual behaviour of your outline
-    // view in addition to your custom code
-    //[super mouseDown:theEvent];
+ 
 }
 
 -(void)setNoteViewDelegate:(id)del
