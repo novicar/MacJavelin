@@ -15,7 +15,6 @@
 #define COMPANY				@"Drumlin Security Ltd."
 #define COMPANY_URL			@"https://www.drumlinsecurity.co.uk"
 
-
 @interface Version : NSObject {
 @private
 }

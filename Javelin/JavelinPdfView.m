@@ -138,21 +138,6 @@
 {
 	PDFSelection* selMain = [self currentSelection];
 	[self markup:selMain withType:kPDFMarkupTypeHighlight];
-	
-/*	if ( selMain != nil )
-	{
-		NSArray* lines = [selMain selectionsByLine];
-		for( int i=0; i<[lines count]; i++ )
-		{
-			PDFSelection* sel = (PDFSelection*)[lines objectAtIndex:i];
-			NSRect rect = [sel boundsForPage:[self currentPage] ];
-			PDFAnnotationMarkup* ann = [[PDFAnnotationMarkup alloc] initWithBounds:rect];
-			
-			PDFPage* page = [self currentPage];
-			//NSArray* pp = [page annotations];
-			[page addAnnotation:ann];
-		}
-	}*/
 }
 
 - (void) strikeoutSel:(id)sender
