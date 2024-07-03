@@ -30,12 +30,16 @@
 	float					m_deltaY;
 	
 	NSSize					m_aspect;
+    
+    BOOL                    m_bDirty;
 	
 }
 
 -(IBAction)onOK:(id)sender;
 -(IBAction)onCancel:(id)sender;
 -(IBAction)onDeleteNote: (id)sender;
+
+@property (readonly,atomic) BOOL isDirty;
 
 -(void)noteDidResignMain:(id)sender;
 -(void)noteDidResize:(id)sender;

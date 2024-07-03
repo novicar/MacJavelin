@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #define MAJOR_VER			3
 #define MINOR_VER			5
-#define REVISION			31
+#define REVISION			33
 #define APP_NAME			@"Javelin"
-#define DATE_BUILT			@"2024-07-02"
+#define DATE_BUILT			@"2024-07-03"
 #define COMPANY				@"Drumlin Security Ltd."
 #define COMPANY_URL			@"https://www.drumlinsecurity.co.uk"
 

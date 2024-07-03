@@ -33,26 +33,51 @@
     // Drawing code here.
 }
 
--(void)mouseDown:(NSEvent *)theEvent 
+/*
+- (void)rightMouseDown:(NSEvent *)event
 {
-    ///CODE YOU WANT EXECUTED WHEN MOUSE IS CLICKED
-    if ( theEvent.clickCount == 2 )
-    {
-        NSPoint globalLocation = [theEvent locationInWindow];
-        NSPoint localLocation = [self convertPoint:globalLocation fromView:nil];
-        NSInteger clickedRow = [self rowAtPoint:localLocation];
+    [super rightMouseDown:event];
+    
+   NSLog(@"mamama");
+    
+    NSPoint globalLocation = [event locationInWindow];
+    NSPoint localLocation = [self convertPoint:globalLocation fromView:nil];
+    NSInteger clickedRow = [self rowAtPoint:localLocation];
+    JAnnotation* ann = nil;
 
-        //NSLog(@"Mouse double-click occurred");
-        if (m_pdfView != nil )
-        {
-            JAnnotation* ann = [self itemAtRow:clickedRow];
-            [m_pdfView itemDoubleClicked:ann];
-            //[m_delNoteView itemDoubleClicked:clickedRow];
-        }
-    }
+    if (m_pdfView != nil )
+        ann = [self itemAtRow:clickedRow];
+
+    if ( ann != nil )
+        NSLog(@"nanan");
+    
+    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:clickedRow] byExtendingSelection:NO];
+}*/
+
+-(void)mouseDown:(NSEvent *)theEvent
+{
+    [super mouseDown:theEvent];
+    
+    ///CODE YOU WANT EXECUTED WHEN MOUSE IS CLICKED
+    //NSLog(@"mkonji");
+    NSPoint globalLocation = [theEvent locationInWindow];
+    NSPoint localLocation = [self convertPoint:globalLocation fromView:nil];
+    NSInteger clickedRow = [self rowAtPoint:localLocation];
+    JAnnotation* ann = nil;
+    
+    if (m_pdfView != nil )
+        ann = [self itemAtRow:clickedRow];
+
+    if ( ann == nil )
+        return;
+
+    if ( theEvent.clickCount == 2 )
+        [m_pdfView itemDoubleClicked:ann];
+    
+    
     // call this to get the usual behaviour of your outline
     // view in addition to your custom code
-    [super mouseDown:theEvent];
+    //[super mouseDown:theEvent];
 }
 
 -(void)setNoteViewDelegate:(id)del
@@ -67,7 +92,9 @@
 
     NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Model browser context menu"];
     [theMenu insertItemWithTitle:@"Delete note" action:@selector(deleteNote:) keyEquivalent:@"" atIndex:0];
-	[theMenu insertItemWithTitle:@"Export all notes" action:@selector(exportAllNotes:) keyEquivalent:@"" atIndex:1];
+    [theMenu insertItemWithTitle:@"Edit note" action:@selector(editNote:) keyEquivalent:@"" atIndex:1];
+	[theMenu insertItemWithTitle:@"Export all notes" action:@selector(exportAllNotes:) keyEquivalent:@"" atIndex:2];
+    
     return theMenu;
 }
 
@@ -83,11 +110,28 @@
 
 -(void)deleteNote:(id)sender
 {
-    if (m_pdfView != nil )
+    if ( [m_selectedAnnotation isKindOfClass:[JAnnotation class]] )
     {
-        [m_pdfView deleteNote:m_selectedAnnotation];
+        
+        if (m_pdfView != nil )
+        {
+            [m_pdfView deleteNote:m_selectedAnnotation];
+        }
     }
 }
+
+-(void)editNote:(id)sender
+{
+    if ( [m_selectedAnnotation isKindOfClass:[JAnnotation class]] )
+    {
+        if (m_pdfView != nil )
+        {
+            //JAnnotation* ann = [self itemAtRow:clickedRow];
+            [m_pdfView itemDoubleClicked:m_selectedAnnotation];
+        }
+    }
+}
+
 
 -(void)exportAllNotes:(id)sender
 {

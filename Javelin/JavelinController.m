@@ -1093,10 +1093,14 @@ RE_AUTHORISE:
         switch( [ann type])
         {
             case ANNOTATION_NOTE:
-                if ( [[ann text] length] > 15 )
-                    return [NSString stringWithFormat:@"%@", [[ann text] substringToIndex:15]];
-                else
+                //if ( [[ann text] length] > 100 )
+                //{
+                 //   return [NSString stringWithFormat:@"%@", [[ann text] substringToIndex:100]];
+                //}
+                //else
+                {
                     return [NSString stringWithFormat:@"%@",[ann text]];
+                }
                 break;
                 
             case ANNOTATION_HIGHLIGHT:
@@ -1124,6 +1128,12 @@ RE_AUTHORISE:
     }
 }
 
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectTableColumn:(NSTableColumn *)tableColumn
+{
+    //NSLog(@"MKONJI");
+    return YES;
+}
+
 #pragma mark -------- NSOutlineViewDelegate Protocol
 // ---------------------------------------------------------------------------------------- outlineViewSelectionDidChange
 
@@ -1131,7 +1141,7 @@ RE_AUTHORISE:
 {
     if ([[notification object] isKindOfClass:[JavelinNotes class]])
     {
-        int nPage = [m_notes selectedRow];
+        int nPage = (int)[m_notes selectedRow];
         id ooo = [m_notes itemAtRow:nPage];
         JAnnotation* ann = nil;
         if ( [ooo isKindOfClass:[NSArray class]])
@@ -1143,9 +1153,6 @@ RE_AUTHORISE:
             ann = (JAnnotation*)ooo;
         }
         [_pdfView goToPage: [[_pdfView document] pageAtIndex: [ann pageNumber]-1]];
-        
-        int n = 100;
-        n++;
     }
     else
     {
@@ -1447,7 +1454,7 @@ RE_AUTHORISE:
 
 - (void) startFind: (NSNotification *) notification
 {
-	NSLog(@"Start find");
+	//NSLog(@"Start find");
 	// Empty arrays.
 	[_searchResults removeAllObjects];
 	[_sampleStrings removeAllObjects];
@@ -1462,7 +1469,7 @@ RE_AUTHORISE:
 
 - (void) endFind: (NSNotification *) notification
 {
-	NSLog(@"End find");
+	//NSLog(@"End find");
 	// Force a reload.
 	//[_searchTime release];
 	if ( _searchResults == nil || _searchResults.count == 0 )
@@ -1484,12 +1491,12 @@ RE_AUTHORISE:
 
 - (void) startPage: (NSNotification *) notification
 {
-	NSLog(@"Start page");
+	//NSLog(@"Start page");
 }
 
 - (void) endPage: (NSNotification *) notification
 {
-	NSLog(@"End page");
+	//NSLog(@"End page");
 }
 /*
 - (void)didMatchString:(PDFSelection *)instance;

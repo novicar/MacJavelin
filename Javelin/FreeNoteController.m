@@ -16,12 +16,14 @@
 @end
 
 @implementation FreeNoteController
+@synthesize isDirty=m_bDirty;
 
 - (void)windowDidLoad {
     [super windowDidLoad];
 	m_annot = nil;
 	m_view = nil;
-	
+    m_bDirty = NO;
+    
     [[[self window]  contentView] setAutoresizesSubviews:YES];
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noteDidResignMain:) name:NSWindowDidResignMainNotification object:self];
@@ -77,6 +79,7 @@
 		//PDFPage* page = [m_annot page];
 		//[page removeAnnotation:m_annot];
 		[m_view deleteAnnotation:self];
+        m_bDirty = YES;
 	}
 	
 	[self close];
@@ -84,13 +87,6 @@
 
 -(IBAction)onOK:(id)sender
 {
-	//NSRect rect = [[self window] frame];
-	//NSLog(@"Orig: %@", NSStringFromRect(m_rectInitial));
-	//NSLog(@"Curr: %@", NSStringFromRect(m_rectCurrent));
-	
-	//float fDeltaX = m_rectInitial.origin.x - m_rectCurrent.origin.x;
-	//float fDeltaY = m_rectInitial.origin.y - m_rectCurrent.origin.y;
-	
 	if ( m_annot != nil )
 	{
 		//NSRect rect = [m_annot bounds];
@@ -99,15 +95,6 @@
 		PDFPage* page = [m_annot page];
 		NSRect rPage = [page boundsForBox:kPDFDisplayBoxCropBox];
 		
-/*		//[self convertRect:[annot bounds] fromPage:[self currentPage]]
-		NSRect rectView = m_rectCurrent;//[[self window] frame];
-		rectView.origin.x += m_deltaX;
-		rectView.origin.y += m_deltaY;
-		
-		NSRect r1 = [m_view convertRect:rectView toPage:page];
-		
-		NSLog(@"Converted: %@", NSStringFromRect(r1));
-*/
 
 		NSRect rWindow = [m_view convertRect:m_rectCurrent toPage:page];
 		//NSPoint pt = [m_view convertPoint:NSMakePoint(m_deltaX, m_deltaY) toPage:page];
@@ -121,25 +108,10 @@
 		rAnnot.size.height = rWindow.size.height;
 		rAnnot.size.width  = rWindow.size.width;
 		
-		//rAnnot.origin.x /= m_aspect.width;
-		//rAnnot.origin.y /= m_aspect.height;
-		//rAnnot.size.width /= m_aspect.width;
-		//rAnnot.size.height/= m_aspect.height;
-		
 		if ( rAnnot.origin.x < 0 ) rAnnot.origin.x = 0;
 		if ( rAnnot.origin.y < 0 ) rAnnot.origin.y = 0;
 		if ( rAnnot.size.height < 0 ) rAnnot.size.height = 100;
 		if ( rAnnot.size.width < 0 ) rAnnot.size.width = 100;
-//		if ( rAnnot.size.height > rPage.size.height ) rAnnot.size.height = 100;
-//		if ( rAnnot.size.width > rPage.size.width) rAnnot.size.width = 100;
-		
-		/*PDFAnnotationFreeText* aa = [[PDFAnnotationFreeText alloc] initWithBounds:rAnnot];
-		[aa setColor:[NSColor colorWithRed:NOTE_RED green:NOTE_GREEN blue:NOTE_BLUE alpha:0.5f]];
-		[aa setContents:ss];
-		       
-        
-		[page removeAnnotation:m_annot];
-		[page addAnnotation:aa];*/
         
         [m_annot setText:ss];
         
@@ -151,18 +123,20 @@
 			[m_view setNeedsDisplay:YES];
 		}
 		m_annot = nil;
+        m_bDirty = YES;
 	}
 	[self close];
 }
 
 -(IBAction)onCancel:(id)sender
 {
-	if ( m_annot != nil && m_annot.newNote )
+/*	if ( m_annot != nil && m_annot.newNote )
 	{
 		[m_view deleteAnnotation:self];
-	}
+	}*/
 	m_annot = nil;
 	m_view = nil;
+    m_bDirty = NO;
 	[self close];
 }
 
@@ -207,6 +181,7 @@
 {
 	m_annot = annot;
 	m_view = view;
+    //m_bDirty = NO;
 	
 	[m_text setFont:[NSFont userFontOfSize:18]];
 	

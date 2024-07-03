@@ -119,7 +119,7 @@
     
     if(error != nil)
     {
-        NSLog(@"write error while saving annotations %@", error);
+        //NSLog(@"write error while saving annotations %@", error);
         
         //NSLog(@"%@", [error localizedDescription]);
         [General displayAlert:@"ERROR: Unable to save annotations" message:[error localizedDescription]];
@@ -237,6 +237,7 @@
 
 -(BOOL)removeAnnotation:(JAnnotation*)annotation fromPage:(int)nPage
 {
+    //NSLog(@"Remove ann %@ from page %d", annotation.text, nPage);
     NSMutableArray* annots = (NSMutableArray*)[self highlightsForPage:nPage];
     if ( annots != nil && [annots count] != 0 )
     {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
-        <plugIn identifier="com.apple.pdfkit.ibplugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
+        <plugIn identifier="com.apple.pdfkit.ibplugin" version="22689"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -211,24 +211,24 @@
             <point key="canvasLocation" x="140" y="250"/>
         </segmentedControl>
         <tabView toolTip="Annotations" focusRingType="exterior" appearanceType="darkAqua" drawsBackground="NO" allowsTruncatedLabels="NO" initialItem="100144" id="100143">
-            <rect key="frame" x="0.0" y="0.0" width="250" height="334"/>
+            <rect key="frame" x="0.0" y="0.0" width="334" height="336"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <font key="font" size="12" name="HelveticaNeue"/>
             <tabViewItems>
                 <tabViewItem label="Outline" identifier="1" image="NSPathTemplate" id="100144">
                     <view key="view" id="100147">
-                        <rect key="frame" x="10" y="33" width="230" height="288"/>
+                        <rect key="frame" x="10" y="33" width="314" height="290"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="100151">
-                                <rect key="frame" x="17" y="-12" width="236" height="288"/>
+                                <rect key="frame" x="17" y="-12" width="300" height="290"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <clipView key="contentView" id="z0l-iY-h1a">
-                                    <rect key="frame" x="1" y="1" width="234" height="286"/>
+                                    <rect key="frame" x="1" y="1" width="298" height="288"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" headerView="100153" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="100156" id="100155">
-                                            <rect key="frame" x="0.0" y="0.0" width="234" height="269"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="298" height="271"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -259,7 +259,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" wantsLayer="YES" id="100153">
-                                    <rect key="frame" x="0.0" y="0.0" width="234" height="17"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="298" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -268,34 +268,34 @@
                 </tabViewItem>
                 <tabViewItem label="Annotations" identifier="2" image="NSTouchBarBookmarksTemplate" id="RAR-fp-yW9">
                     <view key="view" id="YfU-GS-Njo">
-                        <rect key="frame" x="10" y="33" width="230" height="288"/>
+                        <rect key="frame" x="10" y="33" width="314" height="290"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="27" horizontalPageScroll="10" verticalLineScroll="27" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAk-mP-qQ3">
-                                <rect key="frame" x="17" y="-12" width="240" height="297"/>
+                                <rect key="frame" x="17" y="-12" width="300" height="299"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <clipView key="contentView" id="12B-u4-XKB">
-                                    <rect key="frame" x="1" y="1" width="238" height="295"/>
+                                    <rect key="frame" x="1" y="1" width="298" height="297"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="25" headerView="dgL-iI-9Tr" indentationPerLevel="16" outlineTableColumn="vgg-bp-15u" id="mMR-Of-Rsf" customClass="JavelinNotes">
-                                            <rect key="frame" x="0.0" y="0.0" width="238" height="272"/>
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" tableStyle="fullWidth" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="25" indentationPerLevel="16" outlineTableColumn="vgg-bp-15u" id="mMR-Of-Rsf" customClass="JavelinNotes">
+                                            <rect key="frame" x="0.0" y="0.0" width="298" height="297"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="197" minWidth="40" maxWidth="1000" id="vgg-bp-15u">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                <tableColumn editable="NO" width="286" minWidth="40" maxWidth="1000" id="vgg-bp-15u">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Text" id="s7P-bC-y7Z">
+                                                    <textFieldCell key="dataCell" truncatesLastVisibleLine="YES" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Text" id="s7P-bC-y7Z">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                 </tableColumn>
                                             </tableColumns>
                                         </outlineView>
@@ -309,16 +309,12 @@
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <tableHeaderView key="headerView" wantsLayer="YES" id="dgL-iI-9Tr">
-                                    <rect key="frame" x="0.0" y="0.0" width="238" height="23"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableHeaderView>
                             </scrollView>
                         </subviews>
                     </view>
                 </tabViewItem>
             </tabViewItems>
-            <point key="canvasLocation" x="-418" y="144"/>
+            <point key="canvasLocation" x="-376" y="143"/>
         </tabView>
         <segmentedControl verticalHuggingPriority="750" id="100163">
             <rect key="frame" x="0.0" y="0.0" width="171" height="27"/>
@@ -514,8 +510,8 @@ Gw
         </textField>
     </objects>
     <resources>
-        <image name="NSPathTemplate" width="20" height="12"/>
-        <image name="NSTouchBarBookmarksTemplate" width="19" height="14"/>
+        <image name="NSPathTemplate" width="25" height="14"/>
+        <image name="NSTouchBarBookmarksTemplate" width="22" height="17"/>
         <image name="ToolbarView1Adorn" width="25" height="13"/>
         <image name="ToolbarView2Adorn" width="25" height="13"/>
         <image name="ToolbarView3Adorn" width="25" height="13"/>

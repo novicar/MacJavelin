@@ -728,11 +728,19 @@ void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, C
 
 -(void)editNote:(JAnnotation*)annot
 {
-    [self goToPage: [[self document] pageAtIndex: [annot pageNumber]-1]];
-    if ( annot.type == ANNOTATION_NOTE )
+    if ( annot == nil )
+        return;
+    
+    int nPageIndex = [annot pageNumber]-1;
+    
+    if ( nPageIndex >= 0 )
     {
-        m_annotationType = ANNOTATION_NOTE;
-        [delegate editFreeNote:annot inWindow:[self window] viewRect:[self convertRect:[annot boundary] fromPage:[self currentPage]] pdfView:self];
+        [self goToPage: [[self document] pageAtIndex: nPageIndex]];
+        if ( annot.type == ANNOTATION_NOTE )
+        {
+            m_annotationType = ANNOTATION_NOTE;
+            [delegate editFreeNote:annot inWindow:[self window] viewRect:[self convertRect:[annot boundary] fromPage:[self currentPage]] pdfView:self];
+        }
     }
 }
 //-(void)selectAnnotation:(PDFAnnotation*)annot clickNo:(int)nClicks
